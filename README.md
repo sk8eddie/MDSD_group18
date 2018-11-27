@@ -7,7 +7,7 @@ First install git and java on your computer.
 To install Maven use [this guide](https://www.mkyong.com/maven/how-to-install-maven-in-windows/). 
 When downloading the repo do it by using:
 ```
-git clone "repoURL" 
+git clone repoURL 
 ```
 Go to the same directory as the pom.xml file is in and then use the maven command:
 ```
