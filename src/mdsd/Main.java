@@ -1,9 +1,9 @@
 package mdsd;
 import java.util.HashSet;
 import java.util.Set;
+
 import project.Point;
 import project.AbstractSimulatorMonitor;
-import project.AbstractRobotSimulator;
 import simbad.sim.AbstractWall;
 import simbad.sim.Boundary;
 import simbad.sim.EnvironmentDescription;

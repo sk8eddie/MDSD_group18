@@ -2,6 +2,7 @@ package mdsd;
 
 import java.util.Set;
 
+import mdsd.Robot;
 import project.AbstractRobotSimulator;
 import project.AbstractSimulatorMonitor;
 import simbad.sim.EnvironmentDescription;
