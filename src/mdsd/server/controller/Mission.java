@@ -25,6 +25,5 @@ public class Mission {
 		points.add(point4);
 		points.add(point5);
 		Collections.shuffle(points);
-		
     }
 }
