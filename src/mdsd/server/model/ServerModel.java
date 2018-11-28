@@ -4,7 +4,9 @@ import mdsd.rover.Rover;
 
 import java.util.HashMap;
 
-public class ServerModel implements ServiceInterface {
+
+public class ServerModel implements ServerInterface {
+
     int rewardPoints;
     HashMap roverMissions;
 
@@ -12,7 +14,7 @@ public class ServerModel implements ServiceInterface {
     public void nextDestinationReached(Rover rover) {
 
     }
-    
+
     public void reportState(){
 
     }
@@ -20,4 +22,5 @@ public class ServerModel implements ServiceInterface {
     public void missionComplete(Rover rover){
 
     }
+
 }
