@@ -9,8 +9,6 @@ public class Mission {
 
     private List<Point> points;
 
-    //TODO change type after askning about it in the supervision
-    private int constraints;
 
     public void updateMission() {
 
