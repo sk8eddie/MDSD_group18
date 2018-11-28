@@ -17,8 +17,4 @@ public class Rover {
     private void checkRoverFault () {
 
     }
-
-    private void checkMissionState () {
-
-    }
 }

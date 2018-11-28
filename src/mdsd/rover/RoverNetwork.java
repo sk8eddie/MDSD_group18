@@ -17,7 +17,4 @@ public class RoverNetwork implements RoverCommunication {
         return null;
     }
 
-    public CameraSensor getCamera() {
-        return null;
-    }
 }
