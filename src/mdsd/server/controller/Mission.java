@@ -11,6 +11,11 @@ public class Mission {
 
 
     public void updateMission() {
-
+    	//Take a list of points 
+    	// remove the old points from the mission
+        // add new points
+    	for(int i = 0 ; i < points.size() ; i++){
+    		
+    	}
     }
 }
