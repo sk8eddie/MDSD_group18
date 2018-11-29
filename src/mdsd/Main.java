@@ -1,5 +1,6 @@
 package mdsd;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import project.Point;
@@ -12,7 +13,9 @@ import simbad.sim.HorizontalWall;
 import simbad.sim.VerticalBoundary;
 import simbad.sim.VerticalWall;
 import java.awt.Color;
+import mdsd.server.controller.*;
 @SuppressWarnings("unused")
+
 public class Main {
 
 	@SuppressWarnings("unused")
@@ -38,6 +41,7 @@ public class Main {
 
 		robots.add(robot1);
 		robots.add(robot2);
+		
 				
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
