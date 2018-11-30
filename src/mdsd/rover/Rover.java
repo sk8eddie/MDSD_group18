@@ -11,17 +11,19 @@ import java.util.List;
  */
 public class Rover extends Robot {
 
+    private Point currentDestination;
+    private List<Point> gPSCoordinates;
+    private Chassi roverChassi;
+
     /**
-     * Calls cuntructor of its superclass.
+     * Calls cuntructor of its superclass and adds a chassi.
      * @param startPosition
      * @param name
      */
-    public Rover(Point startPosition, String name){
+    public Rover(Point startPosition, String name, Chassi chassi){
         super(startPosition, name);
+        this.roverChassi = chassi;
     }
-
-    private Point currentDestination;
-    private List<Point> gPSCoordinates;
 
     void setRoverDestination(Point newDestination) {
         this.setDestination(newDestination);
