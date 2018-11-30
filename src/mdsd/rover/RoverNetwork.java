@@ -4,6 +4,10 @@ import mdsd.server.model.ServerInterface;
 import project.Point;
 import simbad.sim.CameraSensor;
 
+/**
+ * Concrete implementation of the RoverCommunication interface. Is the facade
+ * for other components to communicate with the Rover.
+ */
 public class RoverNetwork implements RoverCommunication {
 
     private ServerInterface server;
@@ -15,7 +19,7 @@ public class RoverNetwork implements RoverCommunication {
     }
 
     public void setNewDestination(Point newDestination) {
-        this.rover.setDestination(newDestination);
+        this.rover.setRoverDestination(newDestination);
     }
 
     public Point getPosition() {
