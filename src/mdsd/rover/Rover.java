@@ -23,7 +23,20 @@ public class Rover extends Robot {
     public Rover(Point startPosition, String name, Chassi chassi){
         super(startPosition, name);
         this.roverChassi = chassi;
+
     }
+
+    public void stopRover() {
+        System.out.println("STOP, THE ROVER IS BROKEN!");
+        currentDestination = this.getPosition();
+    }
+
+    public void hitChassi () {
+        if (!roverChassi.sustainHit())
+            this.stopRover();
+    }
+
+
 
     void setRoverDestination(Point newDestination) {
         this.setDestination(newDestination);
@@ -34,5 +47,6 @@ public class Rover extends Robot {
      */
     private void checkRoverFault () {
         // TODO way to surveil the rover parts
+        // Poll att the parts???
     }
 }

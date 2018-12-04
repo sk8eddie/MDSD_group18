@@ -11,11 +11,12 @@ abstract class Chassi {
     /**
      * Method to use when the Rover hits something.
      */
-    void takeHit(){
+    boolean sustainHit(){
         addDamage();
         if(damageTaken >= threshold){
-            BrokenRoverHandler.stopRover();
+            return false;
         }
+        return true;
     }
 
     protected abstract void addDamage();
