@@ -1,7 +1,12 @@
 package mdsd.server.model;
 
-/**
- * Created by Tubas on 2018-12-04.
- */
+import java.awt.*;
+
 public interface Area {
+
+    Area createArea (int areaNumber, float position);
+
+    String getAreaType();
+
+    boolean inArea(Point coordinate);
 }
