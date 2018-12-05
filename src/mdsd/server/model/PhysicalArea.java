@@ -10,7 +10,6 @@ import java.awt.*;
 
 public class PhysicalArea implements Area{
 
-    private EnvironmentDescription e = new EnvironmentDescription();
     private Color c = Color.blue;
 
     private String areaType;
@@ -18,7 +17,7 @@ public class PhysicalArea implements Area{
     private Point corner1;
     private Point corner2;
 
-    public PhysicalArea (float xOffset, float zOffset, String name){
+    public PhysicalArea (float xOffset, float zOffset, String name, EnvironmentDescription e){
 
         this.areaType = "Physical";
         this.areaName = name;
@@ -49,12 +48,7 @@ public class PhysicalArea implements Area{
         corner1 = new Point(2.5+xOffset, 2.5+zOffset);
         corner2 = new Point(-2.5+xOffset, -2.5+zOffset);
     }
-
-
-    @Override
-    public Area createArea(Point position, String areaName) {
-        return new PhysicalArea((float)position.getX(), (float)position.getZ(), areaName);
-    }
+    
 
     @Override
     public String getAreaType() {

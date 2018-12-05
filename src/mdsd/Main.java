@@ -34,11 +34,12 @@ public class Main {
 		AbstractWall roomWall3 = new VerticalWall(4.5f, -4.5f, -1f, e, color);
 		AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);*/
 
-		Area a = new PhysicalArea( -2.5f, -2.5f,"Kitchen");
-		Area b = new PhysicalArea( 2.5f, -2.5f, "Living room");
-		Area cc = new PhysicalArea( -2.5f, 2.5f, "Bathroom");
-		Area d = new PhysicalArea( 2.5f, 2.5f, "Bedroom");
-
+		Environment env = new Environment();
+		Area a = env.createArea(new Point(-2.5, -2.5), "Kitchen", e);
+		Area b = env.createArea(new Point(2.5, -2.5), "Living room", e);
+		Area cc = env.createArea(new Point(-2.5f, 2.5f), "Bathroom", e);
+		Area d = env.createArea(new Point(2.5f, 2.5f), "Bedroom", e);
+		Area f = new PhysicalArea(-2.5f, -2.5f, "Kitchen", e);
 
 		Set<Robot> robots = new HashSet<>();
 		Robot robot1 = new Robot(new Point(0, 0), "Robot 1");
