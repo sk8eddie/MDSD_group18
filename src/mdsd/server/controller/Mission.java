@@ -13,6 +13,7 @@ public class Mission {
 
     private List<Point> points;
 
+
     public void updateMission() {
 		Point point = new Point(0,1);
 		Point point2 = new Point(0,2);

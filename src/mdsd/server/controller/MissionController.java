@@ -8,29 +8,26 @@ public class MissionController {
     //private ServerModel model;
 
     private Environment environment;
-
-    public Mission createNewMission() {
+    // Creates a new mission
+    private Mission createNewMission() {
 
         return null;
     }
+    // Updates the strategy of the mission
+    private Mission updateStrategy() {
+    return null;
+    }
+    // Send the strategy
+    private void sendStrategy() {
 
-    public void updateMission() {
+    }
+    // Sends the mission
+    private void sendMission() {
+
+    }
+    // Checks if two rovers in the same room and atleast one rover inside the building, check boundries and return true
+    public void isConstraintFulfilled() {
 
     }
 
-    public void supplyStrategy() {
-
-    }
-
-    public void sendMission() {
-
-    }
-
-    public void checkConstraints() {
-
-    }
-
-    public void checkArea() {
-
-    }
 }
