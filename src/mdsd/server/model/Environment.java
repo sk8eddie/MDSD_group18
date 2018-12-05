@@ -1,12 +1,9 @@
 package mdsd.server.model;
 
-import java.awt.*;
+import project.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Tubas on 2018-12-04.
- */
 public class Environment {
 
     private List<Area> areaList = new ArrayList<Area>();

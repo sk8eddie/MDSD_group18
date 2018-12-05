@@ -1,10 +1,10 @@
 package mdsd.server.model;
 
-import java.awt.*;
+import project.Point;
 
 public class LogicalArea implements Area{
     @Override
-    public Area createArea(int areaNumber, float position) {
+    public Area createArea(Point position) {
         return null;
     }
 
