@@ -1,6 +1,11 @@
 package mdsd.server.controller;
 
+import java.util.Set;
+
 import org.omg.CORBA.Environment;
+
+import mdsd.Robot;
+import mdsd.server.model.Area;
 
 public class MissionController {
 
@@ -25,9 +30,15 @@ public class MissionController {
     private void sendMission() {
 
     }
-    // Checks if two rovers in the same room and atleast one rover inside the building, check boundries and return true
-    public void isConstraintFulfilled() {
-
+    // Checks if two rovers in the same room returns false if true
+    //and atleast one rover inside the building return true
+    //check boundries
+    public boolean isConstraintFulfilled(Robot robot, Area area) {
+    	if(area.inArea(robot.getPosition()) == true){
+    		return false;
+    	} else{
+    		return true;
+    	}
     }
 
 }
