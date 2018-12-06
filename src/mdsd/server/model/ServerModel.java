@@ -23,4 +23,11 @@ public class ServerModel implements ServerInterface {
 
     }
 
+    public void setRoverMissions(HashMap roverMissions) {
+        this.roverMissions = roverMissions;
+    }
+
+    public HashMap getRoverMissions() {
+        return roverMissions;
+    }
 }
