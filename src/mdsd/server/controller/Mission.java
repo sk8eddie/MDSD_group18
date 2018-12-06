@@ -11,6 +11,10 @@ public class Mission {
 
     private List<Point> points;
 
+    public Mission(){
+    	this.points = points;
+	}
+
 
     public void updateMission() {
 		Point point1 = new Point(0,1); //Surgery

@@ -9,4 +9,5 @@ public interface Area {
     String getAreaType();
 
     boolean inArea(Point coordinate);
+
 }
