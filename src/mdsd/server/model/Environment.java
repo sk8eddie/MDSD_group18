@@ -22,8 +22,15 @@ public class Environment {
         return areaList;
     }
 
-    public Area createArea(Point position, String areaName, EnvironmentDescription e){
-        Area area = new PhysicalArea((float)position.getX(), (float)position.getZ(), areaName, e);
+    public Area createArea(float width, float height, Point position, String areaName, EnvironmentDescription e, String areaType){
+        Area area;
+        if (areaType.equals("Physical")) {
+            area = new PhysicalArea(width, height, (float) position.getX(), (float) position.getZ(), areaName, e, areaType);
+        } else if (areaType.equals("Logical")){
+            area = new LogicalArea(width, height, (float) position.getX(), (float) position.getZ(), areaName, e, areaType);
+        }else {
+            return null;
+        }
         areaList.add(area);
         return area;
     }

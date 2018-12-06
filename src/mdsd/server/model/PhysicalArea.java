@@ -17,38 +17,38 @@ public class PhysicalArea implements Area{
     private Point corner1;
     private Point corner2;
 
-    public PhysicalArea (float xOffset, float zOffset, String name, EnvironmentDescription e){
+    PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType){
 
-        this.areaType = "Physical";
+        this.areaType = areaType;
         this.areaName = name;
 
         if (xOffset < 0) {
 
-            AbstractWall hw11 = new HorizontalWall(2.5f + xOffset, 2.5f + zOffset, 1.5f + zOffset, e, c);
-            AbstractWall hw12 = new HorizontalWall(2.5f + xOffset, -1.5f + zOffset, -2.5f + zOffset, e, c);
-            AbstractWall hw2 = new HorizontalWall(-2.5f + xOffset, 2.5f + zOffset, -2.5f + zOffset, e, c);
+            AbstractWall hw11 = new HorizontalWall((height/2) + xOffset, (width/2) + zOffset, (width/2)-1 + zOffset, e, c);
+            AbstractWall hw12 = new HorizontalWall((height/2) + xOffset, -(width/2)+1 + zOffset, -(width/2) + zOffset, e, c);
+            AbstractWall hw2 = new HorizontalWall(-(height/2) + xOffset, (width/2) + zOffset, -(width/2) + zOffset, e, c);
 
-            AbstractWall vw11 = new VerticalWall(2.5f + zOffset, 2.5f + xOffset, 1.5f + xOffset, e, c);
-            AbstractWall vw12 = new VerticalWall(2.5f + zOffset, -1.5f + xOffset, -2.5f + xOffset, e, c);
+            AbstractWall vw11 = new VerticalWall((width/2) + zOffset, (height/2) + xOffset, (height/2)-1 + xOffset, e, c);
+            AbstractWall vw12 = new VerticalWall((width/2) + zOffset, -(height/2)+1 + xOffset, -(height/2) + xOffset, e, c);
 
-            AbstractWall vw21 = new VerticalWall(-2.5f + zOffset, 2.5f + xOffset, 1.5f + xOffset, e, c);
-            AbstractWall vw22 = new VerticalWall(-2.5f + zOffset, -1.5f + xOffset, -2.5f + xOffset, e, c);
+            AbstractWall vw21 = new VerticalWall(-(width/2) + zOffset, (height/2) + xOffset, (height/2)-1 + xOffset, e, c);
+            AbstractWall vw22 = new VerticalWall(-(width/2) + zOffset, -(height/2)+1 + xOffset, -(height/2) + xOffset, e, c);
         }
         else {
-            AbstractWall hw1 = new HorizontalWall(2.5f + xOffset, 2.5f + zOffset, -2.5f + zOffset, e, c);
-            AbstractWall hw21 = new HorizontalWall(-2.5f + xOffset, 2.5f + zOffset, 1.5f + zOffset, e, c);
-            AbstractWall hw22 = new HorizontalWall(-2.5f + xOffset, -1.5f + zOffset, -2.5f + zOffset, e, c);
+            AbstractWall hw1 = new HorizontalWall((height/2) + xOffset, (width/2) + zOffset, -(width/2) + zOffset, e, c);
+            AbstractWall hw21 = new HorizontalWall(-(height/2) + xOffset, (width/2) + zOffset, (width/2)-1 + zOffset, e, c);
+            AbstractWall hw22 = new HorizontalWall(-(height/2) + xOffset, -(width/2)+1 + zOffset, -(width/2) + zOffset, e, c);
 
-            AbstractWall vw11 = new VerticalWall(2.5f + zOffset, 2.5f + xOffset, 1.5f + xOffset, e, c);
-            AbstractWall vw12 = new VerticalWall(2.5f + zOffset, -1.5f + xOffset, -2.5f + xOffset, e, c);
+            AbstractWall vw11 = new VerticalWall((width/2) + zOffset, (height/2) + xOffset, (height/2)-1 + xOffset, e, c);
+            AbstractWall vw12 = new VerticalWall((width/2) + zOffset, -(height/2)+1 + xOffset, -(height/2) + xOffset, e, c);
 
-            AbstractWall vw21 = new VerticalWall(-2.5f + zOffset, 2.5f + xOffset, 1.5f + xOffset, e, c);
-            AbstractWall vw22 = new VerticalWall(-2.5f + zOffset, -1.5f + xOffset, -2.5f + xOffset, e, c);
+            AbstractWall vw21 = new VerticalWall(-(width/2) + zOffset, (height/2) + xOffset, (height/2)-1 + xOffset, e, c);
+            AbstractWall vw22 = new VerticalWall(-(width/2) + zOffset, -(height/2)+1 + xOffset, -(height/2) + xOffset, e, c);
         }
-        corner1 = new Point(2.5+xOffset, 2.5+zOffset);
-        corner2 = new Point(-2.5+xOffset, -2.5+zOffset);
+        corner1 = new Point((height/2)+xOffset, (width/2)+zOffset);
+        corner2 = new Point(-(height/2)+xOffset, -(width/2)+zOffset);
     }
-    
+
 
     @Override
     public String getAreaType() {
@@ -63,4 +63,5 @@ public class PhysicalArea implements Area{
     public String getAreaName(){
         return this.areaName;
     }
+
 }
