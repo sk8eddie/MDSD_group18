@@ -10,7 +10,7 @@ import mdsd.server.model.Area;
 public class MissionController {
 
     // TODO uncomment when the ServerModel-class is added
-    //private ServerModel model;
+    private ServerModel model;
 
     private Environment environment;
     // Creates a new mission
@@ -28,8 +28,7 @@ public class MissionController {
     }
     // Sends the mission
     private void sendRoverMission() {
-        ServerModel send = null;
-        send.setRoverMissions(createNewMission());
+        model.setRoverMissions(createNewMission());
     }
     // Checks if a rover is in the same room as objective returns true
     //and atleast one rover inside the building return true
