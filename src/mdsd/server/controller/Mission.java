@@ -12,7 +12,6 @@ public class Mission {
     private List<Point> points;
 
     public Mission(){
-    	this.points = points;
 	}
 
 
