@@ -27,7 +27,7 @@ public class MissionController {
 
     }
     // Sends the mission
-    private void sendMission() {
+    private void sendRoverMission() {
         ServerModel send = null;
         send.setRoverMissions(createNewMission());
     }
@@ -40,6 +40,9 @@ public class MissionController {
     	} else{
     		return false;
     	}
+    }
+
+    private void startRovers(){
     }
 
 }
