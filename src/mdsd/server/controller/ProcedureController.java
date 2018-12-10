@@ -22,13 +22,12 @@ public class ProcedureController {
     //private Clock clock;
     private int clock = 20;
     private Procedure currentProcedure = Procedure.A;
-    private Environment environment;
     private ServerModel model;
 
 
-    private void computeRewardPoints(Set<Robot> robots) {
+    private void computeRewardPoints(Set<Robot> robots, Environment env) {
         if (clock % 20 == 0) {
-            setCurrentProcedure(robots);
+            setCurrentProcedure(robots, env);
             Iterator<Robot> iterator = robots.iterator();
             Robot rover;
 
@@ -36,13 +35,13 @@ public class ProcedureController {
                 case A:
                     while (iterator.hasNext()) {
                         rover = iterator.next();
-                        procedureA(rover);
+                        procedureA(rover, env);
                     }
                     break;
                 case B:
                     while (iterator.hasNext()) {
                         rover = iterator.next();
-                        procedureB(rover);
+                        procedureB(rover, env);
                     }
                     break;
             }
@@ -52,39 +51,39 @@ public class ProcedureController {
 
     }
 
-    private void procedureA(Robot rover) {
-        if(environment.getRoverArea(rover.getPosition()).getAreaName().equals("office")){
+    private void procedureA(Robot rover, Environment env) {
+        if(env.getRoverArea(rover.getPosition()).getAreaName().equals("office")){
             model.setRewardPoints(model.getRewardPoints() + 1);
         }
 
-        else if(environment.getRoverArea(rover.getPosition()).getAreaName().equals("teachingRoom")){
+        else if(env.getRoverArea(rover.getPosition()).getAreaName().equals("teachingRoom")){
             model.setRewardPoints(model.getRewardPoints() + 2);
         }
 
     }
 
-    private void procedureB(Robot rover) {
-        if(environment.getRoverArea(rover.getPosition()).getAreaName().equals("wifiZone")){
+    private void procedureB(Robot rover, Environment env) {
+        if(env.getRoverArea(rover.getPosition()).getAreaName().equals("wifiZone")){
             model.setRewardPoints(model.getRewardPoints() + 1);
         }
-        else if(environment.getRoverArea(rover.getPosition()).getAreaName().equals("eatingArea")){
+        else if(env.getRoverArea(rover.getPosition()).getAreaName().equals("eatingArea")){
             model.setRewardPoints(model.getRewardPoints() + 2);
 
         }
 
     }
 
-    private void setCurrentProcedure(Set<Robot> robots) {
+    private void setCurrentProcedure(Set<Robot> robots, Environment env) {
         Iterator<Robot> iterator = robots.iterator();
 
         while (iterator.hasNext()){
             Robot rover = iterator.next();
             if(currentProcedure == Procedure.A){
-               if(environment.getRoverArea(rover.getPosition()).getAreaType().equals("Logical")){
+               if(env.getRoverArea(rover.getPosition()).getAreaType().equals("Logical")){
                    currentProcedure = Procedure.B;
                 }
             }else if(currentProcedure == Procedure.B){
-                if(environment.getRoverArea(rover.getPosition()).getAreaType().equals("Physical")){
+                if(env.getRoverArea(rover.getPosition()).getAreaType().equals("Physical")){
                     currentProcedure = Procedure.A;
                 }
             }
