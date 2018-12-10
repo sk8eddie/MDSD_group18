@@ -30,4 +30,13 @@ public class ServerModel implements ServerInterface {
     public HashMap getRoverMissions() {
         return roverMissions;
     }
+
+    public int getRewardPoints(){
+        return this.rewardPoints;
+    }
+
+    public void setRewardPoints(int newPts){
+        this.rewardPoints = newPts;
+    }
+
 }
