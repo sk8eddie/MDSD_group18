@@ -28,6 +28,8 @@ public class ProcedureController extends TimerTask {
     }
 
 
+    // Calculates the reward points depending on which procedure should be used,
+    // Overrided from TimerTask
     @Override
     public void run() {
             setCurrentProcedure(robots, env);
@@ -54,6 +56,7 @@ public class ProcedureController extends TimerTask {
 
     }
 
+    //Calculates reward points with procedure A
     private void procedureA(Robot rover, Environment env) {
         if(env.getRoverArea(rover.getPosition()).getAreaName().equals("office")){
             model.setRewardPoints(model.getRewardPoints() + 1);
@@ -65,6 +68,7 @@ public class ProcedureController extends TimerTask {
 
     }
 
+    //Calculates reward points with procedure B
     private void procedureB(Robot rover, Environment env) {
         if(env.getRoverArea(rover.getPosition()).getAreaName().equals("wifiZone")){
             model.setRewardPoints(model.getRewardPoints() + 1);
@@ -76,6 +80,7 @@ public class ProcedureController extends TimerTask {
 
     }
 
+    //Sets current procedure depending on which area type the rovers are in
     private void setCurrentProcedure(Set<Robot> robots, Environment env) {
         Iterator<Robot> iterator = robots.iterator();
 
