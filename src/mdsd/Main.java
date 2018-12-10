@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import mdsd.server.model.*;
 import project.Point;
 import project.AbstractSimulatorMonitor;
 import simbad.sim.AbstractWall;
@@ -24,20 +25,27 @@ public class Main {
 		EnvironmentDescription e = new EnvironmentDescription();
 		
 		Color color = Color.GRAY;
+		Color c = Color.blue;
 
-		Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5.0f, e, color);
-		Boundary w2 = new HorizontalBoundary(5.0f, -5.0f, 5.0f, e, color);
-		Boundary w3 = new VerticalBoundary(5.0f, -5.0f, 5.0f, e, color);
-		Boundary w4 = new VerticalBoundary(-5.0f, -5.0f, 5.0f, e, color);
+		Boundary w1 = new HorizontalBoundary(-10.0f, -10.0f, 10.0f, e, color);
+		Boundary w2 = new HorizontalBoundary(10.0f, -10.0f, 10.0f, e, color);
+		Boundary w3 = new VerticalBoundary(10.0f, -10.0f, 10.0f, e, color);
+		Boundary w4 = new VerticalBoundary(-10.0f, -10.0f, 10.0f, e, color);
 
-		AbstractWall roomWall1 = new HorizontalWall(-1f, 4.5f, 3.5f, e, color);
+		/*AbstractWall roomWall1 = new HorizontalWall(-1f, 4.5f, 3.5f, e, color);
 		AbstractWall roomWall2 = new HorizontalWall(-4.5f, 4.5f, 1f, e, color);
 		AbstractWall roomWall3 = new VerticalWall(4.5f, -4.5f, -1f, e, color);
-		AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);
+		AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);*/
+
+		Environment env = new Environment();
+		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Kitchen", e, "Physical");
+		Area b = env.createArea(5f, 5f,new Point(2.5, -2.5), "Living room", e, "Physical");
+		Area cc = env.createArea(5f, 5f,new Point(-2.5f, 2.5f), "Bathroom", e, "Physical");
+		Area d = env.createArea(5f, 5f,new Point(2.5f, 2.5f), "Bedroom", e, "Physical");
 
 		Set<Robot> robots = new HashSet<>();
-		Robot robot1 = new Robot(new Point(0, 0), "Robot 1");
-		Robot robot2 = new Robot(new Point(1, 3), "Robot 2");
+		Robot robot1 = new Robot(new Point(2.5, 6), "Robot 1");
+		Robot robot2 = new Robot(new Point(-2.5, -6), "Robot 2");
 
 		robots.add(robot1);
 		robots.add(robot2);

@@ -1,10 +1,8 @@
 package mdsd.server.model;
 
-import java.awt.*;
+import project.Point;
 
 public interface Area {
-
-    Area createArea (int areaNumber, float position);
 
     String getAreaType();
 
