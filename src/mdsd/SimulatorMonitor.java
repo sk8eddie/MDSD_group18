@@ -9,7 +9,7 @@ import simbad.sim.EnvironmentDescription;
 
 public class SimulatorMonitor extends AbstractSimulatorMonitor<Robot> {
 
-	public SimulatorMonitor(Set<? extends Robot> robots, EnvironmentDescription e) {
+	public SimulatorMonitor(Set<Robot> robots, EnvironmentDescription e) {
 		super(robots, e);
 	}
 
