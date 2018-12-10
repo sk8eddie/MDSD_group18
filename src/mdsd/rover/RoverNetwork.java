@@ -18,6 +18,14 @@ public class RoverNetwork implements RoverCommunication {
         this.rover = rover;
     }
 
+    /**
+     * Sends a signal to the server when the rover has reached its destination.
+     */
+    private void checkRoverDestination(){
+        // TODO loop that calls rover.isAtDestination() to see if it is time to get new destination
+        server.nextDestinationReached(rover);
+    }
+
     public void setNewDestination(Point newDestination) {
         this.rover.setRoverDestination(newDestination);
     }
