@@ -15,6 +15,7 @@ public class Environment {
     }
 
     public Area getRoverArea(Point position){
+
         return null;
     }
 

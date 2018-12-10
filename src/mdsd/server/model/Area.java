@@ -8,5 +8,5 @@ public interface Area {
 
     boolean inArea(Point coordinate);
 
-    String getAreName();
+    String getAreaName();
 }
