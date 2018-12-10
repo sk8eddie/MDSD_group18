@@ -22,4 +22,12 @@ public class ServerModel implements ServerInterface {
 
     }
 
+    public int getRewardPoints(){
+        return this.rewardPoints;
+    }
+
+    public void setRewardPoints(int newPts){
+        this.rewardPoints = newPts;
+    }
+
 }
