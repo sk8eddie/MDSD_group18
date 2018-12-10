@@ -4,7 +4,6 @@ import mdsd.rover.Rover;
 
 import java.util.HashMap;
 
-
 public class ServerModel implements ServerInterface {
 
     int rewardPoints; // Init by procedure controller

@@ -4,5 +4,5 @@ import project.Point;
 
 public interface RoverCommunication {
     void setNewDestination (Point newDestination);
-    Point getDestination();
+    Point getPosition();
 }
