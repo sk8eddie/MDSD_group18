@@ -1,8 +1,9 @@
 package mdsd;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
+import mdsd.rover.Rover;
+import mdsd.rover.RoverCommunication;
+import mdsd.rover.RoverNetwork;
 import mdsd.server.model.*;
 import project.Point;
 import project.AbstractSimulatorMonitor;
@@ -14,7 +15,6 @@ import simbad.sim.HorizontalWall;
 import simbad.sim.VerticalBoundary;
 import simbad.sim.VerticalWall;
 import java.awt.Color;
-import java.util.Timer;
 
 import mdsd.server.controller.*;
 @SuppressWarnings("unused")
@@ -45,14 +45,28 @@ public class Main {
 		Area cc = env.createArea(5f, 5f,new Point(-2.5f, 2.5f), "Bathroom", e, "Physical");
 		Area d = env.createArea(5f, 5f,new Point(2.5f, 2.5f), "Bedroom", e, "Physical");
 
+		// Rover creation
 		Set<Robot> robots = new HashSet<>();
-		Robot robot1 = new Robot(new Point(2.5, 6), "Robot 1");
-		Robot robot2 = new Robot(new Point(-2.5, -6), "Robot 2");
+		HashMap<Rover, Mission> roverMissions = new HashMap<>();
+
+		Robot robot1 = new Rover(new Point(2.5, 6), "Rover 1");
+		Robot robot2 = new Rover(new Point(-2.5, -6), "Rover 2");
 
 		robots.add(robot1);
 		robots.add(robot2);
-		
-				
+
+		Mission m1 = new Mission();
+
+		Mission m2 = new Mission();
+
+		roverMissions.put((Rover)robot1, m1);
+		roverMissions.put((Rover)robot2, m2);
+
+		ServerInterface sInter = new ServerModel(roverMissions);
+
+		RoverCommunication rovCom1  = new RoverNetwork(sInter, (Rover)robot1);
+		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);
+
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
 		//Calls the method to calculate the reward points every 20 seconds

@@ -12,15 +12,18 @@ public class ServerModel implements ServerInterface {
     HashMap<Rover, Mission> roverMissions; // Rover is the key and mission is the value
     HashMap<Rover, RoverCommunication> roverCommunication;
 
-    ServerModel(HashMap<Rover, Mission> roverMissions, HashMap<Rover, RoverCommunication> roverCommunication){
+    public ServerModel(HashMap<Rover, Mission> roverMissions){
         this.rewardPoints = 0;
         this.roverMissions = roverMissions;
-        this.roverCommunication = roverCommunication;
     }
 
     @Override
     public void nextDestinationReached(Rover rover) { // get rover , Lookup mission for that rover and get the next point/destination and set new destination
 
+    }
+
+    public void setRoverCommunication(HashMap<Rover, RoverCommunication> roverComm){
+        this.roverCommunication = roverComm;
     }
 
     public void getState(){ // Report everything, damage, location , reward points and report if any fault

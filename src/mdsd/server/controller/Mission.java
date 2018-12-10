@@ -1,9 +1,8 @@
 package mdsd.server.controller;
 
-import com.sun.xml.internal.bind.v2.TODO;
+import project.Point;
 
-import java.awt.*;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -12,10 +11,14 @@ public class Mission {
     private List<Point> points;
 
     public Mission(){
+    	this.points = new ArrayList<>();
 	}
 
+	public void addPoint(Point point){
+		this.points.add(point);
+	}
 
-    public void updateMission() {
+   /* public void updateMission() {
 		Point point1 = new Point(0,1); //Surgery
 		Point point2 = new Point(0,2); // Consulting
 		Point point3 = new Point(0,3); //Surgery nr2
@@ -24,5 +27,5 @@ public class Mission {
 		points.add(point2);
 		points.add(point3);
 		points.add(point4);
-    }
+    }*/
 }
