@@ -60,6 +60,7 @@ public class PhysicalArea implements Area{
         return this.corner2.getX() < coordinate.getX() && coordinate.getX() < this.corner1.getX() && this.corner2.getZ() < coordinate.getZ() && coordinate.getZ() < this.corner1.getZ();
     }
 
+    @Override
     public String getAreaName(){
         return this.areaName;
     }

@@ -28,6 +28,7 @@ public class LogicalArea implements Area{
         return coordinate.getX() < corner1.getX() && coordinate.getX() > corner2.getX() && coordinate.getZ() < corner1.getZ() && coordinate.getZ() > corner2.getZ();
     }
 
+    @Override
     public String getAreaName(){
         return this.areaName;
     }
