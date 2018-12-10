@@ -53,22 +53,22 @@ public class ProcedureController {
     }
 
     private void procedureA(Robot rover) {
-        if(environment.getRoverArea(rover.getPosition()).equals(office)){
-            model.getRewardPoints() = model.setRewardPoints(model.getRewardPoints + 1);
+        if(environment.getRoverArea(rover.getPosition()).getAreaName().equals("office")){
+            model.setRewardPoints(model.getRewardPoints() + 1);
         }
 
-        else if(environment.getRoverArea(rover.getPosition()).equals(teachingRoom)){
-            model.getRewardPoints() = model.setRewardPoints(model.getRewardPoints + 2);
+        else if(environment.getRoverArea(rover.getPosition()).getAreaName().equals("teachingRoom")){
+            model.setRewardPoints(model.getRewardPoints() + 2);
         }
 
     }
 
     private void procedureB(Robot rover) {
-        if(environment.getRoverArea(rover.getPosition()).equals(wifiZone)){
-            model.getRewardPoints() = model.setRewardPoints(model.getRewardPoints + 1);
+        if(environment.getRoverArea(rover.getPosition()).getAreaName().equals("wifiZone")){
+            model.setRewardPoints(model.getRewardPoints() + 1);
         }
-        else if(environment.getRoverArea(rover.getPosition()).equals(eatingArea)){
-            model.getRewardPoints() = model.setRewardPoints(model.getRewardPoints + 2);
+        else if(environment.getRoverArea(rover.getPosition()).getAreaName().equals("eatingArea")){
+            model.setRewardPoints(model.getRewardPoints() + 2);
 
         }
 
@@ -80,13 +80,13 @@ public class ProcedureController {
         while (iterator.hasNext()){
             Robot rover = iterator.next();
             if(currentProcedure == Procedure.A){
-              //  if(environment.getRoverArea(rover.getPosition()).getAreaType().equals("Logical")){
-              //      currentProcedure = Procedure.B;
-               // }
+               if(environment.getRoverArea(rover.getPosition()).getAreaType().equals("Logical")){
+                   currentProcedure = Procedure.B;
+                }
             }else if(currentProcedure == Procedure.B){
-              //  if(environment.getRoverArea(rover.getPosition()).getAreaType().equals("Physical")){
-              //      currentProcedure = Procedure.A;
-              //  }
+                if(environment.getRoverArea(rover.getPosition()).getAreaType().equals("Physical")){
+                    currentProcedure = Procedure.A;
+                }
             }
         }
 
