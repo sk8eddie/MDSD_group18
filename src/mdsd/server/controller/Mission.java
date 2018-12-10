@@ -3,6 +3,7 @@ package mdsd.server.controller;
 import project.Point;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +17,10 @@ public class Mission {
 
 	public void addPoint(Point point){
 		this.points.add(point);
+	}
+
+	public List<Point> getPoints(){
+		return this.points;
 	}
 
    /* public void updateMission() {

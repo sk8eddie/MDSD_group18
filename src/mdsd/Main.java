@@ -55,10 +55,20 @@ public class Main {
 		robots.add(robot1);
 		robots.add(robot2);
 
+		// Start create Missions
 		Mission m1 = new Mission();
-
 		Mission m2 = new Mission();
+		m2.addPoint(new Point(-2.5, -2.5));
+		m2.addPoint(new Point(2.5, -2.5));
+		m2.addPoint(new Point(2.5, -6));
 
+		m1.addPoint(new Point(2.5, 2.5));
+		m1.addPoint(new Point(-2.5, 2.5));
+		m1.addPoint(new Point(-2.5, 6));
+
+		// End create missions
+
+		// Init rovers
 		roverMissions.put((Rover)robot1, m1);
 		roverMissions.put((Rover)robot2, m2);
 
@@ -68,6 +78,16 @@ public class Main {
 		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);
 
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+		// End init rovers
+
+		// Start rovers
+		ServerModel servM = (ServerModel)sInter;
+		HashMap<Rover, Mission> rmMap = servM.getRoverMissions();
+
+		for(Rover r : rmMap.keySet()){
+			r.setDestination(rmMap.get(r).getPoints().get(0));
+		}
+		// end start rovers
 
 		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
