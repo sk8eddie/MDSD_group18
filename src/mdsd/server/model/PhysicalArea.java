@@ -17,39 +17,98 @@ public class PhysicalArea implements Area{
     private Point corner1;
     private Point corner2;
 
-    PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType){
+    PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType, String env) {
 
         this.areaType = areaType;
         this.areaName = name;
 
-        if (xOffset < 0) {
+        switch (env) {
+            case "hospital":
+                switch (areaName) {
+                    case "consulting":
+                        AbstractWall hw1 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
+                        AbstractWall hw2 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 1 + zOffset, -(width / 2) + zOffset, e, c);
+                        AbstractWall hw3 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
+                        AbstractWall hw4 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 1 + zOffset, -(width / 2) + zOffset, e, c);
+                        AbstractWall vw1 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                        AbstractWall vw2 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+                        AbstractWall vw3 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                        AbstractWall vw4 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+                        break;
+                    case "hall":
+                        if (width > height) {
+                            AbstractWall hw11 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall hw12 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall vw11 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                            AbstractWall vw12 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+                            AbstractWall vw13 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                            AbstractWall vw14 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+                        } else {
+                            AbstractWall hw11 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
+                            AbstractWall hw12 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 1 + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall hw13 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
+                            AbstractWall hw14 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 1 + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall vw11 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
+                            AbstractWall vw12 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
+                        }
+                        break;
+                    case "surgery":
+                        if (xOffset < 0) {
+                            AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
+                            AbstractWall hw22 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 1 + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall hw23 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall vw21 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
+                            AbstractWall vw22 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
+                        } else if (xOffset > 0) {
+                            AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) + zOffset, e, c);
+                            AbstractWall hw22 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
+                            AbstractWall hw23 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 1 + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall vw21 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
+                            AbstractWall vw22 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
+                        } else if (zOffset < 0) {
+                            AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) + zOffset, e, c);
+                            AbstractWall hw22 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall vw21 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                            AbstractWall vw22 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+                            AbstractWall vw23 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
+                        } else {
+                            AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) + zOffset, e, c);
+                            AbstractWall hw22 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
+                            AbstractWall vw23 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
+                            AbstractWall vw24 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                            AbstractWall vw25 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+                        }
+                        break;
+                }
+                break;
+            case "demo":
+                if (xOffset < 0) {
 
-            AbstractWall hw11 = new HorizontalWall((height/2) + xOffset, (width/2) + zOffset, (width/2)-1 + zOffset, e, c);
-            AbstractWall hw12 = new HorizontalWall((height/2) + xOffset, -(width/2)+1 + zOffset, -(width/2) + zOffset, e, c);
-            AbstractWall hw2 = new HorizontalWall(-(height/2) + xOffset, (width/2) + zOffset, -(width/2) + zOffset, e, c);
+                    AbstractWall hw11 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
+                    AbstractWall hw12 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 1 + zOffset, -(width / 2) + zOffset, e, c);
+                    AbstractWall hw2 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
 
-            AbstractWall vw11 = new VerticalWall((width/2) + zOffset, (height/2) + xOffset, (height/2)-1 + xOffset, e, c);
-            AbstractWall vw12 = new VerticalWall((width/2) + zOffset, -(height/2)+1 + xOffset, -(height/2) + xOffset, e, c);
+                    AbstractWall vw11 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                    AbstractWall vw12 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
 
-            AbstractWall vw21 = new VerticalWall(-(width/2) + zOffset, (height/2) + xOffset, (height/2)-1 + xOffset, e, c);
-            AbstractWall vw22 = new VerticalWall(-(width/2) + zOffset, -(height/2)+1 + xOffset, -(height/2) + xOffset, e, c);
+                    AbstractWall vw21 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                    AbstractWall vw22 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+                } else {
+                    AbstractWall hw1 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
+                    AbstractWall hw21 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
+                    AbstractWall hw22 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 1 + zOffset, -(width / 2) + zOffset, e, c);
+
+                    AbstractWall vw11 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                    AbstractWall vw12 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+
+                    AbstractWall vw21 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1 + xOffset, e, c);
+                    AbstractWall vw22 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1 + xOffset, -(height / 2) + xOffset, e, c);
+                }
+                corner1 = new Point((height / 2) + xOffset, (width / 2) + zOffset);
+                corner2 = new Point(-(height / 2) + xOffset, -(width / 2) + zOffset);
         }
-        else {
-            AbstractWall hw1 = new HorizontalWall((height/2) + xOffset, (width/2) + zOffset, -(width/2) + zOffset, e, c);
-            AbstractWall hw21 = new HorizontalWall(-(height/2) + xOffset, (width/2) + zOffset, (width/2)-1 + zOffset, e, c);
-            AbstractWall hw22 = new HorizontalWall(-(height/2) + xOffset, -(width/2)+1 + zOffset, -(width/2) + zOffset, e, c);
 
-            AbstractWall vw11 = new VerticalWall((width/2) + zOffset, (height/2) + xOffset, (height/2)-1 + xOffset, e, c);
-            AbstractWall vw12 = new VerticalWall((width/2) + zOffset, -(height/2)+1 + xOffset, -(height/2) + xOffset, e, c);
-
-            AbstractWall vw21 = new VerticalWall(-(width/2) + zOffset, (height/2) + xOffset, (height/2)-1 + xOffset, e, c);
-            AbstractWall vw22 = new VerticalWall(-(width/2) + zOffset, -(height/2)+1 + xOffset, -(height/2) + xOffset, e, c);
-        }
-        corner1 = new Point((height/2)+xOffset, (width/2)+zOffset);
-        corner2 = new Point(-(height/2)+xOffset, -(width/2)+zOffset);
     }
-
-
     @Override
     public String getAreaType() {
         return areaType;
