@@ -6,27 +6,30 @@ import mdsd.server.model.ServerModel;
 
 
 
-import java.sql.Time;
-import java.time.Clock;
-import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TimerTask;
 
 
-public class ProcedureController {
+public class ProcedureController extends TimerTask {
 
     public enum Procedure {
         A, B;
     }
 
-    //private Clock clock;
-    private int clock = 20;
     private Procedure currentProcedure = Procedure.A;
     private ServerModel model;
+    private Set<Robot> robots;
+    private Environment env;
+
+    public ProcedureController(Set<Robot> robots, Environment env){
+        this.robots = robots;
+        this.env = env;
+    }
 
 
-    private void computeRewardPoints(Set<Robot> robots, Environment env) {
-        if (clock % 20 == 0) {
+    @Override
+    public void run() {
             setCurrentProcedure(robots, env);
             Iterator<Robot> iterator = robots.iterator();
             Robot rover;
@@ -46,7 +49,7 @@ public class ProcedureController {
                     break;
             }
 
-        }
+
 
 
     }
