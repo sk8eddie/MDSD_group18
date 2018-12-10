@@ -14,6 +14,8 @@ import simbad.sim.HorizontalWall;
 import simbad.sim.VerticalBoundary;
 import simbad.sim.VerticalWall;
 import java.awt.Color;
+import java.util.Timer;
+
 import mdsd.server.controller.*;
 @SuppressWarnings("unused")
 
@@ -52,6 +54,9 @@ public class Main {
 		
 				
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+
+		Timer timer = new Timer();
+		timer.schedule(new ProcedureController(robots, env), 0, 20000);
 
 	}
 
