@@ -12,11 +12,11 @@ public class Environment {
     private List<Area> areaList;
 
     public Environment (){
-        areaList = new ArrayList<Area>();
+        areaList = new ArrayList<>();
     }
 
     public Area getRoverArea(Point position){
-        for (Area a : areaList){
+        for (Area a : this.areaList){
             if (a.inArea(position)){
                 return a;
             }
