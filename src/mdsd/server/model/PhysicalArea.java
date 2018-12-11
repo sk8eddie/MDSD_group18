@@ -10,14 +10,12 @@ import java.awt.*;
 
 public class PhysicalArea implements Area{
 
-    private Color c = Color.blue;
-
     private String areaType;
     private String areaName;
     private Point corner1;
     private Point corner2;
 
-    PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType) {
+    PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType, Color c) {
 
         this.areaType = areaType;
         this.areaName = name;

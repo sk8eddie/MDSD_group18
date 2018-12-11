@@ -32,15 +32,15 @@ public class Environment {
     public Area createArea(Point position, String areaName, EnvironmentDescription e, Color c){
         Area area;
         switch (areaName){
-            case "Consulting" : area = new PhysicalArea(4f, 4f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical");
+            case "Consulting" : area = new PhysicalArea(4f, 4f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
             break;
-            case "Hall" : area = new PhysicalArea(2f, 2f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical");
+            case "Hall" : area = new PhysicalArea(2f, 2f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
             break;
-            case "Surgery" : area =  new PhysicalArea(4f,4f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical");
+            case "Surgery" : area =  new PhysicalArea(4f,4f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
             break;
-            case "Office" : area = new PhysicalArea(5f, 5f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical");
+            case "Office" : area = new PhysicalArea(5f, 5f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
             break;
-            case "Teaching" : area = new PhysicalArea(5f, 5f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical");
+            case "Teaching" : area = new PhysicalArea(5f, 5f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
             break;
             case "Wifi" : area = new LogicalArea(5f, 5f, (float)position.getX(), (float)position.getZ(), areaName, e, "Logical");
             break;
