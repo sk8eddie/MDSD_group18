@@ -10,11 +10,11 @@ public class ServerModel implements ServerInterface {
 
     int rewardPoints; // Init by procedure controller
     HashMap<Rover, Mission> roverMissions; // Rover is the key and mission is the value
-    HashMap<Rover, RoverCommunication> roverCommunication;
+    //HashMap<Rover, RoverCommunication> roverCommunication;
 
-    public ServerModel(HashMap<Rover, Mission> roverMissions){
+    public ServerModel(){
         this.rewardPoints = 0;
-        this.roverMissions = roverMissions;
+        this.roverMissions = new HashMap<Rover, Mission>();
     }
 
     @Override
@@ -22,9 +22,9 @@ public class ServerModel implements ServerInterface {
 
     }
 
-    public void setRoverCommunication(HashMap<Rover, RoverCommunication> roverComm){
+    /*public void setRoverCommunication(HashMap<Rover, RoverCommunication> roverComm){
         this.roverCommunication = roverComm;
-    }
+    }*/
 
     public void getState(){ // Report everything, damage, location , reward points and report if any fault
 
@@ -38,8 +38,16 @@ public class ServerModel implements ServerInterface {
         this.roverMissions = roverMissions;
     }
 
-    public HashMap getRoverMissions() {
+    public HashMap<Rover, Mission> getRoverMissions() {
         return roverMissions;
+    }
+
+    public void updateRoverMissions(Rover rover, Mission mission){
+        if (roverMissions.containsKey(rover)){
+            roverMissions.replace(rover, mission);
+        } else {
+            roverMissions.put(rover, mission);
+        }
     }
 
     public int getRewardPoints(){

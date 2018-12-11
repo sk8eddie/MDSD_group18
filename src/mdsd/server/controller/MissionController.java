@@ -1,49 +1,57 @@
 package mdsd.server.controller;
 
-import mdsd.rover.RoverCommunication;
+import mdsd.server.model.Environment;
 import mdsd.server.model.ServerModel;
-import org.omg.CORBA.Environment;
-
 import mdsd.Robot;
 import mdsd.server.model.Area;
+import mdsd.rover.Rover;
+
+import java.util.HashMap;
+import java.util.Set;
 
 public class MissionController {
 
-    // TODO uncomment when the ServerModel-class is added
     private ServerModel model;
-
     private Environment environment;
-    // Creates a new mission
-    private Mission createNewMission() {
 
-        return null;
-    }
-    // Updates the strategy of the mission
-    private Mission updateStrategy() {
-    return null;
-    }
-    // Send the strategy
-    private void sendStrategy() {
 
+    // Returns a HashMap with the Rover and an empty mission
+    private void createNewMission(Rover rover) {
+        Mission mission = new Mission();
+        model.updateRoverMissions(rover, mission);
     }
+
+    // Returns a HashMap with the Rover and an updated the strategy of the mission
+    // which means an initialised list of points
+    private void updateStrategy(Rover rover) {
+        Mission mission = model.getRoverMissions().get(rover);
+        mission.updateStrategy();
+        //hashMap = new HashMap<>();
+    }
+
+    /*private void sendStrategy(Rover rover) {
+        model.setRoverMissions(updateStrategy(rover));
+    }*/
+
     // Sends the mission
-    private void sendRoverMission() {
-        // To be able to run the program
-        //TODO uncomment when it works
-     //   model.setRoverMissions(createNewMission());
-    }
+    /*private void sendRoverMission(Rover rover) {
+        model.setRoverMissions(createNewMission(rover));
+    }*/
+
+
+
+
     // Checks if a rover is in the same room as objective returns true
-    //and atleast one rover inside the building return true
-    //check boundries
-    public boolean isConstraintFulfilled(Robot robot, Area area) {
-    	if(robot.getPosition().equals(area)){
-    		return true;
-    	} else{
-    		return false;
-    	}
+    // and at least one rover inside the building return true
+    // check boundaries
+    public boolean isConstraintFulfilled(Rover rover, Area area) {
+        return true;
     }
 
-    private void startRovers(){
+    private void startRovers(Set<Rover> rovers){
+        for (Rover r : rovers){
+            createNewMission(r);
+        }
     }
 
 }
