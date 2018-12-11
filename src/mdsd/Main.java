@@ -67,6 +67,7 @@ public class Main {
 				
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
+		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
 		timer.schedule(new ProcedureController(robots, env), 0, 20000);
 

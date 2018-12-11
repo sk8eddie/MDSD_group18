@@ -20,23 +20,34 @@ public class Rover extends Robot {
      * @param startPosition
      * @param name
      */
-    public Rover(Point startPosition, String name, Chassi chassi){
+    Rover(Point startPosition, String name, Chassi chassi){
         super(startPosition, name);
         this.roverChassi = chassi;
 
     }
 
-    public void stopRover() {
+    void stopRover() {
         System.out.println("STOP, THE ROVER IS BROKEN!");
-        currentDestination = this.getPosition();
+        this.currentDestination = this.getPosition();
+        this.setRoverDestination(this.currentDestination);
     }
 
-    public void hitChassi () {
+    void hitChassi () {
         if (!roverChassi.sustainHit())
             this.stopRover();
     }
 
+    boolean isAtDestination(){
+        return (isinXRange(this.getPosition().getX()) && isinZRange(this.getPosition().getZ()));
+    }
 
+    private Boolean isinXRange(double x){
+        return (((this.currentDestination.getX() - 0.5) < x) && (x < (this.currentDestination.getX() + 0.5)));
+    }
+
+    private Boolean isinZRange(double z){
+        return (((this.currentDestination.getZ() - 0.5) < z) && (z < (this.currentDestination.getZ() + 0.5)));
+    }
 
     void setRoverDestination(Point newDestination) {
         this.setDestination(newDestination);

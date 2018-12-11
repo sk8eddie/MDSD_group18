@@ -1,13 +1,22 @@
 package mdsd.server.model;
 
 import mdsd.rover.Rover;
+import mdsd.rover.RoverCommunication;
+import mdsd.server.controller.Mission;
 
 import java.util.HashMap;
 
 public class ServerModel implements ServerInterface {
 
     int rewardPoints; // Init by procedure controller
-    HashMap roverMissions; // Rover is the key and mission is the value
+    HashMap<Rover, Mission> roverMissions; // Rover is the key and mission is the value
+    HashMap<Rover, RoverCommunication> roverCommunication;
+
+    ServerModel(HashMap<Rover, Mission> roverMissions, HashMap<Rover, RoverCommunication> roverCommunication){
+        this.rewardPoints = 0;
+        this.roverMissions = roverMissions;
+        this.roverCommunication = roverCommunication;
+    }
 
     @Override
     public void nextDestinationReached(Rover rover) { // get rover , Lookup mission for that rover and get the next point/destination and set new destination
@@ -34,6 +43,7 @@ public class ServerModel implements ServerInterface {
         return this.rewardPoints;
     }
 
+    // TODO Change to a method for adding reward points instead.
     public void setRewardPoints(int newPts){
         this.rewardPoints = newPts;
     }
