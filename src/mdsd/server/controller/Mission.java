@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-
+//TODO add current destination
 public class Mission implements Iterable{
 
     private List<Point> points;
