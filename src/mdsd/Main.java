@@ -40,10 +40,22 @@ public class Main {
 		AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);*/
 
 		Environment env = new Environment();
-		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Kitchen", e, "Physical");
-		Area b = env.createArea(5f, 5f,new Point(2.5, -2.5), "Living room", e, "Physical");
-		Area cc = env.createArea(5f, 5f,new Point(-2.5f, 2.5f), "Bathroom", e, "Physical");
-		Area d = env.createArea(5f, 5f,new Point(2.5f, 2.5f), "Bedroom", e, "Physical");
+		Area c1 = env.createArea(4f, 4f, new Point(0,0), "consulting", e, "Physical");
+		Area h1 = env.createArea(2f, 2f, new Point(3,0), "hall", e, "Physical");
+		Area h2 = env.createArea(3f, 2f, new Point(0,3.5), "hall", e, "Physical");
+		Area h3 = env.createArea(2f, 4f, new Point(-4,0), "hall", e, "Physical");
+		Area h4 = env.createArea(5f, 2f, new Point(0,-4.5), "hall", e, "Physical");
+		Area s1 = env.createArea(4f, 2f, new Point(5,0), "surgery", e, "Physical");
+		Area s2 = env.createArea(2f, 4f, new Point(0,6), "surgery", e, "Physical");
+		Area s3 = env.createArea(4f, 2f, new Point(-7,0), "surgery", e, "Physical");
+		Area s4 = env.createArea(2f, 4f, new Point(0,-8), "surgery", e, "Physical");
+
+		/*
+		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Demo", e, "Physical");
+		Area b = env.createArea(5f, 5f,new Point(2.5, -2.5), "Demo", e, "Physical");
+		Area cc = env.createArea(5f, 5f,new Point(-2.5f, 2.5f), "Demo", e, "Physical");
+		Area d = env.createArea(5f, 5f,new Point(2.5f, 2.5f), "Demo", e, "Physical");
+		*/
 
 		Set<Robot> robots = new HashSet<>();
 		Robot robot1 = new Robot(new Point(2.5, 6), "Robot 1");

@@ -28,7 +28,7 @@ public class MissionController {
     }
     // Sends the mission
     private void sendRoverMission() {
-        model.setRoverMissions(createNewMission());
+        //model.setRoverMissions(createNewMission());
     }
     // Checks if a rover is in the same room as objective returns true
     //and atleast one rover inside the building return true
