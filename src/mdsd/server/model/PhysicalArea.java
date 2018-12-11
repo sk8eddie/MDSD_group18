@@ -23,7 +23,7 @@ public class PhysicalArea implements Area{
         this.areaName = name;
 
         switch (areaName) {
-            case "consulting":
+            case "Consulting":
                 AbstractWall hw1 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1.5f + zOffset, e, c);
                 AbstractWall hw2 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 1.5f + zOffset, -(width / 2) + zOffset, e, c);
                 AbstractWall hw3 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1.5f + zOffset, e, c);
@@ -33,8 +33,8 @@ public class PhysicalArea implements Area{
                 AbstractWall vw3 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1.5f + xOffset, e, c);
                 AbstractWall vw4 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1.5f + xOffset, -(height / 2) + xOffset, e, c);
                 break;
-            case "hall":
-                if (width > height) {
+            case "Hall":
+                if (Math.abs(zOffset) > Math.abs(xOffset)) {
                     AbstractWall hw11 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     AbstractWall hw12 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     AbstractWall vw11 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 0.5f + xOffset, e, c);
@@ -50,7 +50,7 @@ public class PhysicalArea implements Area{
                     AbstractWall vw12 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                 }
                 break;
-            case "surgery":
+            case "Surgery":
                 if (xOffset < -3) {
                     AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 0.75f + zOffset, e, c);
                     AbstractWall hw22 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 0.75f + zOffset, -(width / 2) + zOffset, e, c);

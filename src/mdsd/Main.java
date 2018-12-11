@@ -40,15 +40,15 @@ public class Main {
 		AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);*/
 
 		Environment env = new Environment();
-		Area c1 = env.createArea(4f, 4f, new Point(0,0), "consulting", e, "Physical");
-		Area h1 = env.createArea(2f, 2f, new Point(3,0), "hall", e, "Physical");
-		Area h2 = env.createArea(3f, 2f, new Point(0,3.5), "hall", e, "Physical");
-		Area h3 = env.createArea(2f, 4f, new Point(-4,0), "hall", e, "Physical");
-		Area h4 = env.createArea(5f, 2f, new Point(0,-4.5), "hall", e, "Physical");
-		Area s1 = env.createArea(4f, 2f, new Point(5,0), "surgery", e, "Physical");
-		Area s2 = env.createArea(2f, 4f, new Point(0,6), "surgery", e, "Physical");
-		Area s3 = env.createArea(4f, 2f, new Point(-7,0), "surgery", e, "Physical");
-		Area s4 = env.createArea(2f, 4f, new Point(0,-8), "surgery", e, "Physical");
+		Area c1 = env.createArea(new Point(0,0), "Consulting", e, c);
+		Area h1 = env.createArea(new Point(3,0), "Hall", e, c);
+		Area h2 = env.createArea(new Point(0,3.5), "Hall", e, c);
+		Area h3 = env.createArea(new Point(-4,0), "Hall", e, c);
+		Area h4 = env.createArea(new Point(0,-4.5), "Hall", e, c);
+		Area s1 = env.createArea(new Point(5,0), "Surgery", e, c);
+		Area s2 = env.createArea(new Point(0,6), "Surgery", e, c);
+		Area s3 = env.createArea(new Point(-7,0), "Surgery", e, c);
+		Area s4 = env.createArea(new Point(0,-8), "Surgery", e, c);
 
 		/*
 		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Demo", e, "Physical");
