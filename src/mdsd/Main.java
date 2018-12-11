@@ -42,13 +42,13 @@ public class Main {
 		Environment env = new Environment();
 		Area c1 = env.createArea(new Point(0,0), "Consulting", e, c);
 		Area h1 = env.createArea(new Point(3,0), "Hall", e, c);
-		Area h2 = env.createArea(new Point(0,3.5), "Hall", e, c);
-		Area h3 = env.createArea(new Point(-4,0), "Hall", e, c);
-		Area h4 = env.createArea(new Point(0,-4.5), "Hall", e, c);
-		Area s1 = env.createArea(new Point(5,0), "Surgery", e, c);
+		Area h2 = env.createArea(new Point(0,3), "Hall", e, c);
+		Area h3 = env.createArea(new Point(-3,0), "Hall", e, c);
+		Area h4 = env.createArea(new Point(0,-3), "Hall", e, c);
+		Area s1 = env.createArea(new Point(6,0), "Surgery", e, c);
 		Area s2 = env.createArea(new Point(0,6), "Surgery", e, c);
-		Area s3 = env.createArea(new Point(-7,0), "Surgery", e, c);
-		Area s4 = env.createArea(new Point(0,-8), "Surgery", e, c);
+		Area s3 = env.createArea(new Point(-6,0), "Surgery", e, c);
+		Area s4 = env.createArea(new Point(0,-6), "Surgery", e, c);
 
 		/*
 		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Demo", e, "Physical");
