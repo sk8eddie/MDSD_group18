@@ -7,9 +7,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+
 public class Mission implements Iterable{
 
     private List<Point> points;
+    private Iterator missionIterator = new MissionIterator();
 
     public Mission(){
     	this.points = new ArrayList<>();
@@ -23,13 +25,13 @@ public class Mission implements Iterable{
 		return this.points;
 	}
 
-   public void updateStrategy(){
+   public void updateStrategy(){ //TODO handle for when a rover has reached a certain amount of points.
 	   Collections.shuffle(this.points);
    }
 
 	@Override
 	public Iterator iterator() {
-		return new MissionIterator();
+		return this.missionIterator;
 	}
 
 	private class MissionIterator implements Iterator<Point>{
