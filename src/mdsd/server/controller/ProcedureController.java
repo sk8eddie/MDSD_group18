@@ -1,14 +1,13 @@
 package mdsd.server.controller;
 
+import javafx.util.Pair;
 import mdsd.Robot;
-import mdsd.server.model.Environment;
-import mdsd.server.model.ServerModel;
+import mdsd.server.model.*;
+import java.util.HashMap;
 
 
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TimerTask;
+import java.util.*;
 
 
 public class ProcedureController extends TimerTask {
@@ -21,18 +20,23 @@ public class ProcedureController extends TimerTask {
     private ServerModel model;
     private Set<Robot> robots;
     private Environment env;
+    private Map<Area, Integer> envpnt = new HashMap<Area, Integer>();
 
-    public ProcedureController(Set<Robot> robots, Environment env){
+
+    public ProcedureController(Set<Robot> robots, Environment env, Map<Area, Integer> envpnt){
         this.robots = robots;
         this.env = env;
+        this.envpnt = envpnt;
     }
+
+
 
 
     // Calculates the reward points depending on which procedure should be used,
     // Overrided from TimerTask
     @Override
     public void run() {
-            setCurrentProcedure(robots, env);
+            setCurrentProcedure();
             Iterator<Robot> iterator = robots.iterator();
             Robot rover;
 
@@ -40,13 +44,13 @@ public class ProcedureController extends TimerTask {
                 case A:
                     while (iterator.hasNext()) {
                         rover = iterator.next();
-                        procedureA(rover, env);
+                        procedureA(rover);
                     }
                     break;
                 case B:
                     while (iterator.hasNext()) {
                         rover = iterator.next();
-                        procedureB(rover, env);
+                        procedureB(rover);
                     }
                     break;
             }
@@ -57,31 +61,49 @@ public class ProcedureController extends TimerTask {
     }
 
     //Calculates reward points with procedure A
-    private void procedureA(Robot rover, Environment env) {
-        if(env.getRoverArea(rover.getPosition()).getAreaName().equals("office")){
+    private void procedureA(Robot rover) {
+        for(Map.Entry<Area, Integer> values : envpnt.entrySet()){
+            if (values.getKey().getAreaType().equals("Physical")){
+                if(env.getRoverArea(rover.getPosition()).getAreaName().equals(values.getKey().getAreaName())){
+                    model.setRewardPoints(model.getRewardPoints() + values.getValue());
+                }
+            }
+        }
+
+
+     /*   if(env.getRoverArea(rover.getPosition()).getAreaName().equals("office")){
             model.setRewardPoints(model.getRewardPoints() + 1);
         }
 
         else if(env.getRoverArea(rover.getPosition()).getAreaName().equals("teachingRoom")){
             model.setRewardPoints(model.getRewardPoints() + 2);
         }
-
+    */
     }
 
     //Calculates reward points with procedure B
-    private void procedureB(Robot rover, Environment env) {
-        if(env.getRoverArea(rover.getPosition()).getAreaName().equals("wifiZone")){
+    private void procedureB(Robot rover) {
+        for (Map.Entry<Area, Integer> values : envpnt.entrySet()) {
+            if (values.getKey().getAreaType().equals("Logical")) {
+                if (env.getRoverArea(rover.getPosition()).getAreaName().equals(values.getKey().getAreaName())) {
+                    model.setRewardPoints(model.getRewardPoints() + values.getValue());
+                }
+            }
+
+      /*  if(env.getRoverArea(rover.getPosition()).getAreaName().equals("wifiZone")){
             model.setRewardPoints(model.getRewardPoints() + 1);
         }
         else if(env.getRoverArea(rover.getPosition()).getAreaName().equals("eatingArea")){
             model.setRewardPoints(model.getRewardPoints() + 2);
 
         }
+        */
 
+        }
     }
 
     //Sets current procedure depending on which area type the rovers are in
-    private void setCurrentProcedure(Set<Robot> robots, Environment env) {
+    private void setCurrentProcedure() {
         Iterator<Robot> iterator = robots.iterator();
 
         while (iterator.hasNext()){

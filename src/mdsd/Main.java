@@ -1,7 +1,5 @@
 package mdsd;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import mdsd.server.model.*;
 import project.Point;
@@ -14,7 +12,6 @@ import simbad.sim.HorizontalWall;
 import simbad.sim.VerticalBoundary;
 import simbad.sim.VerticalWall;
 import java.awt.Color;
-import java.util.Timer;
 
 import mdsd.server.controller.*;
 @SuppressWarnings("unused")
@@ -51,13 +48,19 @@ public class Main {
 
 		robots.add(robot1);
 		robots.add(robot2);
-		
+
+		// List containing the points gained for being in each area
+		Map<Area, Integer> environment1 = new HashMap<Area, Integer>();
+		environment1.put(a, 1);
+		environment1.put(b, 2);
+		environment1.put(cc, 1);
+		environment1.put(d, 2);
 				
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
 		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
-		timer.schedule(new ProcedureController(robots, env), 0, 20000);
+		timer.schedule(new ProcedureController(robots, env, environment1), 0, 20000);
 
 	}
 
