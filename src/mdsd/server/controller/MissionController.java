@@ -29,14 +29,14 @@ public class MissionController {
 
     /**
      * From a xml-file that is in "mdsdSimultar/missionData.xml" predefined missions are read and will
-     * generate a java list of Missions that are assigned to each Rover.
+     * generate a java list of Missions that are assigned to each Rover. The xml-file should be in the
      * @return a java list of Missions.
      */
     public List<Mission> readMissionsXML(){
         List<Mission> missions = new ArrayList<>();
         try{
             // Read the xml-file
-            File missionsXml = new File("missionData.xml");
+            File missionsXml = new File("../mdsd/src/mdsd/server/controller/missionData.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
             Document missionDoc = documentBuilder.parse(missionsXml);
@@ -45,6 +45,9 @@ public class MissionController {
 
             // Get all xml-missions and create java objects from them
             NodeList missionNodes = missionDoc.getElementsByTagName("Mission");
+            if(missionNodes.getLength() == 0){
+                throw new Exception("There are no Missions defined in the 'missionData.xml'-file.");
+            }
             for(int i = 0; i < missionNodes.getLength(); i++){
                 Mission newMission = new Mission(getPointsFromMissionXML(missionNodes.item(i)));
                 missions.add(newMission);
@@ -120,7 +123,7 @@ public class MissionController {
             }
         }
 
-        System.out.println(model.getRoverMissions());
+        System.out.println("START ROVERS" + model.getRoverMissions());
 
         for(Rover r : model.getRoverMissions().keySet()){
             r.setDestination((Point)model.getRoverMissions().get(r).iterator().next());
