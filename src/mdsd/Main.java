@@ -47,7 +47,7 @@ public class Main {
 
 		// Rover creation
 		Set<Robot> robots = new HashSet<>();
-		HashMap<Rover, Mission> roverMissions = new HashMap<>();
+		//HashMap<Rover, Mission> roverMissions = new HashMap<>();
 
 		Robot robot1 = new Rover(new Point(2.5, 6), "Rover 1");
 		Robot robot2 = new Rover(new Point(-2.5, -6), "Rover 2");
@@ -56,23 +56,15 @@ public class Main {
 		robots.add(robot2);
 
 		// Start create Missions
-		Mission m1 = new Mission();
-		Mission m2 = new Mission();
-		m2.addPoint(new Point(-2.5, -2.5));
-		m2.addPoint(new Point(2.5, -2.5));
-		m2.addPoint(new Point(2.5, -6));
 
-		m1.addPoint(new Point(2.5, 2.5));
-		m1.addPoint(new Point(-2.5, 2.5));
-		m1.addPoint(new Point(-2.5, 6));
 
 		// End create missions
 
 		// Init rovers
-		roverMissions.put((Rover)robot1, m1);
-		roverMissions.put((Rover)robot2, m2);
+		//roverMissions.put((Rover)robot1, m1);
+		//roverMissions.put((Rover)robot2, m2);
 
-		ServerInterface sInter = new ServerModel(roverMissions);
+		ServerInterface sInter = new ServerModel();
 
 		RoverCommunication rovCom1  = new RoverNetwork(sInter, (Rover)robot1);
 		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);
@@ -82,16 +74,16 @@ public class Main {
 
 		// Start rovers
 		ServerModel servM = (ServerModel)sInter;
-		HashMap<Rover, Mission> rmMap = servM.getRoverMissions();
+		MissionController mController = new MissionController(servM);
+		mController.startRovers(robots);
 
-		for(Rover r : rmMap.keySet()){
-			r.setDestination(rmMap.get(r).getPoints().get(0));
-		}
 		// end start rovers
 
 		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
 		timer.schedule(new ProcedureController(robots, env), 0, 20000);
+
+
 
 	}
 
