@@ -52,8 +52,8 @@ public class Main {
 		Robot robot1 = new Rover(new Point(2.5, 6), "Rover 1");
 		Robot robot2 = new Rover(new Point(-2.5, -6), "Rover 2");
 
-		robots.add(robot1);
 		robots.add(robot2);
+		robots.add(robot1);
 
 		// Start create Missions
 

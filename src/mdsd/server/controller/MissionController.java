@@ -6,6 +6,7 @@ import mdsd.Robot;
 import mdsd.server.model.Area;
 import mdsd.rover.Rover;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import project.Point;
@@ -14,7 +15,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -27,27 +27,15 @@ public class MissionController {
         this.model = model;
     }
 
-    //temp
-    /*List<Mission> m = new ArrayList<>();
-
-    private void create(){
-        Mission m2 = new Mission();
-        m2.addPoint(new Point(-2.5, -2.5));
-        m2.addPoint(new Point(2.5, -2.5));
-        m2.addPoint(new Point(2.5, -6));
-        Mission m1 = new Mission();
-        m1.addPoint(new Point(2.5, 2.5));
-        m1.addPoint(new Point(-2.5, 2.5));
-        m1.addPoint(new Point(-2.5, 6));
-        m.add(m2);
-        m.add(m1);
-
-    }*/
-    //temp
-
+    /**
+     * From a xml-file that is in "mdsdSimultar/missionData.xml" predefined missions are read and will
+     * generate a java list of Missions that are assigned to each Rover.
+     * @return a java list of Missions.
+     */
     public List<Mission> readMissionsXML(){
         List<Mission> missions = new ArrayList<>();
         try{
+            // Read the xml-file
             File missionsXml = new File("missionData.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
@@ -55,32 +43,41 @@ public class MissionController {
 
             missionDoc.getDocumentElement().normalize();
 
+            // Get all xml-missions and create java objects from them
             NodeList missionNodes = missionDoc.getElementsByTagName("Mission");
             for(int i = 0; i < missionNodes.getLength(); i++){
-                Mission newMission = new Mission();
-
-                System.out.println("MISSION NODE: ");
+                Mission newMission = new Mission(getPointsFromMissionXML(missionNodes.item(i)));
+                missions.add(newMission);
             }
 
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return missions;
     }
 
+    /**
+     * From each mission tag in the XML-file, extract its points and create objects for them according to attributes.
+     * @param mission the Mission-tag from the xml-file.
+     * @return a java list of Points that belonging to the sent Mission-tag.
+     */
     private List<Point> getPointsFromMissionXML(Node mission){
         List<Point> points = new ArrayList<>();
+        NodeList missionPoints = mission.getChildNodes(); // Get points from XML-tag
 
+        for(int i = 0; i < missionPoints.getLength(); i++){
+            Node pointNode = missionPoints.item(i);
+            if(pointNode.getNodeType() == Node.ELEMENT_NODE){
+                Element xmlPoint = (Element)pointNode;
+
+                double x = Double.parseDouble(xmlPoint.getAttribute("x"));
+                double y = Double.parseDouble(xmlPoint.getAttribute("y"));
+                points.add(new Point(x, y));
+            }
+        }
+        return points;
     }
 
-    // Returns a HashMap with the Rover and an empty mission
-    private void createNewMission(Rover rover) {
-        /*List<Mission> missions = readMissionsXML();
-        Mission mission = missions.get(0);
-        missions.remove(0);
-        model.updateRoverMissions(rover, mission);*/
-    }
 
     // Returns a HashMap with the Rover and an updated the strategy of the mission
     // which means an initialised list of points
@@ -110,8 +107,17 @@ public class MissionController {
     }
 
     public void startRovers(Set<Robot> rovers){
-        for (Robot r : rovers){
-            createNewMission((Rover)r);
+
+        List<Mission> missions = readMissionsXML();
+
+        // Add all rovers and their missions to the model
+        if(rovers.size() == missions.size()){
+            int missionIndex = 0;
+            for(Robot r : rovers){
+                Rover rover = (Rover)r;
+                this.model.updateRoverMissions(rover, missions.get(missionIndex));
+                missionIndex++;
+            }
         }
 
         System.out.println(model.getRoverMissions());

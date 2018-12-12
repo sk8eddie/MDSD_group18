@@ -18,6 +18,10 @@ public class Mission implements Iterable{
     	this.points = new ArrayList<>();
 	}
 
+	public Mission(List<Point> points){
+    	this.points = points;
+	}
+
 	public void addPoint(Point point){
 		this.points.add(point);
 	}
