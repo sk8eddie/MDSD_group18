@@ -75,6 +75,9 @@ public class Main {
 		// Start rovers
 		ServerModel servM = (ServerModel)sInter;
 		MissionController mController = new MissionController(servM);
+
+		mController.readMissionsXML();
+
 		mController.startRovers(robots);
 
 		// end start rovers

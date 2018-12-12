@@ -5,8 +5,14 @@ import mdsd.server.model.ServerModel;
 import mdsd.Robot;
 import mdsd.server.model.Area;
 import mdsd.rover.Rover;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import project.Point;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +25,10 @@ public class MissionController {
 
     public MissionController(ServerModel model){
         this.model = model;
-        create();
     }
 
     //temp
-    List<Mission> m = new ArrayList<>();
+    /*List<Mission> m = new ArrayList<>();
 
     private void create(){
         Mission m2 = new Mission();
@@ -37,14 +42,44 @@ public class MissionController {
         m.add(m2);
         m.add(m1);
 
-    }
+    }*/
     //temp
+
+    public List<Mission> readMissionsXML(){
+        List<Mission> missions = new ArrayList<>();
+        try{
+            File missionsXml = new File("missionData.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
+            Document missionDoc = documentBuilder.parse(missionsXml);
+
+            missionDoc.getDocumentElement().normalize();
+
+            NodeList missionNodes = missionDoc.getElementsByTagName("Mission");
+            for(int i = 0; i < missionNodes.getLength(); i++){
+                Mission newMission = new Mission();
+
+                System.out.println("MISSION NODE: ");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return missions;
+    }
+
+    private List<Point> getPointsFromMissionXML(Node mission){
+        List<Point> points = new ArrayList<>();
+
+    }
 
     // Returns a HashMap with the Rover and an empty mission
     private void createNewMission(Rover rover) {
-        Mission mission = m.get(0);
-        m.remove(0);
-        model.updateRoverMissions(rover, mission);
+        /*List<Mission> missions = readMissionsXML();
+        Mission mission = missions.get(0);
+        missions.remove(0);
+        model.updateRoverMissions(rover, mission);*/
     }
 
     // Returns a HashMap with the Rover and an updated the strategy of the mission
