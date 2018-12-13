@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class Rover extends Robot {
 
+    //TODO RoverFactory
+
     private Point currentDestination;
     private List<Point> gPSCoordinates;
     private Chassi roverChassi;
@@ -20,10 +22,14 @@ public class Rover extends Robot {
      * @param startPosition
      * @param name
      */
-    Rover(Point startPosition, String name, Chassi chassi){
+    public Rover(Point startPosition, String name, Chassi chassi){
         super(startPosition, name);
         this.roverChassi = chassi;
+    }
 
+    public Rover(Point startPosition, String name){
+        super(startPosition, name);
+        this.roverChassi = new RegularChassi();
     }
 
     void stopRover() {
