@@ -1,6 +1,9 @@
 package mdsd;
 import java.util.*;
 
+import mdsd.rover.Rover;
+import mdsd.rover.RoverCommunication;
+import mdsd.rover.RoverNetwork;
 import mdsd.server.model.*;
 import project.Point;
 import project.AbstractSimulatorMonitor;
@@ -37,30 +40,76 @@ public class Main {
 		AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);*/
 
 		Environment env = new Environment();
-		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Kitchen", e, "Physical");
-		Area b = env.createArea(5f, 5f,new Point(2.5, -2.5), "Living room", e, "Physical");
-		Area cc = env.createArea(5f, 5f,new Point(-2.5f, 2.5f), "Bathroom", e, "Physical");
-		Area d = env.createArea(5f, 5f,new Point(2.5f, 2.5f), "Bedroom", e, "Physical");
+		Area c1 = env.createArea(new Point(0,0), "Consulting", e, c);
+		Area h1 = env.createArea(new Point(3,0), "Hall", e, c);
+		Area h2 = env.createArea(new Point(0,3), "Hall", e, c);
+		Area h3 = env.createArea(new Point(-3,0), "Hall", e, c);
+		Area h4 = env.createArea(new Point(0,-3), "Hall", e, c);
+		Area s1 = env.createArea(new Point(6,0), "Surgery", e, c);
+		Area s2 = env.createArea(new Point(0,6), "Surgery", e, c);
+		Area s3 = env.createArea(new Point(-6,0), "Surgery", e, c);
+		Area s4 = env.createArea(new Point(0,-6), "Surgery", e, c);
 
+		/*
+		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Demo", e, "Physical");
+		Area b = env.createArea(5f, 5f,new Point(2.5, -2.5), "Demo", e, "Physical");
+		Area cc = env.createArea(5f, 5f,new Point(-2.5f, 2.5f), "Demo", e, "Physical");
+		Area d = env.createArea(5f, 5f,new Point(2.5f, 2.5f), "Demo", e, "Physical");
+		*/
+
+		// Rover creation
 		Set<Robot> robots = new HashSet<>();
-		Robot robot1 = new Robot(new Point(2.5, 6), "Robot 1");
-		Robot robot2 = new Robot(new Point(-2.5, -6), "Robot 2");
+		//HashMap<Rover, Mission> roverMissions = new HashMap<>();
 
-		robots.add(robot1);
+		Robot robot1 = new Rover(new Point(2.5, 6), "Rover 1");
+		Robot robot2 = new Rover(new Point(-2.5, -6), "Rover 2");
+
 		robots.add(robot2);
+
 
 		// List containing the points gained for being in each area
 		Map<Area, Integer> environment1 = new HashMap<Area, Integer>();
-		environment1.put(a, 1);
-		environment1.put(b, 2);
-		environment1.put(cc, 1);
-		environment1.put(d, 2);
+		//environment1.put(a, 1);
+		//environment1.put(b, 2);
+		//environment1.put(cc, 1);
+		//environment1.put(d, 2);
 				
+
+		robots.add(robot1);
+
+		// Start create Missions
+
+
+		// End create missions
+
+		// Init rovers
+		//roverMissions.put((Rover)robot1, m1);
+		//roverMissions.put((Rover)robot2, m2);
+
+		ServerInterface sInter = new ServerModel();
+
+		RoverCommunication rovCom1  = new RoverNetwork(sInter, (Rover)robot1);
+		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);
+
+
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+		// End init rovers
+
+		// Start rovers
+		ServerModel servM = (ServerModel)sInter;
+		MissionController mController = new MissionController(servM);
+
+		mController.readMissionsXML();
+
+		mController.startRovers(robots);
+
+		// end start rovers
 
 		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
 		//timer.schedule(new ProcedureController(robots, env, environment1), 0, 20000);
+
+
 
 	}
 
