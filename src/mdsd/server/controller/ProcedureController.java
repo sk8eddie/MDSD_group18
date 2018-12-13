@@ -37,24 +37,23 @@ public class ProcedureController extends TimerTask {
     // Overrided from TimerTask
     @Override
     public void run() {
-            setCurrentProcedure();
-            Iterator<Robot> iterator = robots.iterator();
+        setCurrentProcedure();
+        Iterator<Robot> iterator = robots.iterator();
             Robot rover;
 
+
+        while (iterator.hasNext()) {
             switch (currentProcedure) {
                 case A:
-                    while (iterator.hasNext()) {
                         rover = iterator.next();
                         procedureA(rover);
-                    }
                     break;
                 case B:
-                    while (iterator.hasNext()) {
                         rover = iterator.next();
                         procedureB(rover);
-                    }
                     break;
             }
+        }
 
 
 
@@ -65,7 +64,7 @@ public class ProcedureController extends TimerTask {
     private void procedureA(Robot rover) {
         for(Map.Entry<Area, Integer> values : envpnt.entrySet()){
             if (values.getKey().getAreaType().equals("Physical")){
-                if(env.getRoverArea(rover.getPosition()).getAreaName().equals(values.getKey().getAreaName())){
+                if(values.getKey().inArea(rover.getPosition())){
                     model.setRewardPoints(model.getRewardPoints() + values.getValue());
                 }
             }
@@ -86,7 +85,7 @@ public class ProcedureController extends TimerTask {
     private void procedureB(Robot rover) {
         for (Map.Entry<Area, Integer> values : envpnt.entrySet()) {
             if (values.getKey().getAreaType().equals("Logical")) {
-                if (env.getRoverArea(rover.getPosition()).getAreaName().equals(values.getKey().getAreaName())) {
+                if (values.getKey().inArea(rover.getPosition())) {
                     model.setRewardPoints(model.getRewardPoints() + values.getValue());
                 }
             }
@@ -109,13 +108,21 @@ public class ProcedureController extends TimerTask {
 
         while (iterator.hasNext()){
             Robot rover = iterator.next();
+
             if(currentProcedure == Procedure.A){
+                System.out.println("---------- setProcedure if A ----------" );
                if(env.getRoverArea(rover.getPosition()).getAreaType().equals("Logical")){
                    currentProcedure = Procedure.B;
+                   System.out.println("---------- setProcedure in A ----------" );
+                   System.out.println("----------" + currentProcedure +"----------" );
+                   break;
                 }
-            }else if(currentProcedure == Procedure.B){
+            }else {
+                System.out.println("---------- setProcedure if B ----------" );
                 if(env.getRoverArea(rover.getPosition()).getAreaType().equals("Physical")){
                     currentProcedure = Procedure.A;
+                    System.out.println("---------- setProcedure in B ----------" );
+                    break;
                 }
             }
         }

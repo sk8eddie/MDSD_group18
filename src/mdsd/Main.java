@@ -50,6 +50,7 @@ public class Main {
 		Area s3 = env.createArea(new Point(-6,0), "Surgery", e, c);
 		Area s4 = env.createArea(new Point(0,-6), "Surgery", e, c);
 
+
 		/*
 		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Demo", e, "Physical");
 		Area b = env.createArea(5f, 5f,new Point(2.5, -2.5), "Demo", e, "Physical");
@@ -67,12 +68,19 @@ public class Main {
 		robots.add(robot2);
 
 
+		// TODO add points to areas instead
 		// List containing the points gained for being in each area
 		Map<Area, Integer> environment1 = new HashMap<Area, Integer>();
-		//environment1.put(a, 1);
-		//environment1.put(b, 2);
-		//environment1.put(cc, 1);
-		//environment1.put(d, 2);
+		environment1.put(c1, 10);
+		environment1.put(h1, 0);
+		environment1.put(h2, 0);
+		environment1.put(h3, 0);
+		environment1.put(h4, 0);
+		environment1.put(s1, 20);
+		environment1.put(s2, 20);
+		environment1.put(s3, 20);
+		environment1.put(s4, 20);
+
 				
 
 		robots.add(robot1);
@@ -107,7 +115,7 @@ public class Main {
 
 		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
-		//timer.schedule(new ProcedureController(robots, env, environment1), 0, 20000);
+		timer.schedule(new ProcedureController(robots, env, environment1, servM), 0, 20000);
 
 
 
