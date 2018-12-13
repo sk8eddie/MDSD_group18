@@ -28,7 +28,7 @@ public class MissionController {
     // Returns a HashMap with the Rover and an updated the strategy of the mission
     // which means an initialised list of points
     private HashMap updateStrategy(Rover rover) {
-        newMission.updateStrategy();
+       // newMission.updateStrategy();
         hashMap = new HashMap<>();
         hashMap.put(rover, newMission);
         return hashMap;

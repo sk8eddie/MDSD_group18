@@ -12,6 +12,7 @@ public class ServerModel implements ServerInterface {
     HashMap<Rover, Mission> roverMissions; // Rover is the key and mission is the value
     HashMap<Rover, RoverCommunication> roverCommunication;
 
+
     ServerModel(HashMap<Rover, Mission> roverMissions, HashMap<Rover, RoverCommunication> roverCommunication){
         this.rewardPoints = 0;
         this.roverMissions = roverMissions;

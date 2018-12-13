@@ -23,7 +23,8 @@ public class ProcedureController extends TimerTask {
     private Map<Area, Integer> envpnt = new HashMap<Area, Integer>();
 
 
-    public ProcedureController(Set<Robot> robots, Environment env, Map<Area, Integer> envpnt){
+    public ProcedureController(Set<Robot> robots, Environment env, Map<Area, Integer> envpnt, ServerModel model){
+        this.model = model;
         this.robots = robots;
         this.env = env;
         this.envpnt = envpnt;
