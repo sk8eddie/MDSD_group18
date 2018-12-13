@@ -20,15 +20,17 @@ public class ServerModel implements ServerInterface {
 
     @Override
     public void nextDestinationReached(Rover rover) { // get rover , Lookup mission for that rover and get the next point/destination and set new destination
-
+        rover.getPosition(); //get destination and check mission , get next point for that mission , if reached ..set new destination
+        rover.setRoverDestination(null);
     }
 
-    public void getState(){ // Report everything, damage, location , reward points and report if any fault
+    public void getState(Rover rover){ // Report everything, damage, location , reward points and report if any fault
+        rover.getPosition();
 
     }
 
     public void missionComplete(Rover rover){ // Check if all points reached - mission complete and then ask for a new mission from the controller
-
+        
     }
 
     public void setRoverMissions(HashMap roverMissions) {

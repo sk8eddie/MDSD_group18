@@ -37,7 +37,7 @@ public class Rover extends Robot {
             this.stopRover();
     }
 
-    boolean isAtDestination(){
+    public boolean isAtDestination(){
         return (isinXRange(this.getPosition().getX()) && isinZRange(this.getPosition().getZ()));
     }
 
@@ -49,7 +49,7 @@ public class Rover extends Robot {
         return (((this.currentDestination.getZ() - 0.5) < z) && (z < (this.currentDestination.getZ() + 0.5)));
     }
 
-    void setRoverDestination(Point newDestination) {
+    public void setRoverDestination(Point newDestination) {
         this.setDestination(newDestination);
     }
 
