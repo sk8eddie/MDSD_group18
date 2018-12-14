@@ -34,6 +34,8 @@ public class Main {
 		Boundary w3 = new VerticalBoundary(10.0f, -10.0f, 10.0f, e, color);
 		Boundary w4 = new VerticalBoundary(-10.0f, -10.0f, 10.0f, e, color);
 
+		//Gridcell[][] cells = new Gridcell[(int)(Math.abs(w1.getP1x()) + Math.abs(w1.getP2x()))][(int)(Math.abs(w1.getP1z()) + Math.abs(w1.getP2z()))];
+
 		/*AbstractWall roomWall1 = new HorizontalWall(-1f, 4.5f, 3.5f, e, color);
 		AbstractWall roomWall2 = new HorizontalWall(-4.5f, 4.5f, 1f, e, color);
 		AbstractWall roomWall3 = new VerticalWall(4.5f, -4.5f, -1f, e, color);

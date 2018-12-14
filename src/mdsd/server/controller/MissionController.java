@@ -28,6 +28,8 @@ public class MissionController {
         this.model = model;
     }
 
+    //TODO Method for Mission complete
+
     /**
      * From a xml-file that is in "mdsdSimultar/missionData.xml" predefined missions are read and will
      * generate a java list of Missions that are assigned to each Rover. The xml-file should be in the
