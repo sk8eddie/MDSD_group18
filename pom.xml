@@ -38,5 +38,11 @@
     <version>4.12</version>
     <scope>test</scope>
   </dependency>
+  <!-- https://mvnrepository.com/artifact/com.github.xaguzman/pathfinding -->
+  <dependency>
+    <groupId>com.github.xaguzman</groupId>
+    <artifactId>pathfinding</artifactId>
+    <version>0.2.6</version>
+  </dependency>
 </dependencies>
 </project>
