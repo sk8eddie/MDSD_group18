@@ -7,6 +7,12 @@ public class GridEnvironment {
 	 * isWalkable on the environment walls
 	 * Return final environment
 	 * 
+	 * Read the XML and points send to PathFinder
+	 * New list of points sent to MissionController
+	 * Mission controller send to Rover
+	 * 
+	 * 
+	 * 
 	 */
 
 }
