@@ -1,13 +1,10 @@
 package mdsd;
 
-import mdsd.server.model.Area;
-import mdsd.server.model.Environment;
 import org.xguzm.pathfinding.grid.GridCell;
-import project.Point;
+import org.xguzm.pathfinding.grid.NavigationGrid;
 import simbad.sim.AbstractWall;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GridEnvironment {
 
@@ -24,11 +21,6 @@ public class GridEnvironment {
                 cells[x][z] = new GridCell(x, z, listOfNotWalkable[x][z]);
             }
         }
-        /*for (GridCell[] gz : cells){
-            for (GridCell gx : gz){
-                if ()
-            }
-        }*/
     }
 
     private boolean[][] transformWallList(ArrayList<AbstractWall> wallList){
@@ -51,6 +43,9 @@ public class GridEnvironment {
         return pts;
     }
 
+    public NavigationGrid getNavGrid(GridCell[][] g){
+        return new NavigationGrid<GridCell>(g);
+    }
 }
 	
 	/*
