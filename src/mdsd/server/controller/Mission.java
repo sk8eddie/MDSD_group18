@@ -1,29 +1,62 @@
 package mdsd.server.controller;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 import project.Point;
 
-import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
-public class Mission {
 
+public class Mission implements Iterable{
+
+	private Point currentDestination;
     private List<Point> points;
+    private Iterator missionIterator = new MissionIterator();
 
-    public void updateMission() {
-		Point point = new Point(0,1);
-		Point point2 = new Point(0,2);
-		Point point3 = new Point(0,3);
-		Point point4 = new Point(0,4);
-		Point point5 = new Point(0,5);
-		points.add(point);
-		points.add(point2);
-		points.add(point3);
-		points.add(point4);
-		points.add(point5);
-		Collections.shuffle(points);
-    }
+    public Mission(){
+    	this.points = new ArrayList<>();
+	}
+
+	public Mission(List<Point> points){
+    	this.points = points;
+	}
+
+	public void addPoint(Point point){
+		this.points.add(point);
+	}
+
+	public List<Point> getPoints(){
+		return this.points;
+	}
+
+	public Point getCurrentDestination(){
+		return this.currentDestination;
+	}
+
+   public void updateStrategy(){ //TODO handle for when a rover has reached a certain amount of points.
+	   Collections.shuffle(this.points);
+   }
+
+	@Override
+	public Iterator iterator() {
+		return this.missionIterator;
+	}
+
+	private class MissionIterator implements Iterator<Point>{
+   		private int currentIndex = 0;
+
+		@Override
+		public boolean hasNext() {
+			return points.get(currentIndex) != null;
+		}
+
+		@Override
+		public Point next() {
+			Point nextPoint = points.get(currentIndex);
+			currentDestination = nextPoint;
+			currentIndex++;
+			return nextPoint;
+		}
+	}
 }
