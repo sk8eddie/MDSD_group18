@@ -74,6 +74,10 @@ public class Environment {
         return area;
     }
 
+    /**
+     * Method for taking all wallLists and putting them together into one list.
+     * @return wallList.
+     */
     public ArrayList<AbstractWall> wallList(){
         ArrayList<AbstractWall> wallList = new ArrayList<AbstractWall>();
         for (Area a : areaList){
