@@ -20,7 +20,7 @@ public class GridEnvironment {
      * @param boundryWidth width of the environment in the simulator.
      * @param boundryHeight height of the environment in the simulator.
      */
-    public GridEnvironment (int boundryWidth, int boundryHeight){
+    GridEnvironment (int boundryWidth, int boundryHeight){
         this.cells = new GridCell[2*boundryWidth][2*boundryHeight];
     }
 
