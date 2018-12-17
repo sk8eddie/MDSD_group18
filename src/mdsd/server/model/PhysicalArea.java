@@ -30,7 +30,7 @@ public class PhysicalArea implements Area{
      * @param zOffset Offset on the z-axis.
      * @param name Name of the Area.
      * @param e Environment desription.
-     * @param areaType Type of Area (allways Physical).
+     * @param areaType Type of Area (always Physical).
      * @param c Color of walls.
      */
     PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType, Color c) {

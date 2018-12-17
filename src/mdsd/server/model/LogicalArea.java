@@ -4,9 +4,11 @@ import project.Point;
 import simbad.sim.AbstractWall;
 import simbad.sim.EnvironmentDescription;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for LogicalArea, i.e. Wifi-zone
+ */
 public class LogicalArea implements Area{
 
     private Point corner1;
@@ -14,6 +16,17 @@ public class LogicalArea implements Area{
     private String areaType;
     private String areaName;
 
+    /**
+     * Constructor for LogicalArea. Doesn't create walls since you can pass through a logical area anywhere.
+     * Only creates top-right and bottom-left corner.
+     * @param width Width of Area.
+     * @param height Height of Area.
+     * @param xOffset Offset on x-axis.
+     * @param zOffset Offset on z-axis.
+     * @param name Name of the Area.
+     * @param e Environment description.
+     * @param areaType Tpe of Area (always Logical).
+     */
     LogicalArea(float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType){
 
         this.areaType = areaType;
