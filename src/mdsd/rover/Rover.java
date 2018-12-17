@@ -56,6 +56,7 @@ public class Rover extends Robot {
     }
 
     void setRoverDestination(Point newDestination) {
+        this.currentDestination = newDestination;
         this.setDestination(newDestination);
     }
 
