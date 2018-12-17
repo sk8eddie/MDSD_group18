@@ -60,6 +60,10 @@ public class Rover extends Robot {
         this.setDestination(newDestination);
     }
 
+    public Point getRoverDestination() {
+        return currentDestination;
+    }
+
     /**
      * Should verify if there are any physical faults with the Rover, broken sensors etc.
      */

@@ -2,6 +2,7 @@ package mdsd.server.controller;
 
 import javafx.util.Pair;
 import mdsd.Robot;
+import mdsd.rover.RoverCommunication;
 import mdsd.server.model.*;
 import java.util.HashMap;
 
@@ -18,14 +19,14 @@ public class ProcedureController extends TimerTask {
 
     private Procedure currentProcedure = Procedure.A;
     private ServerModel model;
-    private Set<Robot> robots;
+    private Set<RoverCommunication> rovers;
     private Environment env;
     private Map<Area, Integer> envpnt = new HashMap<Area, Integer>();
 
 
-    public ProcedureController(Set<Robot> robots, Environment env, Map<Area, Integer> envpnt, ServerModel model){
+    public ProcedureController(Set<RoverCommunication> rovers, Environment env, Map<Area, Integer> envpnt, ServerModel model){
         this.model = model;
-        this.robots = robots;
+        this.rovers = rovers;
         this.env = env;
         this.envpnt = envpnt;
     }
@@ -38,8 +39,8 @@ public class ProcedureController extends TimerTask {
     @Override
     public void run() {
         setCurrentProcedure();
-        Iterator<Robot> iterator = robots.iterator();
-            Robot rover;
+        Iterator<RoverCommunication> iterator = rovers.iterator();
+            RoverCommunication rover;
 
 
         while (iterator.hasNext()) {
@@ -61,7 +62,7 @@ public class ProcedureController extends TimerTask {
     }
 
     //Calculates reward points with procedure A
-    private void procedureA(Robot rover) {
+    private void procedureA(RoverCommunication rover) {
         for(Map.Entry<Area, Integer> values : envpnt.entrySet()){
             if (values.getKey().getAreaType().equals("Physical")){
                 if(values.getKey().inArea(rover.getPosition())){
@@ -82,7 +83,7 @@ public class ProcedureController extends TimerTask {
     }
 
     //Calculates reward points with procedure B
-    private void procedureB(Robot rover) {
+    private void procedureB(RoverCommunication rover) {
         for (Map.Entry<Area, Integer> values : envpnt.entrySet()) {
             if (values.getKey().getAreaType().equals("Logical")) {
                 if (values.getKey().inArea(rover.getPosition())) {
@@ -104,10 +105,10 @@ public class ProcedureController extends TimerTask {
 
     //Sets current procedure depending on which area type the rovers are in
     private void setCurrentProcedure() {
-        Iterator<Robot> iterator = robots.iterator();
+        Iterator<RoverCommunication> iterator = rovers.iterator();
 
         while (iterator.hasNext()){
-            Robot rover = iterator.next();
+            RoverCommunication rover = iterator.next();
 
             if(currentProcedure == Procedure.A){
                 System.out.println("---------- setProcedure if A ----------" );
