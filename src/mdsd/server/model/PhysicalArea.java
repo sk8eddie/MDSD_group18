@@ -10,6 +10,9 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Class for PhysicalArea, i.e. Consulting room
+ */
 public class PhysicalArea implements Area{
 
     private String areaType;
@@ -18,6 +21,18 @@ public class PhysicalArea implements Area{
     private Point corner2;
     private List<AbstractWall> wallList = new ArrayList<>();
 
+    /**
+     * Constructor for Physical Area. Converts witdh and height with the offsets to place Area in the correct position.
+     * On case for each class of Area and different layouts depending on where it is placed.
+     * @param width Width of Area.
+     * @param height Height of Area.
+     * @param xOffset Offset on the x-axis.
+     * @param zOffset Offset on the z-axis.
+     * @param name Name of the Area.
+     * @param e Environment desription.
+     * @param areaType Type of Area (always Physical).
+     * @param c Color of walls.
+     */
     PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType, Color c) {
 
         this.areaType = areaType;

@@ -1,21 +1,31 @@
 package mdsd.server.model;
 
 import project.Point;
+import simbad.sim.AbstractWall;
 import simbad.sim.EnvironmentDescription;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
+/**
+ * Environment class. Creates Areas and contains a list of them.
+ */
 public class Environment {
 
     private ArrayList<Area> areaList;
 
+    /**
+     * Constructor for Environment. Contains list of Area in the environment.
+     */
     public Environment (){
         areaList = new ArrayList<>();
     }
 
+    /**
+     * Method for getting which Area a certain point is in, mainly for rovers.
+     * @param position point to check.
+     * @return return first Area in list that rover is in. if not in any Area, return null.
+     */
     public Area getRoverArea(Point position){
         for (Area a : this.areaList){
             if (a.inArea(position)){
@@ -25,10 +35,22 @@ public class Environment {
         return null;
     }
 
+    /**
+     * Getterf or areaList.
+     * @return areaList.
+     */
     public ArrayList getAreas(){
         return areaList;
     }
 
+    /**
+     * Factory method for Areas. Adds the Area to the AreaList as well.
+     * @param position Center point for the area.
+     * @param areaName Specific name of Area, can only have certain values.
+     * @param e Description of the environment.
+     * @param c Color of the Area walls.
+     * @return The specified Area. If areaName isn't of certain values, return null.
+     */
     public Area createArea(Point position, String areaName, EnvironmentDescription e, Color c){
         Area area;
         switch (areaName){
@@ -52,4 +74,17 @@ public class Environment {
         return area;
     }
 
+    /**
+     * Method for taking all wallLists and putting them together into one list.
+     * @return wallList.
+     */
+    public ArrayList<AbstractWall> wallList(){
+        ArrayList<AbstractWall> wallList = new ArrayList<AbstractWall>();
+        for (Area a : areaList){
+            for (AbstractWall aw : a.getWallList()){
+                wallList.add(aw);
+            }
+        }
+        return wallList;
+    }
 }

@@ -21,18 +21,23 @@ import mdsd.server.controller.*;
 
 public class Main {
 
+
+
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws InterruptedException {
+
+		float width = 20;
+		float height = 20;
 
 		EnvironmentDescription e = new EnvironmentDescription();
 		
 		Color color = Color.GRAY;
 		Color c = Color.blue;
 
-		Boundary w1 = new HorizontalBoundary(-10.0f, -10.0f, 10.0f, e, color);
-		Boundary w2 = new HorizontalBoundary(10.0f, -10.0f, 10.0f, e, color);
-		Boundary w3 = new VerticalBoundary(10.0f, -10.0f, 10.0f, e, color);
-		Boundary w4 = new VerticalBoundary(-10.0f, -10.0f, 10.0f, e, color);
+		Boundary w1 = new HorizontalBoundary(-width/2, -height/2, height/2, e, color);
+		Boundary w2 = new HorizontalBoundary(width/2, -height/2, height/2, e, color);
+		Boundary w3 = new VerticalBoundary(width/2, -height/2, height/2, e, color);
+		Boundary w4 = new VerticalBoundary(-width/2, -height/2, height/2, e, color);
 
 		//Gridcell[][] cells = new Gridcell[(int)(Math.abs(w1.getP1x()) + Math.abs(w1.getP2x()))][(int)(Math.abs(w1.getP1z()) + Math.abs(w1.getP2z()))];
 

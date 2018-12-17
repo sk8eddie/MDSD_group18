@@ -1,22 +1,33 @@
 package mdsd;
 
-import mdsd.server.model.Area;
-import mdsd.server.model.Environment;
 import org.xguzm.pathfinding.grid.GridCell;
-import project.Point;
+import org.xguzm.pathfinding.grid.NavigationGrid;
 import simbad.sim.AbstractWall;
 
 import java.util.ArrayList;
-import java.util.List;
+
+/**
+ * The GridEnvironment is used to convert the environment to a graph to
+ * later be able to use pathfinders that the rovers can use.
+ */
 
 public class GridEnvironment {
 
     private GridCell[][] cells;
 
+    /**
+     * Constructor for the graph
+     * @param boundryWidth width of the environment in the simulator.
+     * @param boundryHeight height of the environment in the simulator.
+     */
     public GridEnvironment (int boundryWidth, int boundryHeight){
         this.cells = new GridCell[2*boundryWidth][2*boundryHeight];
     }
 
+    /**
+     * Creates the graph with walkable and not walkable cells.
+     * @param wallList list of walls which will be not not walkable cells.
+     */
     public void createCells(ArrayList<AbstractWall> wallList){
         boolean[][] listOfNotWalkable = transformWallList(wallList);
         for (int x = 0; x < 41; x++){
@@ -24,13 +35,13 @@ public class GridEnvironment {
                 cells[x][z] = new GridCell(x, z, listOfNotWalkable[x][z]);
             }
         }
-        /*for (GridCell[] gz : cells){
-            for (GridCell gx : gz){
-                if ()
-            }
-        }*/
     }
 
+    /**
+     * Method for transforming the list of AbstractWalls to a matrix of booleans for walkable and not walkable cells.
+     * @param wallList list of walls which will be not not walkable cells.
+     * @return matrix of walkable and not walkable cells.
+     */
     private boolean[][] transformWallList(ArrayList<AbstractWall> wallList){
         boolean[][] pts = new boolean[40][40]; //
         for (AbstractWall aw : wallList){
@@ -51,6 +62,13 @@ public class GridEnvironment {
         return pts;
     }
 
+    /**
+     * Creates a NavigationGrid that can be used by the pathfinders.
+     * @return NavigationGrid of the created cells.
+     */
+    public NavigationGrid createNavGrid(){
+        return new NavigationGrid<GridCell>(this.cells);
+    }
 }
 	
 	/*
