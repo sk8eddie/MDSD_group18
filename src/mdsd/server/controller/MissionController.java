@@ -89,7 +89,7 @@ public class MissionController {
     // which means an initialised list of points
     private void updateStrategy(Rover rover) {
         Mission mission = model.getRoverMissions().get(rover);
-        mission.updateStrategy();
+        mission.updateStrategy(rover, mission);
         //hashMap = new HashMap<>();
     }
 
@@ -122,6 +122,7 @@ public class MissionController {
             int missionIndex = 0;
             for(Robot r : rovers){
                 Rover rover = (Rover)r;
+                updateStrategy(rover);
                 this.model.updateRoverMissions(rover, missions.get(missionIndex));
                 missionIndex++;
             }

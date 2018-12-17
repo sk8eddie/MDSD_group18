@@ -69,8 +69,8 @@ public class Main {
 		Set<Robot> robots = new HashSet<>();
 		//HashMap<Rover, Mission> roverMissions = new HashMap<>();
 
-		Robot robot1 = new Rover(new Point(2.5, 6), "Rover 1");
-		Robot robot2 = new Rover(new Point(-2.5, -6), "Rover 2");
+		Robot robot1 = new Rover(new Point(6.0, 0), "Rover 1");
+		Robot robot2 = new Rover(new Point(-6.0, 0), "Rover 2");
 
 		robots.add(robot2);
 
