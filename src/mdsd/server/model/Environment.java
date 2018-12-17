@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Environment {
 
-    private List<Area> areaList;
+    private ArrayList<Area> areaList;
 
     public Environment (){
         areaList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class Environment {
         return null;
     }
 
-    public List getAreas(){
+    public ArrayList getAreas(){
         return areaList;
     }
 
