@@ -1,7 +1,11 @@
 package mdsd.server.model;
 
 import project.Point;
+import simbad.sim.AbstractWall;
 import simbad.sim.EnvironmentDescription;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogicalArea implements Area{
 
@@ -31,6 +35,11 @@ public class LogicalArea implements Area{
     @Override
     public String getAreaName(){
         return this.areaName;
+    }
+
+    @Override
+    public List<AbstractWall> getWallList(){
+        return null;
     }
 
 }

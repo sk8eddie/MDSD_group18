@@ -1,6 +1,10 @@
 package mdsd.server.model;
 
 import project.Point;
+import simbad.sim.AbstractWall;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public interface Area {
 
@@ -9,4 +13,6 @@ public interface Area {
     boolean inArea(Point coordinate);
 
     String getAreaName();
+
+    List<AbstractWall> getWallList();
 }

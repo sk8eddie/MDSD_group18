@@ -16,13 +16,12 @@ public class PhysicalArea implements Area{
     private String areaName;
     private Point corner1;
     private Point corner2;
-    private List<AbstractWall> wallList;
+    private List<AbstractWall> wallList = new ArrayList<>();
 
     PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType, Color c) {
 
         this.areaType = areaType;
         this.areaName = name;
-        wallList = new ArrayList<>();
 
         switch (areaName) {
             case "Consulting":
@@ -174,7 +173,8 @@ public class PhysicalArea implements Area{
         return this.areaName;
     }
 
-    public List getWallList(){
+    @Override
+    public List<AbstractWall> getWallList(){
         return this.wallList;
     }
 
