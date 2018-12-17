@@ -89,7 +89,7 @@ public class MissionController {
     // which means an initialised list of points
     private void updateStrategy(Rover rover, Environment env) {
         Mission mission = model.getRoverMissions().get(rover);
-        mission.updateStrategy(rover, mission, env);
+        mission.updateStrategy(rover, env);
         //hashMap = new HashMap<>();
     }
 

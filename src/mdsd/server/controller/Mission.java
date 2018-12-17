@@ -36,10 +36,12 @@ public class Mission implements Iterable{
 		return this.currentDestination;
 	}
 
-   public void updateStrategy(Rover rover, Mission mission, Environment env){ //TODO handle for when a rover has reached a certain amount of points.
+   public void updateStrategy(Rover rover, Environment env){ //TODO handle for when a rover has reached a certain amount of points.
 	   PathFinder p = new PathFinder();
-	   List l = p.getPathPoints(rover.getPosition(), mission.getCurrentDestination(), env);
-	   Mission m = new Mission(l);
+	   Iterator it = this.iterator();
+	   if (it.hasNext()){
+		   this.points = p.getPathPoints(rover.getPosition(), (Point)it.next(), env);
+	   }
    }
 
 	@Override

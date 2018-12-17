@@ -5,6 +5,7 @@ import org.xguzm.pathfinding.grid.NavigationGrid;
 import simbad.sim.AbstractWall;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The GridEnvironment is used to convert the environment to a graph to
@@ -30,9 +31,14 @@ public class GridEnvironment {
      */
     public void createCells(ArrayList<AbstractWall> wallList){
         boolean[][] listOfNotWalkable = transformWallList(wallList);
-        for (int x = 0; x < 21; x++){
-            for (int z = 0; z < 21; z++){
+        for (int x = 0; x < 40; x++){
+            System.out.println("");
+            for (int z = 0; z < 40; z++){
                 cells[x][z] = new GridCell(x, z, listOfNotWalkable[x][z]);
+                if (cells[x][z].isWalkable())
+                    System.out.print("x  ");
+                else
+                    System.out.print("   ");
             }
         }
     }
@@ -43,7 +49,12 @@ public class GridEnvironment {
      * @return matrix of walkable and not walkable cells.
      */
     private boolean[][] transformWallList(ArrayList<AbstractWall> wallList){
-        boolean[][] pts = new boolean[40][40]; //
+        boolean[][] pts = new boolean[40][40];
+        for (int a = 0; a < 40; a++){
+            for (int b = 0; b < 40; b++){
+                pts[a][b] = true;
+            }
+        }
         for (AbstractWall aw : wallList){
             int x1 = (int) ((aw.getP1x()+10) * 2);
             int x2 = (int) ((aw.getP2x()+10) * 2);
