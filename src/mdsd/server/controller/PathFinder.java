@@ -43,18 +43,18 @@ public class PathFinder {
 		return pathToEnd;
 	}
 	
-	public Mission getPathPoints(Point start, Point end){
-		
-        Mission mission = new Mission();
+	public List<Point> getPathPoints(Point start, Point end){
+
 		List<GridCell> gridPoints = new ArrayList<GridCell>();
+		List<Point> pathPoints = new ArrayList<>();
 		
 		gridPoints = getFastestPath(start,end);
 		
 		for (GridCell a : gridPoints){
            Point newPoint = new Point(a.getX(),a.getY());
-           mission.addPoint(newPoint);
+           pathPoints.add(newPoint);
         }
-		return mission;
+		return pathPoints;
 	}
 
 }
