@@ -1,26 +1,31 @@
 package mdsd.server.model;
 
-import mdsd.rover.Rover;
 import mdsd.rover.RoverCommunication;
 import mdsd.server.controller.Mission;
+import project.Point;
 
 import java.util.HashMap;
 
 public class ServerModel implements ServerInterface {
 
     int rewardPoints; // Init by procedure controller
-    HashMap<Rover, Mission> roverMissions; // Rover is the key and mission is the value
+    HashMap<RoverCommunication, Mission> roverMissions; // Rover is the key and mission is the value
     //HashMap<Rover, RoverCommunication> roverCommunication;
 
 
     public ServerModel(){
         this.rewardPoints = 0;
-        this.roverMissions = new HashMap<Rover, Mission>();
+        this.roverMissions = new HashMap<RoverCommunication, Mission>();
     }
 
     @Override
-    public void nextDestinationReached(Rover rover) { // get rover , Lookup mission for that rover and get the next point/destination and set new destination
-
+    public void nextDestinationReached(RoverCommunication roverCommunication) { // get rover , Lookup mission for that rover and get the next point/destination and set new destination
+        Mission mission = roverMissions.get(roverCommunication);
+        if (mission.iterator().hasNext()) {
+            roverCommunication.setNewDestination((Point) mission.iterator().next());
+        } else {
+            missionComplete(roverCommunication);
+        }
     }
 
     /*public void setRoverCommunication(HashMap<Rover, RoverCommunication> roverComm){
@@ -31,7 +36,7 @@ public class ServerModel implements ServerInterface {
 
     }
 
-    public void missionComplete(Rover rover){ // Check if all points reached - mission complete and then ask for a new mission from the controller
+    public void missionComplete(RoverCommunication roverCommunication){ // Check if all points reached - mission complete and then ask for a new mission from the controller
 
     }
 
@@ -39,15 +44,15 @@ public class ServerModel implements ServerInterface {
         this.roverMissions = roverMissions;
     }
 
-    public HashMap<Rover, Mission> getRoverMissions() {
+    public HashMap<RoverCommunication, Mission> getRoverMissions() {
         return roverMissions;
     }
 
-    public void updateRoverMissions(Rover rover, Mission mission){
-        if (roverMissions.containsKey(rover)){
-            roverMissions.replace(rover, mission);
+    public void updateRoverMissions(RoverCommunication roverCommunication, Mission mission){
+        if (roverMissions.containsKey(roverCommunication)){
+            roverMissions.replace(roverCommunication, mission);
         } else {
-            roverMissions.put(rover, mission);
+            roverMissions.put(roverCommunication, mission);
         }
     }
 

@@ -48,7 +48,8 @@ public class Mission implements Iterable{
 
 		@Override
 		public boolean hasNext() {
-			return points.get(currentIndex) != null;
+		    return currentIndex < points.size();
+			//return points.get(currentIndex) != null;
 		}
 
 		@Override
