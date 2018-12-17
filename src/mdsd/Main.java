@@ -118,8 +118,6 @@ public class Main {
 
 		mController.startRovers(robots);
 
-		GridEnvironment grid = new GridEnvironment((int)width, (int)height);
-		grid.createCells(env.);
 		// end start rovers
 
 		//Calls the method to calculate the reward points every 20 seconds
