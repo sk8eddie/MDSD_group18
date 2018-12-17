@@ -1,6 +1,7 @@
 package mdsd.server.model;
 
 import project.Point;
+import simbad.sim.AbstractWall;
 import simbad.sim.EnvironmentDescription;
 
 import java.awt.*;
@@ -73,4 +74,13 @@ public class Environment {
         return area;
     }
 
+    public ArrayList<AbstractWall> wallList(){
+        ArrayList<AbstractWall> wallList = new ArrayList<AbstractWall>();
+        for (Area a : areaList){
+            for (AbstractWall aw : a.getWallList()){
+                wallList.add(aw);
+            }
+        }
+        return wallList;
+    }
 }
