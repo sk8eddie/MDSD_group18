@@ -30,8 +30,8 @@ public class GridEnvironment {
      */
     public void createCells(ArrayList<AbstractWall> wallList){
         boolean[][] listOfNotWalkable = transformWallList(wallList);
-        for (int x = 0; x < 41; x++){
-            for (int z = 0; z < 41; z++){
+        for (int x = 0; x < 21; x++){
+            for (int z = 0; z < 21; z++){
                 cells[x][z] = new GridCell(x, z, listOfNotWalkable[x][z]);
             }
         }

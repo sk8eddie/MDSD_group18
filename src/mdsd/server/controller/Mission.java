@@ -1,6 +1,7 @@
 package mdsd.server.controller;
 
 import mdsd.rover.Rover;
+import mdsd.server.model.Environment;
 import project.Point;
 
 import java.util.ArrayList;
@@ -35,9 +36,9 @@ public class Mission implements Iterable{
 		return this.currentDestination;
 	}
 
-   public void updateStrategy(Rover rover, Mission mission){ //TODO handle for when a rover has reached a certain amount of points.
+   public void updateStrategy(Rover rover, Mission mission, Environment env){ //TODO handle for when a rover has reached a certain amount of points.
 	   PathFinder p = new PathFinder();
-	   List l = p.getPathPoints(rover.getPosition(), mission.getCurrentDestination());
+	   List l = p.getPathPoints(rover.getPosition(), mission.getCurrentDestination(), env);
 	   Mission m = new Mission(l);
    }
 

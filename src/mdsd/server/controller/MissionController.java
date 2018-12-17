@@ -87,9 +87,9 @@ public class MissionController {
 
     // Returns a HashMap with the Rover and an updated the strategy of the mission
     // which means an initialised list of points
-    private void updateStrategy(Rover rover) {
+    private void updateStrategy(Rover rover, Environment env) {
         Mission mission = model.getRoverMissions().get(rover);
-        mission.updateStrategy(rover, mission);
+        mission.updateStrategy(rover, mission, env);
         //hashMap = new HashMap<>();
     }
 
@@ -113,7 +113,7 @@ public class MissionController {
 
     }
 
-    public void startRovers(Set<Robot> rovers){
+    public void startRovers(Set<Robot> rovers, Environment env){
 
         List<Mission> missions = readMissionsXML();
 
@@ -122,8 +122,8 @@ public class MissionController {
             int missionIndex = 0;
             for(Robot r : rovers){
                 Rover rover = (Rover)r;
-                updateStrategy(rover);
                 this.model.updateRoverMissions(rover, missions.get(missionIndex));
+                updateStrategy(rover , env);
                 missionIndex++;
             }
         }

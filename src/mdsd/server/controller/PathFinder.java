@@ -30,30 +30,31 @@ public class PathFinder {
 	Environment env;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<GridCell> getFastestPath(Point start, Point end){
+	public List<GridCell> getFastestPath(Point start, Point end, Environment env){
 		
 		grid.createCells(env.wallList());
 		
 		GridFinderOptions opt = new GridFinderOptions();
 		opt.allowDiagonal = false;
 		AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
-
+		
 		List<GridCell> pathToEnd = finder.findPath((int) start.getX(), (int) start.getZ(), (int)end.getZ(), (int)end.getX(), grid.createNavGrid());
 		
 		return pathToEnd;
 	}
 	
-	public List<Point> getPathPoints(Point start, Point end){
+	public List<Point> getPathPoints(Point start, Point end , Environment env){
 
 		List<GridCell> gridPoints = new ArrayList<GridCell>();
 		List<Point> pathPoints = new ArrayList<>();
 		
-		gridPoints = getFastestPath(start,end);
+		gridPoints = getFastestPath(start,end, env);
 		
 		for (GridCell a : gridPoints){
            Point newPoint = new Point(a.getX(),a.getY());
            pathPoints.add(newPoint);
         }
+		System.out.println("reached");
 		return pathPoints;
 	}
 

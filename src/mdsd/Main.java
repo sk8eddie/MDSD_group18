@@ -116,7 +116,7 @@ public class Main {
 
 		mController.readMissionsXML();
 
-		mController.startRovers(robots);
+		mController.startRovers(robots, env);
 
 		// end start rovers
 
