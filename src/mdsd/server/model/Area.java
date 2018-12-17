@@ -19,12 +19,20 @@ public interface Area {
 
     /**
      * Method for checking if a coordinate is in an Area.
-     * @param coordinate
-     * @return
+     * @param coordinate Coordinate to check.
+     * @return True if point is in Area, otherwise false.
      */
     boolean inArea(Point coordinate);
 
+    /**
+     * Getter for areaName.
+     * @return areaName.
+     */
     String getAreaName();
 
+    /**
+     * Getter for WallList.
+     * @return wallList.
+     */
     List<AbstractWall> getWallList();
 }
