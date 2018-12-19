@@ -39,10 +39,7 @@ public class Mission implements Iterable{
 
    public void updateStrategy(RoverCommunication rover, Environment env){ //TODO handle for when a rover has reached a certain amount of points.
 	   PathFinder p = new PathFinder();
-	   Iterator it = this.iterator();
-	   if (it.hasNext()){
-		   this.points = p.getPathPoints(rover.getPosition(), (Point)it.next(), env);
-	   }
+	   this.points = p.getPathPoints(rover, this, env);
    }
 
 	@Override

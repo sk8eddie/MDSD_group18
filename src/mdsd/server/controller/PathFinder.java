@@ -1,6 +1,8 @@
 package mdsd.server.controller;
 
 import mdsd.GridEnvironment;
+import mdsd.rover.Rover;
+import mdsd.rover.RoverCommunication;
 import mdsd.server.model.Area;
 import mdsd.server.model.Environment;
 
@@ -13,6 +15,7 @@ import project.Point;
 import simbad.sim.AbstractWall;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class PathFinder {
@@ -41,12 +44,18 @@ public class PathFinder {
 		return finder.findPath(convertPoints(start.getX()), convertPoints(start.getZ()), convertPoints(end.getX()), convertPoints(end.getZ()), grid.createNavGrid());
 	}
 	
-	public List<Point> getPathPoints(Point start, Point end , Environment env){
+	public List<Point> getPathPoints(RoverCommunication rover, Mission mission , Environment env){
 
-		List<GridCell> gridPoints;
+		List<GridCell> gridPoints = new ArrayList<>();
 		List<Point> pathPoints = new ArrayList<>();
+
+		Point current = rover.getPosition();
+
+		for (Point p : mission.getPoints()){
+			gridPoints.addAll(getFastestPath(current, p, env));
+			current = p;
+		}
 		
-		gridPoints = getFastestPath(start,end,env);
 		int i = 0;
 		for (GridCell a : gridPoints){
 			if (i%2!=0) {
