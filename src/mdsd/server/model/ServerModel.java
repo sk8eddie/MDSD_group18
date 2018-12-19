@@ -40,7 +40,7 @@ public class ServerModel implements ServerInterface {
 
     }
 
-    public void setRoverMissions(HashMap roverMissions) {
+    public void setRoverMissions(HashMap<RoverCommunication, Mission> roverMissions) {
         this.roverMissions = roverMissions;
     }
 

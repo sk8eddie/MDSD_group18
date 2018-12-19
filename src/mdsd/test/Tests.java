@@ -9,8 +9,7 @@ import mdsd.server.model.ServerModel;
 import org.junit.jupiter.api.Test;
 import project.Point;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -59,6 +58,21 @@ class Tests {
                 assertTrue(missionList.get(i).getPoints().get(j).getZ() == xmlList.get(i).getPoints().get(j).getZ());
             }
         }
+    }
+
+
+    @Test
+    void serverTest () {
+        ServerModel server = new ServerModel();
+        HashMap<RoverCommunication, Mission> missionHashMap = new HashMap<>();
+        RoverCommunication rovCom = new RoverNetwork(server, new Rover(new Point(0,0), "Test"));
+        Mission mission = new Mission();
+        missionHashMap.put(rovCom,mission);
+        server.setRoverMissions(missionHashMap);
+        assertEquals(missionHashMap,server.getRoverMissions());
+        server.nextDestinationReached(rovCom);
+        //assertTrue();
+
     }
 
 
