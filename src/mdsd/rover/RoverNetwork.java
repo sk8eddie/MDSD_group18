@@ -13,21 +13,33 @@ public class RoverNetwork implements RoverCommunication {
     private ServerInterface server;
     private Rover rover;
 
+    private Thread positionChecker;
+
     public RoverNetwork(ServerInterface server, Rover rover){
         this.server = server;
         this.rover = rover;
     }
 
-    /**
-     * Sends a signal to the server when the rover has reached its destination.
-     */
-    private void checkRoverDestination(){
-        // TODO loop that calls rover.isAtDestination() to see if it is time to get new destination
-        server.nextDestinationReached(rover);
-    }
-
     public void setNewDestination(Point newDestination) {
         this.rover.setRoverDestination(newDestination);
+        RoverCommunication self = this;
+        this.positionChecker = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Started: " + this.toString());
+                while (!rover.isAtDestination()) {
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println("Rover " + rover.getName() + " at position");
+                server.nextDestinationReached(self);
+                System.out.println("Thread exit: " + this.toString());
+            }
+        });
+        positionChecker.start();
     }
 
     public Point getPosition() {

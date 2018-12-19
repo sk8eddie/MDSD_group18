@@ -26,8 +26,8 @@ public class Main {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws InterruptedException {
 
-		float width = 20;
-		float height = 20;
+		float width = 60;
+		float height = 60;
 
 		EnvironmentDescription e = new EnvironmentDescription();
 		
@@ -48,14 +48,14 @@ public class Main {
 
 		Environment env = new Environment();
 		Area c1 = env.createArea(new Point(0,0), "Consulting", e, c);
-		Area h1 = env.createArea(new Point(3,0), "Hall", e, c);
-		Area h2 = env.createArea(new Point(0,3), "Hall", e, c);
-		Area h3 = env.createArea(new Point(-3,0), "Hall", e, c);
-		Area h4 = env.createArea(new Point(0,-3), "Hall", e, c);
-		Area s1 = env.createArea(new Point(6,0), "Surgery", e, c);
-		Area s2 = env.createArea(new Point(0,6), "Surgery", e, c);
-		Area s3 = env.createArea(new Point(-6,0), "Surgery", e, c);
-		Area s4 = env.createArea(new Point(0,-6), "Surgery", e, c);
+		Area h1 = env.createArea(new Point(9,0), "Hall", e, c);
+		Area h2 = env.createArea(new Point(0,9), "Hall", e, c);
+		Area h3 = env.createArea(new Point(-9,0), "Hall", e, c);
+		Area h4 = env.createArea(new Point(0,-9), "Hall", e, c);
+		Area s1 = env.createArea(new Point(18,0), "Surgery", e, c);
+		Area s2 = env.createArea(new Point(0,18), "Surgery", e, c);
+		Area s3 = env.createArea(new Point(-18,0), "Surgery", e, c);
+		Area s4 = env.createArea(new Point(0,-18), "Surgery", e, c);
 
 
 		/*
@@ -69,8 +69,9 @@ public class Main {
 		Set<Robot> robots = new HashSet<>();
 		//HashMap<Rover, Mission> roverMissions = new HashMap<>();
 
-		Robot robot1 = new Rover(new Point(6.0, 0), "Rover 1");
-		Robot robot2 = new Rover(new Point(-6.0, 0), "Rover 2");
+		Robot robot1 = new Rover(new Point(18, 0), "Rover 1");
+		Robot robot2 = new Rover(new Point(-18, 0), "Rover 2");
+
 
 		robots.add(robot2);
 
@@ -106,6 +107,11 @@ public class Main {
 		RoverCommunication rovCom1  = new RoverNetwork(sInter, (Rover)robot1);
 		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);
 
+		Set<RoverCommunication> rovComs = new HashSet<>();
+        rovComs.add(rovCom2);
+		rovComs.add(rovCom1);
+
+
 
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 		// End init rovers
@@ -116,13 +122,14 @@ public class Main {
 
 		mController.readMissionsXML();
 
-		mController.startRovers(robots, env);
+		mController.startRovers(rovComs, env);
+
 
 		// end start rovers
 
 		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
-		timer.schedule(new ProcedureController(robots, env, environment1, servM), 0, 20000);
+		timer.schedule(new ProcedureController(rovComs, env, environment1, servM), 0, 20000);
 
 
 

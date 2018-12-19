@@ -1,10 +1,10 @@
 package mdsd.server.controller;
 
+import mdsd.rover.Rover;
+import mdsd.rover.RoverCommunication;
 import mdsd.server.model.Environment;
 import mdsd.server.model.ServerModel;
-import mdsd.Robot;
 import mdsd.server.model.Area;
-import mdsd.rover.Rover;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -87,11 +87,12 @@ public class MissionController {
 
     // Returns a HashMap with the Rover and an updated the strategy of the mission
     // which means an initialised list of points
-    private void updateStrategy(Rover rover, Environment env) {
-        Mission mission = model.getRoverMissions().get(rover);
-        mission.updateStrategy(rover, env);
-        //hashMap = new HashMap<>();
+    private void updateStrategy(RoverCommunication roverCommunication, Environment env) {
+        Mission mission = model.getRoverMissions().get(roverCommunication);
+        mission.updateStrategy(roverCommunication, env);
     }
+
+
 
     /*private void sendStrategy(Rover rover) {
         model.setRoverMissions(updateStrategy(rover));
@@ -108,30 +109,31 @@ public class MissionController {
     // Checks if a rover is in the same room as objective returns true
     // and at least one rover inside the building return true
     // check boundaries
-    public boolean isConstraintFulfilled(Rover rover, Area area) {
+    public boolean isConstraintFulfilled(RoverCommunication roverCommunication, Area area) {
         return true;
 
     }
 
-    public void startRovers(Set<Robot> rovers, Environment env){
+    public void startRovers(Set<RoverCommunication> rovers, Environment env){
 
         List<Mission> missions = readMissionsXML();
 
         // Add all rovers and their missions to the model
         if(rovers.size() == missions.size()){
             int missionIndex = 0;
-            for(Robot r : rovers){
-                Rover rover = (Rover)r;
-                this.model.updateRoverMissions(rover, missions.get(missionIndex));
-                updateStrategy(rover , env);
+
+            for(RoverCommunication r : rovers){
+                this.model.updateRoverMissions(r, missions.get(missionIndex));
+                updateStrategy(r , env);
                 missionIndex++;
             }
         }
 
         System.out.println("START ROVERS" + model.getRoverMissions());
 
-        for(Rover r : model.getRoverMissions().keySet()){
-            r.setDestination((Point)model.getRoverMissions().get(r).iterator().next());
+        for(RoverCommunication r : model.getRoverMissions().keySet()){
+            r.setNewDestination((Point)model.getRoverMissions().get(r).iterator().next());
+            System.out.println("Test");
         }
     }
 

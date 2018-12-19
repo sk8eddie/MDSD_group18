@@ -48,15 +48,20 @@ public class Rover extends Robot {
     }
 
     private Boolean isinXRange(double x){
-        return (((this.currentDestination.getX() - 0.5) < x) && (x < (this.currentDestination.getX() + 0.5)));
+        return (((this.currentDestination.getX() - 0.25) < x) && (x < (this.currentDestination.getX() + 0.25)));
     }
 
     private Boolean isinZRange(double z){
-        return (((this.currentDestination.getZ() - 0.5) < z) && (z < (this.currentDestination.getZ() + 0.5)));
+        return (((this.currentDestination.getZ() - 0.25) < z) && (z < (this.currentDestination.getZ() + 0.25)));
     }
 
     void setRoverDestination(Point newDestination) {
+        this.currentDestination = newDestination;
         this.setDestination(newDestination);
+    }
+
+    public Point getRoverDestination() {
+        return currentDestination;
     }
 
     /**

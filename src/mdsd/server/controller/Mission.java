@@ -1,6 +1,7 @@
 package mdsd.server.controller;
 
 import mdsd.rover.Rover;
+import mdsd.rover.RoverCommunication;
 import mdsd.server.model.Environment;
 import project.Point;
 
@@ -36,7 +37,7 @@ public class Mission implements Iterable{
 		return this.currentDestination;
 	}
 
-   public void updateStrategy(Rover rover, Environment env){ //TODO handle for when a rover has reached a certain amount of points.
+   public void updateStrategy(RoverCommunication rover, Environment env){ //TODO handle for when a rover has reached a certain amount of points.
 	   PathFinder p = new PathFinder();
 	   Iterator it = this.iterator();
 	   if (it.hasNext()){
@@ -54,7 +55,8 @@ public class Mission implements Iterable{
 
 		@Override
 		public boolean hasNext() {
-			return points.get(currentIndex) != null;
+		    return currentIndex < points.size();
+			//return points.get(currentIndex) != null;
 		}
 
 		@Override

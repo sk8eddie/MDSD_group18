@@ -26,7 +26,7 @@ public class PathFinder {
 	 * 
 	 */
 	
-	private GridEnvironment grid = new GridEnvironment(40, 40);
+	private GridEnvironment grid = new GridEnvironment(60, 60);
 	Environment env;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -35,7 +35,7 @@ public class PathFinder {
 		grid.createCells(env.wallList());
 		
 		GridFinderOptions opt = new GridFinderOptions();
-		opt.allowDiagonal = false;
+		opt.allowDiagonal = true;
 		AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
 		
 		return finder.findPath(convertPoints(start.getX()), convertPoints(start.getZ()), convertPoints(end.getX()), convertPoints(end.getZ()), grid.createNavGrid());
@@ -47,20 +47,25 @@ public class PathFinder {
 		List<Point> pathPoints = new ArrayList<>();
 		
 		gridPoints = getFastestPath(start,end,env);
+		int i = 0;
 		for (GridCell a : gridPoints){
-           Point newPoint = new Point(unConvertPoints(a.getX()), unConvertPoints(a.getY()));
-           pathPoints.add(newPoint);
-        }
+			if (i%2!=0) {
+				Point newPoint = new Point(unConvertPoints(a.getX()), unConvertPoints(a.getY()));
+				pathPoints.add(newPoint);
+				System.out.println("( " + unConvertPoints(a.getX()) + " , " + unConvertPoints(a.getY()) + " )");
+			}
+			i++;
+		}
 		System.out.println("reached");
 		return pathPoints;
 	}
 
 	private int convertPoints(double val){
-		return (int)(val + 10) * 2;
+		return (int)((val/3) + 10) * 2;
 	}
 
 	private double unConvertPoints(double val){
-		return val/2 - 10;
+		return (val/2 - 10) * 3;
 	}
 
 }
