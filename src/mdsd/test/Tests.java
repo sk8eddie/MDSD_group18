@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import project.Point;
 
 import java.util.*;
+import java.util.concurrent.locks.Lock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +22,21 @@ class Tests {
             @Override
             public void nextDestinationReached(RoverCommunication roverCommunication) {
                 System.out.println("Dummy");
+            }
+
+            @Override
+            public boolean isEntryPoint(Point destination) {
+                return false;
+            }
+
+            @Override
+            public boolean isExitPoint(Point destination) {
+                return false;
+            }
+
+            @Override
+            public Lock getLock(Point destination) {
+                return null;
             }
         };
         Point startPosition = new Point(0,0);

@@ -5,11 +5,15 @@ import mdsd.server.controller.Mission;
 import project.Point;
 
 import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
 
 public class ServerModel implements ServerInterface {
 
     int rewardPoints; // Init by procedure controller
     HashMap<RoverCommunication, Mission> roverMissions; // Rover is the key and mission is the value
+    HashMap<Point, Lock> entryPoints;
+    HashMap<Point, Lock> exitPoints;
+
     //HashMap<Rover, RoverCommunication> roverCommunication;
 
 
@@ -25,6 +29,27 @@ public class ServerModel implements ServerInterface {
             roverCommunication.setNewDestination((Point) mission.iterator().next());
         } else {
             missionComplete(roverCommunication);
+        }
+    }
+
+    @Override
+    public boolean isEntryPoint(Point destination) {
+        return entryPoints.containsKey(destination);
+    }
+
+    @Override
+    public boolean isExitPoint(Point destination) {
+        return exitPoints.containsKey(destination);
+    }
+
+    @Override
+    public Lock getLock(Point destination) {
+        if (entryPoints.containsKey(destination)) {
+            return entryPoints.get(destination);
+        } else if (exitPoints.containsKey(destination)) {
+            return exitPoints.get(destination);
+        } else {
+            return null;
         }
     }
 
