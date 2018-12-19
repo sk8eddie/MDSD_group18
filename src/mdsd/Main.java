@@ -127,7 +127,7 @@ public class Main {
 
 		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
-		timer.schedule(new ProcedureController(robots, env, environment1, servM), 0, 20000);
+		timer.schedule(new ProcedureController(rovComs, env, environment1, servM), 0, 20000);
 
 
 
