@@ -1,4 +1,4 @@
-package mdsd;
+package mdsd.server.model;
 
 import org.xguzm.pathfinding.grid.GridCell;
 import org.xguzm.pathfinding.grid.NavigationGrid;

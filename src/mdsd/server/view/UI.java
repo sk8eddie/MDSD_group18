@@ -1,5 +1,6 @@
-package mdsd;
+package mdsd.server.view;
 
+import mdsd.StartObserver;
 import mdsd.server.controller.MissionController;
 import simbad.gui.Simbad;
 
@@ -16,9 +17,11 @@ public class UI {
     private JLabel pointsLabel = new JLabel();
     private File file;
     private MissionController missionController;
+    private StartObserver startObserver;
 
-    public UI(MissionController mc){
+    public UI(MissionController mc, StartObserver startObserver){
         this.missionController = mc;
+        this.startObserver = startObserver;
     }
 
     public void createFrame() {
@@ -66,8 +69,11 @@ public class UI {
 
                 int returnValue = jfc.showOpenDialog(null);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    System.out.println("Selected new XML file: " + jfc.getSelectedFile().getPath());
-                    file = jfc.getSelectedFile();
+                    // System.out.println("Selected new XML file: " + jfc.getSelectedFile().getPath());
+                    // file = jfc.getSelectedFile();
+
+                    missionController.readMissionsXML();
+                    startObserver.start();
                 }
 
             }

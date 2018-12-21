@@ -8,6 +8,7 @@ import mdsd.server.model.Area;
 import mdsd.server.model.Environment;
 import mdsd.server.model.ServerInterface;
 import mdsd.server.model.ServerModel;
+import mdsd.server.view.UI;
 import project.AbstractSimulatorMonitor;
 import project.Point;
 import simbad.sim.Boundary;
@@ -19,9 +20,14 @@ import java.awt.*;
 import java.util.*;
 @SuppressWarnings("unused")
 
-public class Main {
+public class Main implements StartObserver{
 
 	private static UI ui;
+	private static MissionController missionController;
+	private static Set<RoverCommunication> rovComs;
+	private static Environment env;
+	private static ServerModel servM;
+	private static Map<Area, Integer> environment1;
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws InterruptedException {
@@ -46,7 +52,7 @@ public class Main {
 		AbstractWall roomWall3 = new VerticalWall(4.5f, -4.5f, -1f, e, color);
 		AbstractWall roomWall4 = new VerticalWall(1f, -4.5f, -1f, e, color);*/
 
-		Environment env = new Environment();
+		env = new Environment();
 		Area c1 = env.createArea(new Point(0,0), "Consulting", e, c);
 		Area h1 = env.createArea(new Point(3,0), "Hall", e, c);
 		Area h2 = env.createArea(new Point(0,3), "Hall", e, c);
@@ -77,7 +83,7 @@ public class Main {
 
 		// TODO add points to areas instead
 		// List containing the points gained for being in each area
-		Map<Area, Integer> environment1 = new HashMap<Area, Integer>();
+		environment1 = new HashMap<Area, Integer>();
 		environment1.put(c1, 10);
 		environment1.put(h1, 0);
 		environment1.put(h2, 0);
@@ -90,20 +96,12 @@ public class Main {
 
 		robots.add(robot1);
 
-		// Start create Missions
-
-		// End create missions
-
-		// Init rovers
-		//roverMissions.put((Rover)robot1, m1);
-		//roverMissions.put((Rover)robot2, m2);
-
 		ServerInterface sInter = new ServerModel();
 
 		RoverCommunication rovCom1  = new RoverNetwork(sInter, (Rover)robot1);
 		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);
 
-		Set<RoverCommunication> rovComs = new HashSet<>();
+		rovComs = new HashSet<>();
         rovComs.add(rovCom2);
 		rovComs.add(rovCom1);
 
@@ -111,27 +109,25 @@ public class Main {
 		// End init rovers
 
 		// Start rovers
-		ServerModel servM = (ServerModel)sInter;
-		MissionController mController = new MissionController(servM);
+		servM = (ServerModel)sInter;
+		missionController = new MissionController(servM);
 
-		ui = new UI(mController);
-
-		mController.readMissionsXML();
-
-		mController.startRovers(rovComs);
+		ui = new UI(missionController, new Main());
 
 		ui.createFrame();
-
-		// end start rovers
-
-		//Calls the method to calculate the reward points every 20 seconds
-		Timer timer = new Timer();
-		timer.schedule(new ProcedureController(rovComs, env, environment1, servM), 0, 20000);
-
 	}
 
 	public UI getUi(){
 		return ui;
 	}
 
+	@Override
+	public void start() {
+		missionController.startRovers(rovComs);
+		// end start rovers
+
+		//Calls the method to calculate the reward points every 20 seconds
+		Timer timer = new Timer();
+		timer.schedule(new ProcedureController(rovComs, env, environment1, servM), 0, 20000);
+	}
 }
