@@ -1,21 +1,15 @@
 package mdsd.server.controller;
 
-import mdsd.GridEnvironment;
-import mdsd.rover.Rover;
-import mdsd.rover.RoverCommunication;
-import mdsd.server.model.Area;
-import mdsd.server.model.Environment;
 
+import mdsd.rover.RoverCommunication;
+import mdsd.server.model.GridEnvironment;
+import mdsd.server.model.Environment;
 import org.xguzm.pathfinding.grid.GridCell;
-import org.xguzm.pathfinding.grid.NavigationGrid;
 import org.xguzm.pathfinding.grid.finders.AStarGridFinder;
 import org.xguzm.pathfinding.grid.finders.GridFinderOptions;
-
 import project.Point;
-import simbad.sim.AbstractWall;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class PathFinder {

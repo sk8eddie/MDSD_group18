@@ -40,21 +40,21 @@ public class PhysicalArea implements Area{
 
         switch (areaName) {
             case "Consulting":
-                AbstractWall hw1 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 4.5f + zOffset, e, c);
+                AbstractWall hw1 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1.5f + zOffset, e, c);
                 wallList.add(hw1);
-                AbstractWall hw2 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 4.5f + zOffset, -(width / 2) + zOffset, e, c);
+                AbstractWall hw2 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 1.5f + zOffset, -(width / 2) + zOffset, e, c);
                 wallList.add(hw2);
-                AbstractWall hw3 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 4.5f + zOffset, e, c);
+                AbstractWall hw3 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1.5f + zOffset, e, c);
                 wallList.add(hw3);
-                AbstractWall hw4 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 4.5f + zOffset, -(width / 2) + zOffset, e, c);
+                AbstractWall hw4 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 1.5f + zOffset, -(width / 2) + zOffset, e, c);
                 wallList.add(hw4);
-                AbstractWall vw1 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 4.5f + xOffset, e, c);
+                AbstractWall vw1 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1.5f + xOffset, e, c);
                 wallList.add(vw1);
-                AbstractWall vw2 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 4.5f + xOffset, -(height / 2) + xOffset, e, c);
+                AbstractWall vw2 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 1.5f + xOffset, -(height / 2) + xOffset, e, c);
                 wallList.add(vw2);
-                AbstractWall vw3 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 4.5f + xOffset, e, c);
+                AbstractWall vw3 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1.5f + xOffset, e, c);
                 wallList.add(vw3);
-                AbstractWall vw4 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 4.5f + xOffset, -(height / 2) + xOffset, e, c);
+                AbstractWall vw4 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1.5f + xOffset, -(height / 2) + xOffset, e, c);
                 wallList.add(vw4);
                 break;
             case "Hall":
@@ -63,22 +63,22 @@ public class PhysicalArea implements Area{
                     wallList.add(hw11);
                     AbstractWall hw12 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw12);
-                    AbstractWall vw11 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1.5f + xOffset, e, c);
+                    AbstractWall vw11 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 0.5f + xOffset, e, c);
                     wallList.add(vw11);
-                    AbstractWall vw12 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 1.5f + xOffset, -(height / 2) + xOffset, e, c);
+                    AbstractWall vw12 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 0.5f + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw12);
-                    AbstractWall vw13 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 1.5f + xOffset, e, c);
+                    AbstractWall vw13 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 0.5f + xOffset, e, c);
                     wallList.add(vw13);
-                    AbstractWall vw14 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1.5f + xOffset, -(height / 2) + xOffset, e, c);
+                    AbstractWall vw14 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 0.5f + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw14);
                 } else {
-                    AbstractWall hw11 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1.5f + zOffset, e, c);
+                    AbstractWall hw11 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 0.5f + zOffset, e, c);
                     wallList.add(hw11);
-                    AbstractWall hw12 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 1.5f + zOffset, -(width / 2) + zOffset, e, c);
+                    AbstractWall hw12 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 0.5f + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw12);
-                    AbstractWall hw13 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1.5f + zOffset, e, c);
+                    AbstractWall hw13 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 0.5f + zOffset, e, c);
                     wallList.add(hw13);
-                    AbstractWall hw14 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 1.5f + zOffset, -(width / 2) + zOffset, e, c);
+                    AbstractWall hw14 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 0.5f + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw14);
                     AbstractWall vw11 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw11);
@@ -88,9 +88,9 @@ public class PhysicalArea implements Area{
                 break;
             case "Surgery":
                 if (xOffset < -3) {
-                    AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 2.25f + zOffset, e, c);
+                    AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 0.75f + zOffset, e, c);
                     wallList.add(hw21);
-                    AbstractWall hw22 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 2.25f + zOffset, -(width / 2) + zOffset, e, c);
+                    AbstractWall hw22 = new HorizontalWall((height / 2) + xOffset, -(width / 2) + 0.75f + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw22);
                     AbstractWall hw23 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw23);
@@ -101,9 +101,9 @@ public class PhysicalArea implements Area{
                 } else if (xOffset > 3) {
                     AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw21);
-                    AbstractWall hw22 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 2.25f + zOffset, e, c);
+                    AbstractWall hw22 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 0.75f + zOffset, e, c);
                     wallList.add(hw22);
-                    AbstractWall hw23 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 2.25f + zOffset, -(width / 2) + zOffset, e, c);
+                    AbstractWall hw23 = new HorizontalWall(-(height / 2) + xOffset, -(width / 2) + 0.75f + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw23);
                     AbstractWall vw21 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw21);
@@ -114,9 +114,9 @@ public class PhysicalArea implements Area{
                     wallList.add(hw21);
                     AbstractWall hw22 = new HorizontalWall(-(height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw22);
-                    AbstractWall vw21 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 2.25f + xOffset, e, c);
+                    AbstractWall vw21 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 0.75f + xOffset, e, c);
                     wallList.add(vw21);
-                    AbstractWall vw22 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 2.25f + xOffset, -(height / 2) + xOffset, e, c);
+                    AbstractWall vw22 = new VerticalWall((width / 2) + zOffset, -(height / 2) + 0.75f + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw22);
                     AbstractWall vw23 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw23);
@@ -127,9 +127,9 @@ public class PhysicalArea implements Area{
                     wallList.add(hw22);
                     AbstractWall vw23 = new VerticalWall((width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw23);
-                    AbstractWall vw24 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 2.25f + xOffset, e, c);
+                    AbstractWall vw24 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, (height / 2) - 0.75f + xOffset, e, c);
                     wallList.add(vw24);
-                    AbstractWall vw25 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 2.25f + xOffset, -(height / 2) + xOffset, e, c);
+                    AbstractWall vw25 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 0.75f + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw25);
                 }
                 break;

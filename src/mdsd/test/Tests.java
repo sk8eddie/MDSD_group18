@@ -9,8 +9,8 @@ import mdsd.server.model.ServerModel;
 import org.junit.jupiter.api.Test;
 import project.Point;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.locks.Lock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +22,21 @@ class Tests {
             @Override
             public void nextDestinationReached(RoverCommunication roverCommunication) {
                 System.out.println("Dummy");
+            }
+
+            @Override
+            public boolean isEntryPoint(Point destination) {
+                return false;
+            }
+
+            @Override
+            public boolean isExitPoint(Point destination) {
+                return false;
+            }
+
+            @Override
+            public Lock getLock(Point destination) {
+                return null;
             }
         };
         Point startPosition = new Point(0,0);
@@ -59,6 +74,21 @@ class Tests {
                 assertTrue(missionList.get(i).getPoints().get(j).getZ() == xmlList.get(i).getPoints().get(j).getZ());
             }
         }
+    }
+
+
+    @Test
+    void serverTest () {
+        ServerModel server = new ServerModel();
+        HashMap<RoverCommunication, Mission> missionHashMap = new HashMap<>();
+        RoverCommunication rovCom = new RoverNetwork(server, new Rover(new Point(0,0), "Test"));
+        Mission mission = new Mission();
+        missionHashMap.put(rovCom,mission);
+        server.setRoverMissions(missionHashMap);
+        assertEquals(missionHashMap,server.getRoverMissions());
+        server.nextDestinationReached(rovCom);
+        //assertTrue();
+
     }
 
 

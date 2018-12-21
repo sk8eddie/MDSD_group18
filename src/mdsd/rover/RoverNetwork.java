@@ -13,17 +13,18 @@ public class RoverNetwork implements RoverCommunication {
     private ServerInterface server;
     private Rover rover;
 
-    private Thread positionChecker;
-
     public RoverNetwork(ServerInterface server, Rover rover){
         this.server = server;
         this.rover = rover;
     }
 
     public void setNewDestination(Point newDestination) {
+        //server has hashmap with room entry and exit points?
+
+
         this.rover.setRoverDestination(newDestination);
         RoverCommunication self = this;
-        this.positionChecker = new Thread(new Runnable() {
+        Thread positionChecker = new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("Started: " + this.toString());
@@ -35,6 +36,16 @@ public class RoverNetwork implements RoverCommunication {
                     }
                 }
                 System.out.println("Rover " + rover.getName() + " at position");
+                if (server.isEntryPoint(newDestination)) {
+                    server.getLock(newDestination).lock();
+                } else if (server.isExitPoint(newDestination)) {
+                    server.getLock(newDestination).unlock();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 server.nextDestinationReached(self);
                 System.out.println("Thread exit: " + this.toString());
             }

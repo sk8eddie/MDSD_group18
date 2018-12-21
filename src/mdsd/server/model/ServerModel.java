@@ -1,21 +1,26 @@
 package mdsd.server.model;
 
+import mdsd.Main;
 import mdsd.rover.RoverCommunication;
 import mdsd.server.controller.Mission;
 import project.Point;
 
 import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
 
 public class ServerModel implements ServerInterface {
 
-    int rewardPoints; // Init by procedure controller
-    HashMap<RoverCommunication, Mission> roverMissions; // Rover is the key and mission is the value
-    //HashMap<Rover, RoverCommunication> roverCommunication;
+    private int rewardPoints; // Init by procedure controller
+    private HashMap<RoverCommunication, Mission> roverMissions; // Rover is the key and mission is the value
+    private HashMap<Point, Lock> entryPoints;
+    private HashMap<Point, Lock> exitPoints;
 
 
     public ServerModel(){
         this.rewardPoints = 0;
         this.roverMissions = new HashMap<RoverCommunication, Mission>();
+        this.entryPoints = new HashMap<>();
+        this.exitPoints = new HashMap<>();
     }
 
     @Override
@@ -31,9 +36,32 @@ public class ServerModel implements ServerInterface {
         }
     }
 
-    /*public void setRoverCommunication(HashMap<Rover, RoverCommunication> roverComm){
-        this.roverCommunication = roverComm;
-    }*/
+    @Override
+    public boolean isEntryPoint(Point destination) {
+        return entryPoints.containsKey(destination);
+    }
+
+    @Override
+    public boolean isExitPoint(Point destination) {
+        return exitPoints.containsKey(destination);
+    }
+
+    @Override
+    public Lock getLock(Point destination) {
+        if (entryPoints.containsKey(destination)) {
+            return entryPoints.get(destination);
+        } else if (exitPoints.containsKey(destination)) {
+            return exitPoints.get(destination);
+        } else {
+            return null;
+        }
+    }
+
+    public void stopRovers(){
+        for(RoverCommunication rc : roverMissions.keySet()){
+            rc.setNewDestination(rc.getPosition());
+        }
+    }
 
     public void getState(){ // Report everything, damage, location , reward points and report if any fault
 
@@ -43,7 +71,7 @@ public class ServerModel implements ServerInterface {
 
     }
 
-    public void setRoverMissions(HashMap roverMissions) {
+    public void setRoverMissions(HashMap<RoverCommunication, Mission> roverMissions) {
         this.roverMissions = roverMissions;
     }
 
@@ -66,6 +94,8 @@ public class ServerModel implements ServerInterface {
     // TODO Change to a method for adding reward points instead.
     public void setRewardPoints(int newPts){
         this.rewardPoints = newPts;
+        Main main = new Main();
+        main.getUi().setPoints(newPts);
     }
 
 }

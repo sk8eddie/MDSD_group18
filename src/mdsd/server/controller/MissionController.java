@@ -1,10 +1,9 @@
 package mdsd.server.controller;
 
-import mdsd.rover.Rover;
 import mdsd.rover.RoverCommunication;
+import mdsd.server.model.Area;
 import mdsd.server.model.Environment;
 import mdsd.server.model.ServerModel;
-import mdsd.server.model.Area;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -39,7 +38,8 @@ public class MissionController {
         List<Mission> missions = new ArrayList<>();
         try{
             // Read the xml-file
-            File missionsXml = new File("../MDSD_group18/src/mdsd/server/controller/missionData.xml");
+            File missionsXml = new File("../mdsd/src/mdsd/server/controller/missionData.xml");
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
             Document missionDoc = documentBuilder.parse(missionsXml);
@@ -54,6 +54,7 @@ public class MissionController {
             for(int i = 0; i < missionNodes.getLength(); i++){
                 Mission newMission = new Mission(getPointsFromMissionXML(missionNodes.item(i)));
                 missions.add(newMission);
+                System.out.println("Mission added");
             }
 
         }catch (Exception e){
@@ -92,26 +93,17 @@ public class MissionController {
         mission.updateStrategy(roverCommunication, env);
     }
 
-
-
-    /*private void sendStrategy(Rover rover) {
-        model.setRoverMissions(updateStrategy(rover));
-    }*/
-
-    // Sends the mission
-    /*private void sendRoverMission(Rover rover) {
-        model.setRoverMissions(createNewMission(rover));
-    }*/
-
-
-
-
     // Checks if a rover is in the same room as objective returns true
     // and at least one rover inside the building return true
     // check boundaries
     public boolean isConstraintFulfilled(RoverCommunication roverCommunication, Area area) {
         return true;
 
+    }
+
+
+    public void stopAllRovers(){
+        this.model.stopRovers();
     }
 
     public void startRovers(Set<RoverCommunication> rovers, Environment env){
