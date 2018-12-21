@@ -20,6 +20,7 @@
 <repository>
 <id>MDSDcourse</id>
 <url>https://raw.github.com/MDSDcourse/MDSDcourse/mvn-repo/</url>
+
 <snapshots>
 <enabled>true</enabled>
 <updatePolicy>always</updatePolicy>
