@@ -1,5 +1,6 @@
 package mdsd;
 
+import mdsd.server.controller.MissionController;
 import simbad.gui.Simbad;
 
 import javax.swing.*;
@@ -14,10 +15,11 @@ public class UI {
 
     private JLabel pointsLabel = new JLabel();
     private File file;
+    private MissionController missionController;
 
-    public UI(){
+    public UI(MissionController mc){
+        this.missionController = mc;
     }
-
 
     public void createFrame() {
         MyInternalFrame frame = new MyInternalFrame();
@@ -43,6 +45,7 @@ public class UI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("All rovers are stopped");
+                missionController.stopAllRovers();
             }
         });
         jPanel2.add(stop);

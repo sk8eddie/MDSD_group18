@@ -38,10 +38,7 @@ public class MissionController {
         List<Mission> missions = new ArrayList<>();
         try{
             // Read the xml-file
-            File missionsXml = new File("../MDSD_group18/src/mdsd/server/controller/missionData.xml");
-
-            //Main main = new Main();
-            //File missionsXml = main.getUi().getXmlFile();
+            File missionsXml = new File("../mdsd/src/mdsd/server/controller/missionData.xml");
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
@@ -97,24 +94,16 @@ public class MissionController {
         //hashMap = new HashMap<>();
     }
 
-    /*private void sendStrategy(Rover rover) {
-        model.setRoverMissions(updateStrategy(rover));
-    }*/
-
-    // Sends the mission
-    /*private void sendRoverMission(Rover rover) {
-        model.setRoverMissions(createNewMission(rover));
-    }*/
-
-
-
-
     // Checks if a rover is in the same room as objective returns true
     // and at least one rover inside the building return true
     // check boundaries
     public boolean isConstraintFulfilled(RoverCommunication roverCommunication, Area area) {
         return true;
 
+    }
+
+    public void stopAllRovers(){
+        this.model.stopRovers();
     }
 
     public void startRovers(Set<RoverCommunication> rovers){

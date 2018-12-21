@@ -21,7 +21,7 @@ import java.util.*;
 
 public class Main {
 
-	private static UI ui = new UI();
+	private static UI ui;
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws InterruptedException {
@@ -113,6 +113,8 @@ public class Main {
 		// Start rovers
 		ServerModel servM = (ServerModel)sInter;
 		MissionController mController = new MissionController(servM);
+
+		ui = new UI(mController);
 
 		mController.readMissionsXML();
 

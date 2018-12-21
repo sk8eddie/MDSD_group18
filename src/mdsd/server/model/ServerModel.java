@@ -10,12 +10,10 @@ import java.util.concurrent.locks.Lock;
 
 public class ServerModel implements ServerInterface {
 
-    int rewardPoints; // Init by procedure controller
-    HashMap<RoverCommunication, Mission> roverMissions; // Rover is the key and mission is the value
-    HashMap<Point, Lock> entryPoints;
-    HashMap<Point, Lock> exitPoints;
-
-    //HashMap<Rover, RoverCommunication> roverCommunication;
+    private int rewardPoints; // Init by procedure controller
+    private HashMap<RoverCommunication, Mission> roverMissions; // Rover is the key and mission is the value
+    private HashMap<Point, Lock> entryPoints;
+    private HashMap<Point, Lock> exitPoints;
 
 
     public ServerModel(){
@@ -54,9 +52,11 @@ public class ServerModel implements ServerInterface {
         }
     }
 
-    /*public void setRoverCommunication(HashMap<Rover, RoverCommunication> roverComm){
-        this.roverCommunication = roverComm;
-    }*/
+    public void stopRovers(){
+        for(RoverCommunication rc : roverMissions.keySet()){
+            rc.setNewDestination(rc.getPosition());
+        }
+    }
 
     public void getState(){ // Report everything, damage, location , reward points and report if any fault
 
