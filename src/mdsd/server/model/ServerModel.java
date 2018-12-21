@@ -19,6 +19,8 @@ public class ServerModel implements ServerInterface {
     public ServerModel(){
         this.rewardPoints = 0;
         this.roverMissions = new HashMap<RoverCommunication, Mission>();
+        this.entryPoints = new HashMap<>();
+        this.exitPoints = new HashMap<>();
     }
 
     @Override
