@@ -1,27 +1,27 @@
 package mdsd;
-import java.util.*;
-
 import mdsd.rover.Rover;
 import mdsd.rover.RoverCommunication;
 import mdsd.rover.RoverNetwork;
-import mdsd.server.model.*;
-import project.Point;
+import mdsd.server.controller.MissionController;
+import mdsd.server.controller.ProcedureController;
+import mdsd.server.model.Area;
+import mdsd.server.model.Environment;
+import mdsd.server.model.ServerInterface;
+import mdsd.server.model.ServerModel;
 import project.AbstractSimulatorMonitor;
-import simbad.sim.AbstractWall;
+import project.Point;
 import simbad.sim.Boundary;
 import simbad.sim.EnvironmentDescription;
 import simbad.sim.HorizontalBoundary;
-import simbad.sim.HorizontalWall;
 import simbad.sim.VerticalBoundary;
-import simbad.sim.VerticalWall;
-import java.awt.Color;
 
-import mdsd.server.controller.*;
+import java.awt.*;
+import java.util.*;
 @SuppressWarnings("unused")
 
 public class Main {
 
-
+	private static UI ui = new UI();
 
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws InterruptedException {
@@ -88,12 +88,9 @@ public class Main {
 		environment1.put(s3, 20);
 		environment1.put(s4, 20);
 
-				
-
 		robots.add(robot1);
 
 		// Start create Missions
-
 
 		// End create missions
 
@@ -110,8 +107,6 @@ public class Main {
         rovComs.add(rovCom2);
 		rovComs.add(rovCom1);
 
-
-
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 		// End init rovers
 
@@ -123,14 +118,18 @@ public class Main {
 
 		mController.startRovers(rovComs);
 
+		ui.createFrame();
+
 		// end start rovers
 
 		//Calls the method to calculate the reward points every 20 seconds
 		Timer timer = new Timer();
 		timer.schedule(new ProcedureController(rovComs, env, environment1, servM), 0, 20000);
 
+	}
 
-
+	public UI getUi(){
+		return ui;
 	}
 
 }

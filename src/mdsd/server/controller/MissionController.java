@@ -1,10 +1,9 @@
 package mdsd.server.controller;
 
-import mdsd.rover.Rover;
 import mdsd.rover.RoverCommunication;
+import mdsd.server.model.Area;
 import mdsd.server.model.Environment;
 import mdsd.server.model.ServerModel;
-import mdsd.server.model.Area;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -40,6 +39,10 @@ public class MissionController {
         try{
             // Read the xml-file
             File missionsXml = new File("../MDSD_group18/src/mdsd/server/controller/missionData.xml");
+
+            //Main main = new Main();
+            //File missionsXml = main.getUi().getXmlFile();
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
             Document missionDoc = documentBuilder.parse(missionsXml);
@@ -54,6 +57,7 @@ public class MissionController {
             for(int i = 0; i < missionNodes.getLength(); i++){
                 Mission newMission = new Mission(getPointsFromMissionXML(missionNodes.item(i)));
                 missions.add(newMission);
+                System.out.println("Mission added");
             }
 
         }catch (Exception e){

@@ -1,5 +1,6 @@
 package mdsd.server.model;
 
+import mdsd.Main;
 import mdsd.rover.RoverCommunication;
 import mdsd.server.controller.Mission;
 import project.Point;
@@ -88,6 +89,8 @@ public class ServerModel implements ServerInterface {
     // TODO Change to a method for adding reward points instead.
     public void setRewardPoints(int newPts){
         this.rewardPoints = newPts;
+        Main main = new Main();
+        main.getUi().setPoints(newPts);
     }
 
 }

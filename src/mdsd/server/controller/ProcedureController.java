@@ -1,12 +1,9 @@
 package mdsd.server.controller;
 
-import javafx.util.Pair;
-import mdsd.Robot;
 import mdsd.rover.RoverCommunication;
-import mdsd.server.model.*;
-import java.util.HashMap;
-
-
+import mdsd.server.model.Area;
+import mdsd.server.model.Environment;
+import mdsd.server.model.ServerModel;
 
 import java.util.*;
 
