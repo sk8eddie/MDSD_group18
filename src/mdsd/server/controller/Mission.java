@@ -11,57 +11,92 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class Mission implements Iterable{
+public class Mission implements Iterable {
 
-	private Point currentDestination;
+    private Point currentDestination;
     private List<Point> points;
     private Iterator missionIterator = new MissionIterator();
 
-    public Mission(){
-    	this.points = new ArrayList<>();
-	}
 
-	public Mission(List<Point> points){
-    	this.points = points;
-	}
+    /**
+     * Empty constructor for the Mission, creates an empty arraylist for the points
+     */
+    public Mission() {
+        this.points = new ArrayList<>();
+    }
 
-	public void addPoint(Point point){
-		this.points.add(point);
-	}
 
-	public List<Point> getPoints(){
-		return this.points;
-	}
+    /**
+     * Constructor for the Mission, sets the list of points to the paramteters list of points
+     *
+     * @param points list of mission points
+     */
+    public Mission(List<Point> points) {
+        this.points = points;
+    }
 
-	public Point getCurrentDestination(){
-		return this.currentDestination;
-	}
+    /**
+     * Adds a new point to the points-list
+     *
+     * @param point the point to be added
+     */
+    public void addPoint(Point point) {
+        this.points.add(point);
+    }
 
-   public void updateStrategy(RoverCommunication rover, Environment env){ //TODO handle for when a rover has reached a certain amount of points.
-	   PathFinder p = new PathFinder();
-	   this.points = p.getPathPoints(rover, this, env);
-   }
+    /**
+     * Getter for the points-list
+     *
+     * @return a list of points
+     */
+    public List<Point> getPoints() {
+        return this.points;
+    }
 
-	@Override
-	public Iterator iterator() {
-		return this.missionIterator;
-	}
+    /**
+     * Getter for the current destination for the mission
+     *
+     * @return the missions current destination
+     */
+    public Point getCurrentDestination() {
+        return this.currentDestination;
+    }
 
-	private class MissionIterator implements Iterator<Point>{
-   		private int currentIndex = 0;
+    /**
+     * Takes the points from a mission and sends them through path finding which returns new points
+     * for teh fastest way between the mission-points
+     */
+    public void updateStrategy(RoverCommunication rover, Environment env) { //TODO handle for when a rover has reached a certain amount of points.
+        PathFinder p = new PathFinder();
+        this.points = p.getPathPoints(rover, this, env);
+    }
 
-		@Override
-		public boolean hasNext() {
-		    return currentIndex < points.size();
-			//return points.get(currentIndex) != null;
-		}
 
-		@Override
-		public Point next() {
-			Point nextPoint = points.get(currentIndex);
-			currentDestination = nextPoint;
-			currentIndex++;
-			return nextPoint;
-		}
-	}
+    @Override
+    public Iterator iterator() {
+        return this.missionIterator;
+    }
+
+    /**
+     * An iterator for the mission
+     */
+    private class MissionIterator implements Iterator<Point> {
+        private int currentIndex = 0;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < points.size();
+            //return points.get(currentIndex) != null;
+        }
+
+        @Override
+        public Point next() {
+            Point nextPoint = points.get(currentIndex);
+            currentDestination = nextPoint;
+            currentIndex++;
+            return nextPoint;
+        }
+    }
+
+
 }

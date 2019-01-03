@@ -21,9 +21,14 @@ import java.util.Set;
 public class MissionController {
 
     private ServerModel model;
-    private Environment environment;
+    // private Environment environment;
 
-    public MissionController(ServerModel model){
+    /**
+     * Constructor for the MissionController
+     *
+     * @param model the ServerModel for the program
+     */
+    public MissionController(ServerModel model) {
         this.model = model;
     }
 
@@ -32,11 +37,12 @@ public class MissionController {
     /**
      * From a xml-file that is in "mdsdSimultar/missionData.xml" predefined missions are read and will
      * generate a java list of Missions that are assigned to each Rover. The xml-file should be in the
+     *
      * @return a java list of Missions.
      */
-    public List<Mission> readMissionsXML(){
+    public List<Mission> readMissionsXML() {
         List<Mission> missions = new ArrayList<>();
-        try{
+        try {
             // Read the xml-file
             File missionsXml = new File("../mdsd/src/mdsd/server/controller/missionData.xml");
 
@@ -48,16 +54,16 @@ public class MissionController {
 
             // Get all xml-missions and create java objects from them
             NodeList missionNodes = missionDoc.getElementsByTagName("Mission");
-            if(missionNodes.getLength() == 0){
+            if (missionNodes.getLength() == 0) {
                 throw new Exception("There are no Missions defined in the 'missionData.xml'-file.");
             }
-            for(int i = 0; i < missionNodes.getLength(); i++){
+            for (int i = 0; i < missionNodes.getLength(); i++) {
                 Mission newMission = new Mission(getPointsFromMissionXML(missionNodes.item(i)));
                 missions.add(newMission);
                 System.out.println("Mission added");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return missions;
@@ -65,17 +71,18 @@ public class MissionController {
 
     /**
      * From each mission tag in the XML-file, extract its points and create objects for them according to attributes.
+     *
      * @param mission the Mission-tag from the xml-file.
      * @return a java list of Points that belonging to the sent Mission-tag.
      */
-    private List<Point> getPointsFromMissionXML(Node mission){
+    private List<Point> getPointsFromMissionXML(Node mission) {
         List<Point> points = new ArrayList<>();
         NodeList missionPoints = mission.getChildNodes(); // Get points from XML-tag
 
-        for(int i = 0; i < missionPoints.getLength(); i++){
+        for (int i = 0; i < missionPoints.getLength(); i++) {
             Node pointNode = missionPoints.item(i);
-            if(pointNode.getNodeType() == Node.ELEMENT_NODE){
-                Element xmlPoint = (Element)pointNode;
+            if (pointNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element xmlPoint = (Element) pointNode;
 
                 double x = Double.parseDouble(xmlPoint.getAttribute("x"));
                 double y = Double.parseDouble(xmlPoint.getAttribute("y"));
@@ -86,8 +93,13 @@ public class MissionController {
     }
 
 
-    // Returns a HashMap with the Rover and an updated the strategy of the mission
-    // which means an initialised list of points
+    /**
+     * Calls the updateStrategy-method in Mission-class in order to update the strategy
+     *
+     * @param roverCommunication the communication with a rover
+     * @param env                the environment the rovers run in
+     */
+
     private void updateStrategy(RoverCommunication roverCommunication, Environment env) {
         Mission mission = model.getRoverMissions().get(roverCommunication);
         mission.updateStrategy(roverCommunication, env);
@@ -102,29 +114,39 @@ public class MissionController {
     }
 
 
-    public void stopAllRovers(){
+    /**
+     * Stops all rovers in the environment
+     */
+    public void stopAllRovers() {
         this.model.stopRovers();
     }
 
-    public void startRovers(Set<RoverCommunication> rovers, Environment env){
+    /**
+     * Starts all rovers in the environment by adding missions to each one of them
+     * as well as setting their destination-points
+     *
+     * @param rovers a list of the RoverCommunication for each rover
+     * @param env    the environment the rovers run in
+     */
+    public void startRovers(Set<RoverCommunication> rovers, Environment env) {
+
 
         List<Mission> missions = readMissionsXML();
 
         // Add all rovers and their missions to the model
-        if(rovers.size() == missions.size()){
+        if (rovers.size() == missions.size()) {
             int missionIndex = 0;
-
-            for(RoverCommunication r : rovers){
+            for (RoverCommunication r : rovers) {
                 this.model.updateRoverMissions(r, missions.get(missionIndex));
-                updateStrategy(r , env);
+                updateStrategy(r, env);
                 missionIndex++;
             }
         }
 
         System.out.println("START ROVERS" + model.getRoverMissions());
 
-        for(RoverCommunication r : model.getRoverMissions().keySet()){
-            r.setNewDestination((Point)model.getRoverMissions().get(r).iterator().next());
+        for (RoverCommunication r : model.getRoverMissions().keySet()) {
+            r.setNewDestination((Point) model.getRoverMissions().get(r).iterator().next());
             System.out.println("Test");
         }
     }
