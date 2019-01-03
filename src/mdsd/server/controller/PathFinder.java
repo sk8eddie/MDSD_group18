@@ -22,7 +22,7 @@ public class PathFinder {
      * Mission controller send to Rover
      *
      */
-    private GridEnvironment grid = new GridEnvironment(60, 60);
+    private GridEnvironment grid = new GridEnvironment(40, 40);
     Environment env;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -50,24 +50,20 @@ public class PathFinder {
             current = p;
         }
 
-        int i = 0;
         for (GridCell a : gridPoints) {
-            if (i % 2 != 0) {
                 Point newPoint = new Point(unConvertPoints(a.getX()), unConvertPoints(a.getY()));
                 pathPoints.add(newPoint);
             }
-            i++;
-        }
         return pathPoints;
     }
 
 
     private int convertPoints(double val) {
-        return (int) ((val / 3) + 10) * 2;
+        return (int) (val + 10) * 2;
     }
 
     private double unConvertPoints(double val) {
-        return (val / 2 - 10) * 3;
+        return val / 2 - 10;
     }
 
 }

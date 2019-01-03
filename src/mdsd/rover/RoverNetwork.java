@@ -12,7 +12,7 @@ public class RoverNetwork implements RoverCommunication {
 
     private ServerInterface server;
     private Rover rover;
-    private boolean hasLock;
+    private boolean hasLock = false;
 
     /**
      * Constructor for the RoverNetwork
@@ -42,7 +42,7 @@ public class RoverNetwork implements RoverCommunication {
                 System.out.println("Started: " + this.toString());
                 while (!rover.isAtDestination()) {
                     try {
-                        Thread.sleep(1);
+                        Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -51,15 +51,20 @@ public class RoverNetwork implements RoverCommunication {
                 if (hasLock){
                     if (server.isExitPoint(newDestination)) {
                         server.getLock(newDestination).unlock();
+                        hasLock=false;
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(10);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                 } else {
                     if (server.isEntryPoint(newDestination)) {
+                        rover.stopRover();
+                        System.out.println("Waiting for lock");
                         server.getLock(newDestination).lock();
+                        System.out.println("Has lock");
+                        hasLock = true;
                     }
                 }
                 server.nextDestinationReached(self);

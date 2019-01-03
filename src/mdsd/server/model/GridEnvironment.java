@@ -26,8 +26,8 @@ public class GridEnvironment {
      * @param boundryHeight height of the environment in the simulator.
      */
     public GridEnvironment(int boundryWidth, int boundryHeight) {
-        this.width = 2 * boundryWidth / 3;
-        this.height = 2 * boundryHeight / 3;
+        this.width = boundryWidth;
+        this.height = boundryHeight;
         this.cells = new GridCell[width][height];
     }
 
@@ -40,8 +40,12 @@ public class GridEnvironment {
         boolean[][] listOfNotWalkable = transformWallList(wallList);
         System.out.println(width + "   " + height);
         for (int x = 0; x < width; x++) {
+            System.out.println("");
             for (int z = 0; z < height; z++) {
                 cells[x][z] = new GridCell(x, z, listOfNotWalkable[x][z]);
+                if (cells[x][z].isWalkable()){
+                    System.out.print("x  ");
+                } else System.out.print("   ");
             }
         }
     }
