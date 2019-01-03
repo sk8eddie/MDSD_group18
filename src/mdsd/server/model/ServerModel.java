@@ -132,11 +132,15 @@ public class ServerModel implements ServerInterface {
         return this.rewardPoints;
     }
 
-    // TODO Change to a method for adding reward points instead.
-    public void setRewardPoints(int newPts) {
-        this.rewardPoints = newPts;
+    /**
+     * Adds new points to the already existing reward points
+     *
+     * @param newPts points to be added
+     */
+    public void addRewardPoints(int newPts) {
+        this.rewardPoints += newPts;
         Main main = new Main();
-        main.getUi().setPoints(newPts);
+        main.getUi().setPoints(this.rewardPoints);
     }
 
 }
