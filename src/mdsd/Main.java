@@ -97,7 +97,7 @@ public class Main implements StartObserver{
 
 		robots.add(robot1);
 
-		ServerInterface sInter = new ServerModel();
+		ServerInterface sInter = new ServerModel(env);
 
 		RoverCommunication rovCom1  = new RoverNetwork(sInter, (Rover)robot1);
 		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);

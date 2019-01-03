@@ -61,14 +61,14 @@ public class PhysicalArea implements Area{
                 wallList.add(vw4);
 
                 Lock con = new ReentrantLock(true);
-                entryPoint.put(new Point((height / 2) + xOffset, zOffset), con);
-                entryPoint.put(new Point(-(height / 2) + xOffset, zOffset), con);
-                entryPoint.put(new Point(xOffset, (width / 2) + zOffset), con);
-                entryPoint.put(new Point(xOffset, -(width / 2) + zOffset), con);
-                exitPoint.put(new Point((height / 2) + xOffset, zOffset), con);
-                exitPoint.put(new Point(-(height / 2) + xOffset, zOffset), con);
-                exitPoint.put(new Point(xOffset, (width / 2) + zOffset), con);
-                exitPoint.put(new Point(xOffset, -(width / 2) + zOffset), con);
+                entryPoint.put(new Point((height / 2) + xOffset + 0.5, zOffset), con);
+                entryPoint.put(new Point(-(height / 2) + xOffset - 0.5, zOffset), con);
+                entryPoint.put(new Point(xOffset, (width / 2) + zOffset + 0.5), con);
+                entryPoint.put(new Point(xOffset, -(width / 2) + zOffset - 0.5), con);
+                exitPoint.put(new Point((height / 2) + xOffset - 0.5, zOffset), con);
+                exitPoint.put(new Point(-(height / 2) + xOffset + 0.5, zOffset), con);
+                exitPoint.put(new Point(xOffset, (width / 2) + zOffset - 0.5), con);
+                exitPoint.put(new Point(xOffset, -(width / 2) + zOffset + 0.5), con);
                 break;
             case "Hall":
                 Lock hall = new ReentrantLock(true);
@@ -85,10 +85,10 @@ public class PhysicalArea implements Area{
                     wallList.add(vw13);
                     AbstractWall vw14 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 0.5f + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw14);
-                    entryPoint.put(new Point(xOffset, (width / 2) + zOffset), hall);
-                    entryPoint.put(new Point(xOffset, -(width / 2) + zOffset), hall);
-                    exitPoint.put(new Point(xOffset, (width / 2) + zOffset), hall);
-                    exitPoint.put(new Point(xOffset, -(width / 2) + zOffset), hall);
+                    entryPoint.put(new Point(xOffset, (width / 2) + zOffset + 0.5), hall);
+                    entryPoint.put(new Point(xOffset, -(width / 2) + zOffset - 0.5), hall);
+                    exitPoint.put(new Point(xOffset, (width / 2) + zOffset - 0.5), hall);
+                    exitPoint.put(new Point(xOffset, -(width / 2) + zOffset + 0.5), hall);
                 } else {
                     AbstractWall hw11 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 0.5f + zOffset, e, c);
                     wallList.add(hw11);
@@ -102,10 +102,10 @@ public class PhysicalArea implements Area{
                     wallList.add(vw11);
                     AbstractWall vw12 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw12);
-                    entryPoint.put(new Point((height / 2) + xOffset, zOffset), hall);
-                    entryPoint.put(new Point(-(height / 2) + xOffset, zOffset), hall);
-                    exitPoint.put(new Point((height / 2) + xOffset, zOffset), hall);
-                    exitPoint.put(new Point(-(height / 2) + xOffset, zOffset), hall);
+                    entryPoint.put(new Point((height / 2) + xOffset + 0.5, zOffset), hall);
+                    entryPoint.put(new Point(-(height / 2) + xOffset - 0.5, zOffset), hall);
+                    exitPoint.put(new Point((height / 2) + xOffset - 0.5, zOffset), hall);
+                    exitPoint.put(new Point(-(height / 2) + xOffset + 0.5, zOffset), hall);
                 }
                 break;
             case "Surgery":
@@ -121,8 +121,8 @@ public class PhysicalArea implements Area{
                     wallList.add(vw21);
                     AbstractWall vw22 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw22);
-                    entryPoint.put(new Point((height / 2) + xOffset, zOffset), sur);
-                    exitPoint.put(new Point((height / 2) + xOffset, zOffset), sur);
+                    entryPoint.put(new Point((height / 2) + xOffset + 0.5, zOffset), sur);
+                    exitPoint.put(new Point((height / 2) + xOffset - 0.5, zOffset), sur);
                 } else if (xOffset > 3) {
                     AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw21);
@@ -134,8 +134,8 @@ public class PhysicalArea implements Area{
                     wallList.add(vw21);
                     AbstractWall vw22 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw22);
-                    entryPoint.put(new Point(-(height / 2) + xOffset, zOffset), sur);
-                    exitPoint.put(new Point(-(height / 2) + xOffset, zOffset), sur);
+                    entryPoint.put(new Point(-(height / 2) + xOffset - 0.5, zOffset), sur);
+                    exitPoint.put(new Point(-(height / 2) + xOffset + 0.5, zOffset), sur);
                 } else if (zOffset < -3) {
                     AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw21);
@@ -147,8 +147,8 @@ public class PhysicalArea implements Area{
                     wallList.add(vw22);
                     AbstractWall vw23 = new VerticalWall(-(width / 2) + zOffset, (height / 2) + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw23);
-                    entryPoint.put(new Point(xOffset, (width / 2) + zOffset), sur);
-                    exitPoint.put(new Point(xOffset, (width / 2) + zOffset), sur);
+                    entryPoint.put(new Point(xOffset, (width / 2) + zOffset + 0.5), sur);
+                    exitPoint.put(new Point(xOffset, (width / 2) + zOffset - 0.5), sur);
                 } else {
                     AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw21);
@@ -160,8 +160,8 @@ public class PhysicalArea implements Area{
                     wallList.add(vw24);
                     AbstractWall vw25 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 0.75f + xOffset, -(height / 2) + xOffset, e, c);
                     wallList.add(vw25);
-                    entryPoint.put(new Point(xOffset, -(width / 2) + zOffset), sur);
-                    exitPoint.put(new Point(xOffset, -(width / 2) + zOffset), sur);
+                    entryPoint.put(new Point(xOffset, -(width / 2) + zOffset - 0.5), sur);
+                    exitPoint.put(new Point(xOffset, -(width / 2) + zOffset + 0.5), sur);
                 }
                 break;
 

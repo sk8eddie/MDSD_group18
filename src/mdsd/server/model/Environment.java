@@ -59,7 +59,6 @@ public class Environment {
         Area area;
         switch (areaName){
             case "Consulting" : area = new PhysicalArea(4f, 4f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
-                entryMap.putAll(area.getEntryList());
             break;
             case "Hall" : area = new PhysicalArea(2f, 2f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
             break;
@@ -76,7 +75,8 @@ public class Environment {
             default: return null;
         }
         areaList.add(area);
-
+        entryMap.putAll(area.getEntryList());
+        exitMap.putAll(area.getExitList());
         return area;
     }
 
@@ -92,5 +92,13 @@ public class Environment {
             }
         }
         return wallList;
+    }
+
+    public HashMap<Point, Lock> getEntryMap(){
+        return entryMap;
+    }
+
+    public HashMap<Point, Lock> getExitMap(){
+        return exitMap;
     }
 }
