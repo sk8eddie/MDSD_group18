@@ -34,7 +34,8 @@ public class PathFinder {
         opt.allowDiagonal = true;
         AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
 
-        return finder.findPath(convertPoints(start.getX()), convertPoints(start.getZ()), convertPoints(end.getX()), convertPoints(end.getZ()), grid.createNavGrid());
+        List<GridCell> lst = finder.findPath(convertPoints(start.getX()), convertPoints(start.getZ()), convertPoints(end.getX()), convertPoints(end.getZ()), grid.createNavGrid());
+        return lst;
     }
 
     public List<Point> getPathPoints(RoverCommunication rover, Mission mission, Environment env) {

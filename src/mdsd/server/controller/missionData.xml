@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <Missions>
     <Mission>
-        <Point x="0.0" y="18.0"> </Point>
         <Point x="0.0" y="0.0"> </Point>
+        <!--<Point x="0.0" y="6.0"> </Point>-->
     </Mission>
     <Mission>
-        <Point x="0.0" y="-18.0"> </Point>
         <Point x="0.0" y="0.0"> </Point>
+        <!--<Point x="0.0" y="-6.0"> </Point>-->
     </Mission>
 </Missions>

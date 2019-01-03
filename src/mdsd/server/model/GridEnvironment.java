@@ -41,10 +41,9 @@ public class GridEnvironment {
             System.out.println("");
             for (int z = 0; z < height; z++){
                 cells[x][z] = new GridCell(x, z, listOfNotWalkable[x][z]);
-                if (cells[x][z].isWalkable())
+                if (cells[x][z].isWalkable()){
                     System.out.print("x  ");
-                else
-                    System.out.print("   ");
+                } else System.out.print("   ");
             }
         }
     }
@@ -62,10 +61,10 @@ public class GridEnvironment {
             }
         }
         for (AbstractWall aw : wallList){
-            int x1 = (int) (((aw.getP1x()/3) + 10) * 2);
-            int x2 = (int) (((aw.getP2x()/3) + 10) * 2);
-            int z1 = (int) (((aw.getP1z()/3) + 10) * 2);
-            int z2 = (int) (((aw.getP2z()/3) + 10) * 2);
+            int x1 = (int) (((aw.getP1x()) + 10) * 2);
+            int x2 = (int) (((aw.getP2x()) + 10) * 2);
+            int z1 = (int) (((aw.getP1z()) + 10) * 2);
+            int z2 = (int) (((aw.getP2z()) + 10) * 2);
             if (x1 == x2){
                 for (int z = z1; z >= z2; z--){
                     pts[x1][z] = false;
