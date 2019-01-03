@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Class for PhysicalArea, i.e. Consulting room
  */
-public class PhysicalArea implements Area{
+public class PhysicalArea implements Area {
 
     private String areaType;
     private String areaName;
@@ -25,16 +25,17 @@ public class PhysicalArea implements Area{
     /**
      * Constructor for Physical Area. Converts witdh and height with the offsets to place Area in the correct position.
      * On case for each class of Area and different layouts depending on where it is placed.
-     * @param width Width of Area.
-     * @param height Height of Area.
-     * @param xOffset Offset on the x-axis.
-     * @param zOffset Offset on the z-axis.
-     * @param name Name of the Area.
-     * @param e Environment desription.
+     *
+     * @param width    Width of Area.
+     * @param height   Height of Area.
+     * @param xOffset  Offset on the x-axis.
+     * @param zOffset  Offset on the z-axis.
+     * @param name     Name of the Area.
+     * @param e        Environment desription.
      * @param areaType Type of Area (always Physical).
-     * @param c Color of walls.
+     * @param c        Color of walls.
      */
-    PhysicalArea (float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType, Color c) {
+    PhysicalArea(float width, float height, float xOffset, float zOffset, String name, EnvironmentDescription e, String areaType, Color c) {
 
         this.areaType = areaType;
         this.areaName = name;
@@ -165,8 +166,8 @@ public class PhysicalArea implements Area{
                 }
                 break;
 
-            case "Office" :
-                if (xOffset < 0 ) {
+            case "Office":
+                if (xOffset < 0) {
 
                     AbstractWall hw31 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 1 + zOffset, e, c);
                     wallList.add(hw31);
@@ -204,33 +205,54 @@ public class PhysicalArea implements Area{
         corner2 = new Point(-(height / 2) + xOffset, -(width / 2) + zOffset);
     }
 
+    /**
+     * Getter for the area type
+     *
+     * @return the type of the area
+     */
     @Override
     public String getAreaType() {
         return areaType;
     }
 
+    /**
+     * Checks if the coordinate is in the area
+     *
+     * @param coordinate Coordinate to check.
+     * @return True if the coordinate is in the area, otherwise false.
+     */
     @Override
     public boolean inArea(Point coordinate) {
         return this.corner2.getX() < coordinate.getX() && coordinate.getX() < this.corner1.getX() && this.corner2.getZ() < coordinate.getZ() && coordinate.getZ() < this.corner1.getZ();
     }
 
+    /**
+     * Getter for the area name
+     *
+     * @return the name of the area
+     */
     @Override
-    public String getAreaName(){
+    public String getAreaName() {
         return this.areaName;
     }
 
+    /**
+     * Getter for the list of walls
+     *
+     * @return the List of the walls
+     */
     @Override
-    public List<AbstractWall> getWallList(){
+    public List<AbstractWall> getWallList() {
         return this.wallList;
     }
 
     @Override
-    public HashMap<Point, Lock> getEntryList(){
+    public HashMap<Point, Lock> getEntryList() {
         return entryPoint;
     }
 
     @Override
-    public HashMap<Point, Lock> getExitList(){
+    public HashMap<Point, Lock> getExitList() {
         return exitPoint;
     }
 

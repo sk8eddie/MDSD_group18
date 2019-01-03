@@ -80,7 +80,7 @@ public class ProcedureController extends TimerTask {
         for (Map.Entry<Area, Integer> values : envpnt.entrySet()) {
             if (values.getKey().getAreaType().equals(areaType)) {
                 if (values.getKey().inArea(rover.getPosition())) {
-                    model.setRewardPoints(model.getRewardPoints() + values.getValue());
+                    model.addRewardPoints(values.getValue());
                 }
             }
         }

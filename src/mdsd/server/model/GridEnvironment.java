@@ -21,10 +21,11 @@ public class GridEnvironment {
 
     /**
      * Constructor for the graph
-     * @param boundryWidth width of the environment in the simulator.
+     *
+     * @param boundryWidth  width of the environment in the simulator.
      * @param boundryHeight height of the environment in the simulator.
      */
-    public GridEnvironment (int boundryWidth, int boundryHeight){
+    public GridEnvironment(int boundryWidth, int boundryHeight) {
         this.width = 2 * boundryWidth / 3;
         this.height = 2 * boundryHeight / 3;
         this.cells = new GridCell[width][height];
@@ -32,14 +33,15 @@ public class GridEnvironment {
 
     /**
      * Creates the graph with walkable and not walkable cells.
-     * @param wallList list of walls which will be not not walkable cells.
+     *
+     * @param wallList list of walls which will be not walkable cells.
      */
-    public void createCells(ArrayList<AbstractWall> wallList){
+    public void createCells(ArrayList<AbstractWall> wallList) {
         boolean[][] listOfNotWalkable = transformWallList(wallList);
         System.out.println(width + "   " + height);
-        for (int x = 0; x < width; x++){
+        for (int x = 0; x < width; x++) {
             System.out.println("");
-            for (int z = 0; z < height; z++){
+            for (int z = 0; z < height; z++) {
                 cells[x][z] = new GridCell(x, z, listOfNotWalkable[x][z]);
                 if (cells[x][z].isWalkable()){
                     System.out.print("x  ");
@@ -50,13 +52,14 @@ public class GridEnvironment {
 
     /**
      * Method for transforming the list of AbstractWalls to a matrix of booleans for walkable and not walkable cells.
-     * @param wallList list of walls which will be not not walkable cells.
+     *
+     * @param wallList list of walls which will be not walkable cells.
      * @return matrix of walkable and not walkable cells.
      */
-    private boolean[][] transformWallList(ArrayList<AbstractWall> wallList){
+    private boolean[][] transformWallList(ArrayList<AbstractWall> wallList) {
         boolean[][] pts = new boolean[width][height];
-        for (int a = 0; a < width; a++){
-            for (int b = 0; b < height; b++){
+        for (int a = 0; a < width; a++) {
+            for (int b = 0; b < height; b++) {
                 pts[a][b] = true;
             }
         }
@@ -69,8 +72,8 @@ public class GridEnvironment {
                 for (int z = z1; z >= z2; z--){
                     pts[x1][z] = false;
                 }
-            } else if (z1 == z2){
-                for (int x = x1; x >= x2; x--){
+            } else if (z1 == z2) {
+                for (int x = x1; x >= x2; x--) {
                     pts[x][z1] = false;
                 }
             }
@@ -80,13 +83,14 @@ public class GridEnvironment {
 
     /**
      * Creates a NavigationGrid that can be used by the pathfinders.
+     *
      * @return NavigationGrid of the created cells.
      */
-    public NavigationGrid createNavGrid(){
+    public NavigationGrid createNavGrid() {
         return new NavigationGrid<GridCell>(this.cells);
     }
 }
-	
+
 	/*
 	 * Get the Environment X,Y + Wall list
 	 * isWalkable on the environment walls
