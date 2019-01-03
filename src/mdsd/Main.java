@@ -77,9 +77,13 @@ public class Main implements StartObserver{
 
 		Robot robot1 = new Rover(new Point(6, 0), "Rover 1");
 		Robot robot2 = new Rover(new Point(-6, 0), "Rover 2");
+		Robot robot3 = new Rover(new Point(0, 6), "Rover 3");
+		Robot robot4 = new Rover(new Point(0, -6), "Rover 4");
 
-
+		robots.add(robot1);
 		robots.add(robot2);
+		robots.add(robot3);
+		robots.add(robot4);
 
 
 		// TODO add points to areas instead
@@ -95,16 +99,21 @@ public class Main implements StartObserver{
 		environment1.put(s3, 20);
 		environment1.put(s4, 20);
 
-		robots.add(robot1);
+
 
 		ServerInterface sInter = new ServerModel(env);
 
 		RoverCommunication rovCom1  = new RoverNetwork(sInter, (Rover)robot1);
 		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);
+		RoverCommunication rovCom3  = new RoverNetwork(sInter, (Rover)robot3);
+		RoverCommunication rovCom4  = new RoverNetwork(sInter, (Rover)robot4);
+
 
 		rovComs = new HashSet<>();
-        rovComs.add(rovCom2);
 		rovComs.add(rovCom1);
+		rovComs.add(rovCom2);
+		rovComs.add(rovCom3);
+		rovComs.add(rovCom4);
 
 		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 		// End init rovers
