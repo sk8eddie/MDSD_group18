@@ -2,6 +2,7 @@ package mdsd.test;
 
 import mdsd.server.controller.Mission;
 import mdsd.server.controller.MissionController;
+import mdsd.server.model.Environment;
 import mdsd.server.model.ServerInterface;
 import mdsd.rover.*;
 import mdsd.server.*;
@@ -66,7 +67,7 @@ class Tests {
         missionList.add(new Mission(points));
 
 
-        MissionController missionController = new MissionController(new ServerModel());
+        MissionController missionController = new MissionController(new ServerModel(new Environment()));
         List<Mission> xmlList = missionController.readMissionsXML();
         for (int i = 0;i<missionList.size();i++) {
             for (int j = 0; j < xmlList.get(i).getPoints().size(); j++) {
@@ -79,7 +80,7 @@ class Tests {
 
     @Test
     void serverTest () {
-        ServerModel server = new ServerModel();
+        ServerModel server = new ServerModel(new Environment());
         HashMap<RoverCommunication, Mission> missionHashMap = new HashMap<>();
         RoverCommunication rovCom = new RoverNetwork(server, new Rover(new Point(0,0), "Test"));
         Mission mission = new Mission();

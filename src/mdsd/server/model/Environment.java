@@ -23,6 +23,8 @@ public class Environment {
      */
     public Environment (){
         areaList = new ArrayList<>();
+        entryMap = new HashMap<>();
+        exitMap = new HashMap<>();
     }
 
     /**
