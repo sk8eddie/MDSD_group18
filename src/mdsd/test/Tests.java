@@ -54,7 +54,7 @@ class Tests {
 
     }
 
-    @Test
+   /* @Test
     void missonTest () {
         List<Mission> missionList = new ArrayList<>();
         List<Point> points = new ArrayList<>();
@@ -90,7 +90,7 @@ class Tests {
         server.nextDestinationReached(rovCom);
         //assertTrue();
 
-    }
+    }*/
 
 
 

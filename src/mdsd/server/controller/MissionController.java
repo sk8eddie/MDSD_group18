@@ -44,7 +44,7 @@ public class MissionController {
         List<Mission> missions = new ArrayList<>();
         try {
             // Read the xml-file
-            File missionsXml = new File("/Users/Tubas/IdeaProjects/MDSD_group18/src/mdsd/server/controller/missionData.xml");
+            File missionsXml = new File("/Users/jonathangildevall/IdeaProjects/MDSD_group18/src/mdsd/server/controller/missionData.xml");
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
