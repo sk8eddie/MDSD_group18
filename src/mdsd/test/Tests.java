@@ -36,7 +36,7 @@ class Tests {
             }
 
             @Override
-            public Lock getLock(Point destination) {
+            public Lock getLock(Point destination, boolean bool) {
                 return null;
             }
         };

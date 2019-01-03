@@ -4,6 +4,9 @@ import mdsd.server.model.ServerInterface;
 import project.Point;
 import simbad.sim.CameraSensor;
 
+import java.util.Locale;
+import java.util.concurrent.locks.Lock;
+
 /**
  * Concrete implementation of the RoverCommunication interface.
  * The facade for other components to communicate with the Rover.
@@ -50,7 +53,7 @@ public class RoverNetwork implements RoverCommunication {
                 System.out.println("Rover " + rover.getName() + " at position");
                 if (hasLock){
                     if (server.isExitPoint(newDestination)) {
-                        server.getLock(newDestination).unlock();
+                        unlock(server.getLock(newDestination, false));
                         hasLock=false;
                         try {
                             Thread.sleep(10);
@@ -62,9 +65,9 @@ public class RoverNetwork implements RoverCommunication {
                     if (server.isEntryPoint(newDestination)) {
                         rover.stopRover();
                         System.out.println("Waiting for lock");
-                        server.getLock(newDestination).lock();
+                        lock(server.getLock(newDestination, true));
+                        hasLock=true;
                         System.out.println("Has lock");
-                        hasLock = true;
                     }
                 }
                 server.nextDestinationReached(self);
@@ -86,6 +89,14 @@ public class RoverNetwork implements RoverCommunication {
     // TODO Should be the camera feed, not a boolean, just need to figure out how to access the camera class
     public Boolean getCamera() {
         return rover.checkCameraDetection();
+    }
+
+    private void lock(Lock lock){
+        lock.lock();
+    }
+
+    private void unlock(Lock lock){
+        lock.unlock();
     }
 
 }

@@ -6,6 +6,7 @@ import mdsd.server.controller.Mission;
 import project.Point;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 
 public class ServerModel implements ServerInterface {
@@ -54,7 +55,13 @@ public class ServerModel implements ServerInterface {
      */
     @Override
     public boolean isEntryPoint(Point destination) {
-        return entryPoints.containsKey(destination);
+        Set<Point> set = entryPoints.keySet();
+        for (Point p : set){
+            if (p.getX() == destination.getX() && p.getZ() == destination.getZ()){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -65,18 +72,33 @@ public class ServerModel implements ServerInterface {
      */
     @Override
     public boolean isExitPoint(Point destination) {
-        return exitPoints.containsKey(destination);
+        Set<Point> set = exitPoints.keySet();
+        for (Point p : set){
+            if (p.getX() == destination.getX() && p.getZ() == destination.getZ()){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public Lock getLock(Point destination) {
-        if (entryPoints.containsKey(destination)) {
-            return entryPoints.get(destination);
-        } else if (exitPoints.containsKey(destination)) {
-            return exitPoints.get(destination);
+    public Lock getLock(Point destination, boolean bool) {
+        if (bool){
+            Set<Point> set = entryPoints.keySet();
+            for (Point p : set){
+                if (p.getX() == destination.getX() && p.getZ() == destination.getZ()){
+                    return entryPoints.get(p);
+                }
+            }
         } else {
-            return null;
+            Set<Point> set = exitPoints.keySet();
+            for (Point p : set){
+                if (p.getX() == destination.getX() && p.getZ() == destination.getZ()){
+                    return exitPoints.get(p);
+                }
+            }
         }
+        return null;
     }
 
     /**

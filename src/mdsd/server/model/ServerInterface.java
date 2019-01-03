@@ -17,5 +17,5 @@ public interface ServerInterface {
 
     boolean isExitPoint(Point destination);
 
-    Lock getLock(Point destination);
+    Lock getLock(Point destination, boolean bool);
 }
