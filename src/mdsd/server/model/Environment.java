@@ -6,6 +6,8 @@ import simbad.sim.EnvironmentDescription;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
 
 /**
  * Environment class. Creates Areas and contains a list of them.
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 public class Environment {
 
     private ArrayList<Area> areaList;
+    private HashMap<Point, Lock> entryMap;
+    private HashMap<Point, Lock> exitMap;
 
     /**
      * Constructor for Environment. Contains list of Area in the environment.
@@ -55,6 +59,7 @@ public class Environment {
         Area area;
         switch (areaName){
             case "Consulting" : area = new PhysicalArea(4f, 4f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
+                entryMap.putAll(area.getEntryList());
             break;
             case "Hall" : area = new PhysicalArea(2f, 2f, (float)position.getX(), (float)position.getZ(), areaName, e, "Physical", c);
             break;
@@ -71,6 +76,7 @@ public class Environment {
             default: return null;
         }
         areaList.add(area);
+
         return area;
     }
 

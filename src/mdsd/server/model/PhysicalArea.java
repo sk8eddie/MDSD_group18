@@ -224,11 +224,13 @@ public class PhysicalArea implements Area{
         return this.wallList;
     }
 
+    @Override
     public HashMap<Point, Lock> getEntryList(){
         return entryPoint;
     }
 
-    public HashMap<Point, Lock> getExitPoint(){
+    @Override
+    public HashMap<Point, Lock> getExitList(){
         return exitPoint;
     }
 
