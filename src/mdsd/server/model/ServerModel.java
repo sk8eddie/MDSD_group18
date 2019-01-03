@@ -16,18 +16,28 @@ public class ServerModel implements ServerInterface {
     private HashMap<Point, Lock> exitPoints;
 
 
-    public ServerModel(Environment e){
+    /**
+     * Constructor for the ServerModel
+     *
+     * @param e the environment in which the program is running
+     */
+    public ServerModel(Environment e) {
         this.rewardPoints = 0;
         this.roverMissions = new HashMap<RoverCommunication, Mission>();
         this.entryPoints = e.getEntryMap();
         this.exitPoints = e.getExitMap();
     }
 
+    /**
+     * Sets the next destination point for the rover when the last one is reached
+     *
+     * @param roverCommunication the communication for a rover
+     */
     @Override
     public void nextDestinationReached(RoverCommunication roverCommunication) { // get rover , Lookup mission for that rover and get the next point/destination and set new destination
         Mission mission = roverMissions.get(roverCommunication);
         if (mission.iterator().hasNext()) {
-            Point p = (Point)mission.iterator().next();
+            Point p = (Point) mission.iterator().next();
             System.out.println(p.getX() + "   " + p.getZ() + "   " + roverCommunication.getPosition());
             roverCommunication.setNewDestination(p);
 
@@ -36,11 +46,23 @@ public class ServerModel implements ServerInterface {
         }
     }
 
+    /**
+     * Checks if the point is an entry point
+     *
+     * @param destination the destination point to be checked
+     * @return True if it is an entry point, otherwise false
+     */
     @Override
     public boolean isEntryPoint(Point destination) {
         return entryPoints.containsKey(destination);
     }
 
+    /**
+     * Checks if the point is an exit point
+     *
+     * @param destination the destination point to be checked
+     * @return True if it is an exit point, otherwise false
+     */
     @Override
     public boolean isExitPoint(Point destination) {
         return exitPoints.containsKey(destination);
@@ -57,17 +79,20 @@ public class ServerModel implements ServerInterface {
         }
     }
 
-    public void stopRovers(){
-        for(RoverCommunication rc : roverMissions.keySet()){
+    /**
+     * Stops all rovers in the environment
+     */
+    public void stopRovers() {
+        for (RoverCommunication rc : roverMissions.keySet()) {
             rc.setNewDestination(rc.getPosition());
         }
     }
 
-    public void getState(){ // Report everything, damage, location , reward points and report if any fault
+    public void getState() { // Report everything, damage, location , reward points and report if any fault
 
     }
 
-    public void missionComplete(RoverCommunication roverCommunication){ // Check if all points reached - mission complete and then ask for a new mission from the controller
+    public void missionComplete(RoverCommunication roverCommunication) { // Check if all points reached - mission complete and then ask for a new mission from the controller
 
     }
 
@@ -75,24 +100,40 @@ public class ServerModel implements ServerInterface {
         this.roverMissions = roverMissions;
     }
 
+    /**
+     * Getter for the list of rover missions
+     *
+     * @return the list with the rover missions
+     */
     public HashMap<RoverCommunication, Mission> getRoverMissions() {
         return roverMissions;
     }
 
-    public void updateRoverMissions(RoverCommunication roverCommunication, Mission mission){
-        if (roverMissions.containsKey(roverCommunication)){
+    /**
+     * Updates a rovers mission
+     *
+     * @param roverCommunication the communication with the rover
+     * @param mission            the new mission for the rover
+     */
+    public void updateRoverMissions(RoverCommunication roverCommunication, Mission mission) {
+        if (roverMissions.containsKey(roverCommunication)) {
             roverMissions.replace(roverCommunication, mission);
         } else {
             roverMissions.put(roverCommunication, mission);
         }
     }
 
-    public int getRewardPoints(){
+    /**
+     * getter for the reward points
+     *
+     * @return the reward points
+     */
+    public int getRewardPoints() {
         return this.rewardPoints;
     }
 
     // TODO Change to a method for adding reward points instead.
-    public void setRewardPoints(int newPts){
+    public void setRewardPoints(int newPts) {
         this.rewardPoints = newPts;
         Main main = new Main();
         main.getUi().setPoints(newPts);
