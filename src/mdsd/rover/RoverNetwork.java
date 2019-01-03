@@ -5,19 +5,30 @@ import project.Point;
 import simbad.sim.CameraSensor;
 
 /**
- * Concrete implementation of the RoverCommunication interface. Is the facade
- * for other components to communicate with the Rover.
+ * Concrete implementation of the RoverCommunication interface.
+ * The facade for other components to communicate with the Rover.
  */
 public class RoverNetwork implements RoverCommunication {
 
     private ServerInterface server;
     private Rover rover;
 
-    public RoverNetwork(ServerInterface server, Rover rover){
+    /**
+     * Constructor for the RoverNetwork
+     *
+     * @param server the ServerModel for the program
+     * @param rover  the rover that should be communicated with
+     */
+    public RoverNetwork(ServerInterface server, Rover rover) {
         this.server = server;
         this.rover = rover;
     }
 
+    /**
+     * sets the rovers new destination, checks the locks for the room
+     *
+     * @param newDestination the new destination for the rover
+     */
     public void setNewDestination(Point newDestination) {
         //server has hashmap with room entry and exit points?
 
@@ -53,12 +64,17 @@ public class RoverNetwork implements RoverCommunication {
         positionChecker.start();
     }
 
+    /**
+     * Getter for the rovers position
+     *
+     * @return the rovers porition
+     */
     public Point getPosition() {
         return rover.getPosition();
     }
 
     // TODO Should be the camera feed, not a boolean, just need to figure out how to access the camera class
-    public Boolean getCamera(){
+    public Boolean getCamera() {
         return rover.checkCameraDetection();
     }
 
