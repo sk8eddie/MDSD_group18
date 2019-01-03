@@ -6,6 +6,7 @@ import simbad.sim.EnvironmentDescription;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -75,12 +76,12 @@ public class LogicalArea implements Area {
     }
 
     @Override
-    public HashMap<Point, Lock> getEntryList() {
+    public HashMap<Point, Semaphore> getEntryList() {
         return null;
     }
 
     @Override
-    public HashMap<Point, Lock> getExitList() {
+    public HashMap<Point, Semaphore> getExitList() {
         return null;
     }
 

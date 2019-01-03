@@ -7,6 +7,7 @@ import simbad.sim.EnvironmentDescription;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -15,8 +16,8 @@ import java.util.concurrent.locks.Lock;
 public class Environment {
 
     private ArrayList<Area> areaList;
-    private HashMap<Point, Lock> entryMap;
-    private HashMap<Point, Lock> exitMap;
+    private HashMap<Point, Semaphore> entryMap;
+    private HashMap<Point, Semaphore> exitMap;
 
     /**
      * Constructor for Environment. Contains list of Area in the environment.
@@ -108,11 +109,11 @@ public class Environment {
         return wallList;
     }
 
-    public HashMap<Point, Lock> getEntryMap() {
+    public HashMap<Point, Semaphore> getEntryMap() {
         return entryMap;
     }
 
-    public HashMap<Point, Lock> getExitMap() {
+    public HashMap<Point, Semaphore> getExitMap() {
         return exitMap;
     }
 }

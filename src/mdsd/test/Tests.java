@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import project.Point;
 
 import java.util.*;
-import java.util.concurrent.locks.Lock;
+import java.util.concurrent.Semaphore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +36,7 @@ class Tests {
             }
 
             @Override
-            public Lock getLock(Point destination, boolean bool) {
+            public Semaphore getSemaphore(Point destination, boolean bool) {
                 return null;
             }
         };

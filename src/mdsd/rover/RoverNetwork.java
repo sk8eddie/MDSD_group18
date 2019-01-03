@@ -5,6 +5,7 @@ import project.Point;
 import simbad.sim.CameraSensor;
 
 import java.util.Locale;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -43,29 +44,44 @@ public class RoverNetwork implements RoverCommunication {
             @Override
             public void run() {
                 System.out.println("Started: " + this.toString());
+                System.out.println(rover.getName());
+                System.out.println(rover.getRoverDestination());
+                System.out.println(newDestination);
                 while (!rover.isAtDestination()) {
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(1);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Rover " + rover.getName() + " at position");
                 if (hasLock){
                     if (server.isExitPoint(newDestination)) {
-                        unlock(server.getLock(newDestination, false));
+                        Semaphore semaphore = server.getSemaphore(newDestination, false);
+                        if (semaphore.availablePermits()==0) {
+                            semaphore.release();
+                        }
                         hasLock=false;
                         try {
-                            Thread.sleep(10);
+                            Thread.sleep(1);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                 } else {
                     if (server.isEntryPoint(newDestination)) {
-                        rover.stopRover();
+                        //rover.stopRover();
                         System.out.println("Waiting for lock");
-                        lock(server.getLock(newDestination, true));
+                        try {
+                            server.getSemaphore(newDestination, true).acquire();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         hasLock=true;
                         System.out.println("Has lock");
                     }
@@ -89,14 +105,6 @@ public class RoverNetwork implements RoverCommunication {
     // TODO Should be the camera feed, not a boolean, just need to figure out how to access the camera class
     public Boolean getCamera() {
         return rover.checkCameraDetection();
-    }
-
-    private void lock(Lock lock){
-        lock.lock();
-    }
-
-    private void unlock(Lock lock){
-        lock.unlock();
     }
 
 }

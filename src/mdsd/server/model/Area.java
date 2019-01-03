@@ -6,6 +6,7 @@ import simbad.sim.AbstractWall;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -38,7 +39,7 @@ public interface Area {
      */
     List<AbstractWall> getWallList();
 
-    HashMap<Point, Lock> getEntryList();
+    HashMap<Point, Semaphore> getEntryList();
 
-    HashMap<Point, Lock> getExitList();
+    HashMap<Point, Semaphore> getExitList();
 }

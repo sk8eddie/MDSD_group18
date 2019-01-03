@@ -3,7 +3,7 @@ package mdsd.server.model;
 import mdsd.rover.RoverCommunication;
 import project.Point;
 
-import java.util.concurrent.locks.Lock;
+import java.util.concurrent.Semaphore;
 
 public interface ServerInterface {
     /**
@@ -17,5 +17,5 @@ public interface ServerInterface {
 
     boolean isExitPoint(Point destination);
 
-    Lock getLock(Point destination, boolean bool);
+    Semaphore getSemaphore(Point destination, boolean bool);
 }

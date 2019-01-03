@@ -7,14 +7,15 @@ import project.Point;
 
 import java.util.HashMap;
 import java.util.Set;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
 public class ServerModel implements ServerInterface {
 
     private int rewardPoints; // Init by procedure controller
     private HashMap<RoverCommunication, Mission> roverMissions; // Rover is the key and mission is the value
-    private HashMap<Point, Lock> entryPoints;
-    private HashMap<Point, Lock> exitPoints;
+    private HashMap<Point, Semaphore> entryPoints;
+    private HashMap<Point, Semaphore> exitPoints;
 
 
     /**
@@ -82,7 +83,7 @@ public class ServerModel implements ServerInterface {
     }
 
     @Override
-    public Lock getLock(Point destination, boolean bool) {
+    public Semaphore getSemaphore(Point destination, boolean bool) {
         if (bool){
             Set<Point> set = entryPoints.keySet();
             for (Point p : set){

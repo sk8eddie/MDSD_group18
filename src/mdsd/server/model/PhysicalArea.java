@@ -6,6 +6,7 @@ import simbad.sim.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -19,8 +20,8 @@ public class PhysicalArea implements Area {
     private Point corner1;
     private Point corner2;
     private List<AbstractWall> wallList = new ArrayList<>();
-    private HashMap<Point, Lock> entryPoint;
-    private HashMap<Point, Lock> exitPoint;
+    private HashMap<Point, Semaphore> entryPoint;
+    private HashMap<Point, Semaphore> exitPoint;
 
     /**
      * Constructor for Physical Area. Converts witdh and height with the offsets to place Area in the correct position.
@@ -61,7 +62,7 @@ public class PhysicalArea implements Area {
                 AbstractWall vw4 = new VerticalWall(-(width / 2) + zOffset, -(height / 2) + 1.5f + xOffset, -(height / 2) + xOffset, e, c);
                 wallList.add(vw4);
 
-                Lock con = new ReentrantLock(true);
+                Semaphore con = new Semaphore(1,true);
                 entryPoint.put(new Point((height / 2) + xOffset + 0.5, zOffset), con);
                 entryPoint.put(new Point(-(height / 2) + xOffset - 0.5, zOffset), con);
                 entryPoint.put(new Point(xOffset, (width / 2) + zOffset + 0.5), con);
@@ -72,7 +73,7 @@ public class PhysicalArea implements Area {
                 exitPoint.put(new Point(xOffset, -(width / 2) + zOffset - 0.5), con);
                 break;
             case "Hall":
-                Lock hall = new ReentrantLock(true);
+                Semaphore hall = new Semaphore(1,true);
                 if (Math.abs(zOffset) > Math.abs(xOffset)) {
                     AbstractWall hw11 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, -(width / 2) + zOffset, e, c);
                     wallList.add(hw11);
@@ -110,7 +111,7 @@ public class PhysicalArea implements Area {
                 }
                 break;
             case "Surgery":
-                Lock sur = new ReentrantLock(true);
+                Semaphore sur = new Semaphore(1,true);
                 if (xOffset < -3) {
                     AbstractWall hw21 = new HorizontalWall((height / 2) + xOffset, (width / 2) + zOffset, (width / 2) - 0.75f + zOffset, e, c);
                     wallList.add(hw21);
@@ -247,12 +248,12 @@ public class PhysicalArea implements Area {
     }
 
     @Override
-    public HashMap<Point, Lock> getEntryList() {
+    public HashMap<Point, Semaphore> getEntryList() {
         return entryPoint;
     }
 
     @Override
-    public HashMap<Point, Lock> getExitList() {
+    public HashMap<Point, Semaphore> getExitList() {
         return exitPoint;
     }
 
