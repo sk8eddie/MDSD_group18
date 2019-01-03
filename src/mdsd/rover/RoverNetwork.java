@@ -12,6 +12,7 @@ public class RoverNetwork implements RoverCommunication {
 
     private ServerInterface server;
     private Rover rover;
+    private boolean hasLock;
 
     public RoverNetwork(ServerInterface server, Rover rover){
         this.server = server;
@@ -36,14 +37,18 @@ public class RoverNetwork implements RoverCommunication {
                     }
                 }
                 System.out.println("Rover " + rover.getName() + " at position");
-                if (server.isEntryPoint(newDestination)) {
-                    server.getLock(newDestination).lock();
-                } else if (server.isExitPoint(newDestination)) {
-                    server.getLock(newDestination).unlock();
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                if (hasLock){
+                    if (server.isExitPoint(newDestination)) {
+                        server.getLock(newDestination).unlock();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    if (server.isEntryPoint(newDestination)) {
+                        server.getLock(newDestination).lock();
                     }
                 }
                 server.nextDestinationReached(self);
