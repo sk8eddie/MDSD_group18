@@ -55,11 +55,9 @@ public class PathFinder {
             if (i % 2 != 0) {
                 Point newPoint = new Point(unConvertPoints(a.getX()), unConvertPoints(a.getY()));
                 pathPoints.add(newPoint);
-                System.out.println("( " + unConvertPoints(a.getX()) + " , " + unConvertPoints(a.getY()) + " )");
             }
             i++;
         }
-        System.out.println("reached");
         return pathPoints;
     }
 

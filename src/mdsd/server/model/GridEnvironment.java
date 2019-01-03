@@ -40,12 +40,8 @@ public class GridEnvironment {
         boolean[][] listOfNotWalkable = transformWallList(wallList);
         System.out.println(width + "   " + height);
         for (int x = 0; x < width; x++) {
-            System.out.println("");
             for (int z = 0; z < height; z++) {
                 cells[x][z] = new GridCell(x, z, listOfNotWalkable[x][z]);
-                if (cells[x][z].isWalkable()){
-                    System.out.print("x  ");
-                } else System.out.print("   ");
             }
         }
     }
