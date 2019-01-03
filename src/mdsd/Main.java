@@ -78,6 +78,7 @@ public class Main implements StartObserver{
 		Robot robot1 = new Rover(new Point(6, 0), "Rover 1");
 		Robot robot2 = new Rover(new Point(-6, 0), "Rover 2");
 
+
 		robots.add(robot2);
 
 
@@ -96,7 +97,7 @@ public class Main implements StartObserver{
 
 		robots.add(robot1);
 
-		ServerInterface sInter = new ServerModel();
+		ServerInterface sInter = new ServerModel(env);
 
 		RoverCommunication rovCom1  = new RoverNetwork(sInter, (Rover)robot1);
 		RoverCommunication rovCom2  = new RoverNetwork(sInter, (Rover)robot2);
@@ -117,13 +118,14 @@ public class Main implements StartObserver{
 		ui.createFrame();
 	}
 
+
 	public UI getUi(){
 		return ui;
 	}
 
 	@Override
 	public void start() {
-		missionController.startRovers(rovComs);
+		missionController.startRovers(rovComs, env);
 		// end start rovers
 
 		//Calls the method to calculate the reward points every 20 seconds

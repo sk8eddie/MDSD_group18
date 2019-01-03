@@ -4,7 +4,9 @@ import project.Point;
 import simbad.sim.AbstractWall;
 import simbad.sim.EnvironmentDescription;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 
 /**
  * Class for LogicalArea, i.e. Wifi-zone
@@ -52,6 +54,16 @@ public class LogicalArea implements Area{
 
     @Override
     public List<AbstractWall> getWallList(){
+        return null;
+    }
+
+    @Override
+    public HashMap<Point, Lock> getEntryList(){
+        return null;
+    }
+
+    @Override
+    public HashMap<Point, Lock> getExitList(){
         return null;
     }
 

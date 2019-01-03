@@ -63,6 +63,7 @@ public class Rover extends Robot {
         return (isinXRange(this.getPosition().getX()) && isinZRange(this.getPosition().getZ()));
     }
 
+
     /**
      * Checks if the parameter x is in the same position as the currentDestinations x-parameter
      *
@@ -70,7 +71,7 @@ public class Rover extends Robot {
      * @return True if x is in the range of the currentDestinations x-parameter, otherwise false
      */
     private Boolean isinXRange(double x) {
-        return (((this.currentDestination.getX() - 0.5) < x) && (x < (this.currentDestination.getX() + 0.5)));
+        return (((this.currentDestination.getX() - 0.25) < x) && (x < (this.currentDestination.getX() + 0.25)));
     }
 
     /**
@@ -80,8 +81,10 @@ public class Rover extends Robot {
      * @return True if z is in the range of the currentDestinations z-parameter, otherwise false
      */
     private Boolean isinZRange(double z) {
-        return (((this.currentDestination.getZ() - 0.5) < z) && (z < (this.currentDestination.getZ() + 0.5)));
+        return (((this.currentDestination.getZ() - 0.25) < z) && (z < (this.currentDestination.getZ() + 0.25)));
+
     }
+
 
     /**
      * Sets the rovers current destination to the newDestination

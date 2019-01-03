@@ -97,11 +97,12 @@ public class MissionController {
      * Calls the updateStrategy-method in Mission-class in order to update the strategy
      *
      * @param roverCommunication the communication with a rover
+     * @param env                the environment the rovers run in
      */
-    private void updateStrategy(RoverCommunication roverCommunication) {
+
+    private void updateStrategy(RoverCommunication roverCommunication, Environment env) {
         Mission mission = model.getRoverMissions().get(roverCommunication);
-        mission.updateStrategy();
-        //hashMap = new HashMap<>();
+        mission.updateStrategy(roverCommunication, env);
     }
 
     // Checks if a rover is in the same room as objective returns true
@@ -111,6 +112,7 @@ public class MissionController {
         return true;
 
     }
+
 
     /**
      * Stops all rovers in the environment
@@ -124,8 +126,10 @@ public class MissionController {
      * as well as setting their destination-points
      *
      * @param rovers a list of the RoverCommunication for each rover
+     * @param env    the environment the rovers run in
      */
-    public void startRovers(Set<RoverCommunication> rovers) {
+    public void startRovers(Set<RoverCommunication> rovers, Environment env) {
+
 
         List<Mission> missions = readMissionsXML();
 
@@ -134,6 +138,7 @@ public class MissionController {
             int missionIndex = 0;
             for (RoverCommunication r : rovers) {
                 this.model.updateRoverMissions(r, missions.get(missionIndex));
+                updateStrategy(r, env);
                 missionIndex++;
             }
         }
@@ -142,6 +147,7 @@ public class MissionController {
 
         for (RoverCommunication r : model.getRoverMissions().keySet()) {
             r.setNewDestination((Point) model.getRoverMissions().get(r).iterator().next());
+            System.out.println("Test");
         }
     }
 

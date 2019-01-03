@@ -4,7 +4,9 @@ import project.Point;
 import simbad.sim.AbstractWall;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 
 /**
  * Interface for Areas.
@@ -35,4 +37,8 @@ public interface Area {
      * @return wallList.
      */
     List<AbstractWall> getWallList();
+
+    HashMap<Point, Lock> getEntryList();
+
+    HashMap<Point, Lock> getExitList();
 }

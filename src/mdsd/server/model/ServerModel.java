@@ -16,18 +16,21 @@ public class ServerModel implements ServerInterface {
     private HashMap<Point, Lock> exitPoints;
 
 
-    public ServerModel(){
+    public ServerModel(Environment e){
         this.rewardPoints = 0;
         this.roverMissions = new HashMap<RoverCommunication, Mission>();
-        this.entryPoints = new HashMap<>();
-        this.exitPoints = new HashMap<>();
+        this.entryPoints = e.getEntryMap();
+        this.exitPoints = e.getExitMap();
     }
 
     @Override
     public void nextDestinationReached(RoverCommunication roverCommunication) { // get rover , Lookup mission for that rover and get the next point/destination and set new destination
         Mission mission = roverMissions.get(roverCommunication);
         if (mission.iterator().hasNext()) {
-            roverCommunication.setNewDestination((Point) mission.iterator().next());
+            Point p = (Point)mission.iterator().next();
+            System.out.println(p.getX() + "   " + p.getZ() + "   " + roverCommunication.getPosition());
+            roverCommunication.setNewDestination(p);
+
         } else {
             missionComplete(roverCommunication);
         }

@@ -1,5 +1,8 @@
 package mdsd.server.controller;
 
+import mdsd.rover.Rover;
+import mdsd.rover.RoverCommunication;
+import mdsd.server.model.Environment;
 import project.Point;
 
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public class Mission implements Iterable {
     private Point currentDestination;
     private List<Point> points;
     private Iterator missionIterator = new MissionIterator();
+
 
     /**
      * Empty constructor for the Mission, creates an empty arraylist for the points
@@ -59,10 +63,12 @@ public class Mission implements Iterable {
     }
 
     /**
-     * Updates the strategy by shuffling the the mission-points
+     * Takes the points from a mission and sends them through path finding which returns new points
+     * for teh fastest way between the mission-points
      */
-    public void updateStrategy() { //TODO handle for when a rover has reached a certain amount of points.
-        Collections.shuffle(this.points);
+    public void updateStrategy(RoverCommunication rover, Environment env) { //TODO handle for when a rover has reached a certain amount of points.
+        PathFinder p = new PathFinder();
+        this.points = p.getPathPoints(rover, this, env);
     }
 
 
@@ -80,6 +86,7 @@ public class Mission implements Iterable {
         @Override
         public boolean hasNext() {
             return currentIndex < points.size();
+            //return points.get(currentIndex) != null;
         }
 
         @Override
@@ -90,4 +97,6 @@ public class Mission implements Iterable {
             return nextPoint;
         }
     }
+
+
 }
