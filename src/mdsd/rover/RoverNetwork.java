@@ -17,7 +17,6 @@ public class RoverNetwork implements RoverCommunication {
     private ServerInterface server;
     private Rover rover;
     private boolean hasLock = false;
-    private boolean stopRover = false;
     private Thread positionChecker;
 
     /**
@@ -48,50 +47,36 @@ public class RoverNetwork implements RoverCommunication {
         positionChecker = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("Started: " + this.toString());
-                if (stopRover)
-                    rover.stopRover();
-                while (!rover.isAtDestination()) {
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
                 try {
+                    System.out.println("Started: " + this.toString());
+                    while (!rover.isAtDestination())
+                        Thread.sleep(1);
+
                     Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("Rover " + rover.getName() + " at position");
-                if (hasLock){
-                    if (server.isExitPoint(newDestination)) {
-                        Semaphore semaphore = server.getSemaphore(newDestination, false);
-                        if (semaphore.availablePermits()==0) {
-                            semaphore.release();
-                        }
-                        hasLock=false;
-                        try {
+                    System.out.println("Rover " + rover.getName() + " at position");
+                    if (hasLock) {
+                        if (server.isExitPoint(newDestination)) {
+                            Semaphore semaphore = server.getSemaphore(newDestination, false);
+                            if (semaphore.availablePermits() == 0) {
+                                semaphore.release();
+                            }
+                            hasLock = false;
                             Thread.sleep(1);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
-                    }
-                } else {
-                    if (server.isEntryPoint(newDestination)) {
-                        //rover.stopRover();
-                        try {
+                    } else {
+                        if (server.isEntryPoint(newDestination)) {
                             server.getSemaphore(newDestination, true).acquire();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            hasLock = true;
                         }
-                        hasLock=true;
                     }
+                    server.nextDestinationReached(self);
+                    System.out.println("Thread exit: " + this.toString());
+                } catch (InterruptedException e) {
+                    e.getStackTrace();
+                    rover.stopRover();
                 }
-                server.nextDestinationReached(self);
-                System.out.println("Thread exit: " + this.toString());
             }
-        });
+            });
         positionChecker.start();
     }
 
@@ -104,9 +89,12 @@ public class RoverNetwork implements RoverCommunication {
         return rover.getPosition();
     }
 
+    /**
+     * Stops the rover by interrupting the thread
+     */
     public void stopRover () {
         rover.stopRover();
-        stopRover=true;
+        positionChecker.interrupt();
     }
 
     // TODO Should be the camera feed, not a boolean, just need to figure out how to access the camera class
