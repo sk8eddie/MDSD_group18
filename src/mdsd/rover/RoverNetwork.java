@@ -44,9 +44,6 @@ public class RoverNetwork implements RoverCommunication {
             @Override
             public void run() {
                 System.out.println("Started: " + this.toString());
-                System.out.println(rover.getName());
-                System.out.println(rover.getRoverDestination());
-                System.out.println(newDestination);
                 while (!rover.isAtDestination()) {
                     try {
                         Thread.sleep(1);
@@ -76,14 +73,12 @@ public class RoverNetwork implements RoverCommunication {
                 } else {
                     if (server.isEntryPoint(newDestination)) {
                         //rover.stopRover();
-                        System.out.println("Waiting for lock");
                         try {
                             server.getSemaphore(newDestination, true).acquire();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                         hasLock=true;
-                        System.out.println("Has lock");
                     }
                 }
                 server.nextDestinationReached(self);

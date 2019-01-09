@@ -3,6 +3,9 @@ package mdsd.server.view;
 import mdsd.StartObserver;
 import mdsd.server.controller.MissionController;
 import simbad.gui.Simbad;
+import simbad.sim.Agent;
+import simbad.sim.CameraSensor;
+import simbad.sim.RobotFactory;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -61,7 +64,7 @@ public class UI {
     //            File file = fileChooser.showOpenDialog();
 
 
-                File xmlPath = new File("../mdsd/src/mdsd/server/controller");
+                File xmlPath = new File("../MDSD_group18/src/mdsd/server/controller");
                 JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getParentDirectory(xmlPath));
                 jfc.setDialogTitle("Select an XML file");
                 jfc.setAcceptAllFileFilterUsed(false);
@@ -103,9 +106,9 @@ public class UI {
                     false,
                     false,
                     false);
-            setSize(214, 100);
+            setSize(260, 100);
             // Set the window's location.
-            setLocation(20, 495);
+            setLocation(20, 500);
 
         }
     }
