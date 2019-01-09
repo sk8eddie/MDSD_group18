@@ -17,6 +17,7 @@ public class RoverNetwork implements RoverCommunication {
     private ServerInterface server;
     private Rover rover;
     private boolean hasLock = false;
+    private boolean stopRover = false;
     private Thread positionChecker;
 
     /**
@@ -48,6 +49,8 @@ public class RoverNetwork implements RoverCommunication {
             @Override
             public void run() {
                 System.out.println("Started: " + this.toString());
+                if (stopRover)
+                    rover.stopRover();
                 while (!rover.isAtDestination()) {
                     try {
                         Thread.sleep(1);
@@ -103,8 +106,8 @@ public class RoverNetwork implements RoverCommunication {
     }
 
     public void stopRover () {
-        positionChecker.interrupt();
         rover.stopRover();
+        stopRover=true;
     }
 
     // TODO Should be the camera feed, not a boolean, just need to figure out how to access the camera class
