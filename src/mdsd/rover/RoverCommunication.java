@@ -2,6 +2,10 @@ package mdsd.rover;
 
 import project.Point;
 
+/**
+ * Interface for communication with the Rover.
+ */
+
 public interface RoverCommunication {
 
     /**
