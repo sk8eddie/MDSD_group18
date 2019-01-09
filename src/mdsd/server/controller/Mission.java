@@ -45,15 +45,14 @@ public class Mission implements Iterable {
         this.points = p.getPathPoints(rover, this, env);
     }
 
-
+    /**
+     * An iterator for the mission
+     */
     @Override
     public Iterator iterator() {
         return this.missionIterator;
     }
 
-    /**
-     * An iterator for the mission
-     */
     private class MissionIterator implements Iterator<Point> {
         private int currentIndex = 0;
 

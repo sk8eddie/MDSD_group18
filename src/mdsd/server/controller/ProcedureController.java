@@ -7,6 +7,9 @@ import mdsd.server.model.ServerModel;
 
 import java.util.*;
 
+/**
+ * Sets current procedure after constraints, and computes the reward points.
+ */
 
 public class ProcedureController extends TimerTask {
 
