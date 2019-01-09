@@ -111,7 +111,7 @@ public class Rover extends Robot {
      * Should verify if there are any physical faults with the Rover, broken sensors etc.
      */
     private void checkRoverFault() {
-        // TODO way to surveil the rover parts
-        // Poll att the parts???
+        // Dummy method for Rover faults.
+        // Since the Rovers are in a simulator, they can't physically break in any way.
     }
 }
