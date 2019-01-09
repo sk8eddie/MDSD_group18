@@ -61,7 +61,7 @@ public class UI {
     //            File file = fileChooser.showOpenDialog();
 
 
-                File xmlPath = new File("../mdsd/src");
+                File xmlPath = new File("../mdsd/src/mdsd/server/controller");
                 JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getParentDirectory(xmlPath));
                 jfc.setDialogTitle("Select an XML file");
                 jfc.setAcceptAllFileFilterUsed(false);

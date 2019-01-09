@@ -57,6 +57,11 @@ public class MissionController {
             if (missionNodes.getLength() == 0) {
                 throw new Exception("There are no Missions defined in the 'missionData.xml'-file.");
             }
+
+            for (int i = 0; i < missionNodes.getLength(); i++) {
+                System.out.println("Mission number: " + missionNodes.item(i).getAttributes().getNamedItem("order"));
+            }
+
             for (int i = 0; i < missionNodes.getLength(); i++) {
                 Mission newMission = new Mission(getPointsFromMissionXML(missionNodes.item(i)));
                 missions.add(newMission);
@@ -136,7 +141,8 @@ public class MissionController {
         // Add all rovers and their missions to the model
         if (rovers.size() == missions.size()) {
             int missionIndex = 0;
-            for (RoverCommunication r : rovers) {
+            for (RoverCommunication r : rovers) { // TODO set may be inconsistent
+                System.out.println("ROVER NAME: " + r.hashCode() + " SIZE: " + rovers.size());
                 this.model.updateRoverMissions(r, missions.get(missionIndex));
                 updateStrategy(r, env);
                 missionIndex++;
