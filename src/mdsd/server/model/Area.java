@@ -39,7 +39,15 @@ public interface Area {
      */
     List<AbstractWall> getWallList();
 
+    /**
+     * Getter for the list of EntryPoints.
+     * @return List of EntryPoints.
+     */
     HashMap<Point, Semaphore> getEntryList();
 
+    /**
+     * Getter for the list of ExitPoints.
+     * @return List of ExitPoints.
+     */
     HashMap<Point, Semaphore> getExitList();
 }

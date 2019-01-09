@@ -12,7 +12,6 @@ import java.util.List;
 public class Rover extends Robot {
 
     private Point currentDestination;
-    //private List<Point> gPSCoordinates;
     private Chassi roverChassi;
 
     /**

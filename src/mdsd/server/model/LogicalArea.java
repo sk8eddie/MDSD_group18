@@ -70,16 +70,28 @@ public class LogicalArea implements Area {
         return this.areaName;
     }
 
+    /**
+     * Getter for the list of walls
+     * @return the List of the walls. Returns null since Logical areas has no walls.
+     */
     @Override
     public List<AbstractWall> getWallList() {
         return null;
     }
 
+    /**
+     * Getter for the list of EntryPoints.
+     * @return List of EntryPoints. Returns null because Logical areas has no entry points.
+     */
     @Override
     public HashMap<Point, Semaphore> getEntryList() {
         return null;
     }
 
+    /**
+     * Getter for the list of ExitPoints.
+     * @return List of ExitPoints. Returns null because Logical areas has no exit points.
+     */
     @Override
     public HashMap<Point, Semaphore> getExitList() {
         return null;
