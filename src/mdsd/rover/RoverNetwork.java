@@ -93,7 +93,6 @@ public class RoverNetwork implements RoverCommunication {
             }
         });
         positionChecker.start();
-        positionChecker.interrupt();
     }
 
     /**
