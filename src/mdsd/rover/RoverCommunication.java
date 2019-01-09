@@ -17,4 +17,5 @@ public interface RoverCommunication {
      * @return the porition of the rover
      */
     Point getPosition();
+
 }

@@ -107,20 +107,12 @@ public class ServerModel implements ServerInterface {
      */
     public void stopRovers() {
         for (RoverCommunication rc : roverMissions.keySet()) {
-            rc.setNewDestination(rc.getPosition());
+            //TODO
         }
-    }
-
-    public void getState() { // Report everything, damage, location , reward points and report if any fault
-
     }
 
     public void missionComplete(RoverCommunication roverCommunication) { // Check if all points reached - mission complete and then ask for a new mission from the controller
 
-    }
-
-    public void setRoverMissions(HashMap<RoverCommunication, Mission> roverMissions) {
-        this.roverMissions = roverMissions;
     }
 
     /**
@@ -144,15 +136,6 @@ public class ServerModel implements ServerInterface {
         } else {
             roverMissions.put(roverCommunication, mission);
         }
-    }
-
-    /**
-     * getter for the reward points
-     *
-     * @return the reward points
-     */
-    public int getRewardPoints() {
-        return this.rewardPoints;
     }
 
     /**

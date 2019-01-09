@@ -17,6 +17,7 @@ public class RoverNetwork implements RoverCommunication {
     private ServerInterface server;
     private Rover rover;
     private boolean hasLock = false;
+    private boolean stopRovers;
 
     /**
      * Constructor for the RoverNetwork
