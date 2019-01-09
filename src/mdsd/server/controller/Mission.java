@@ -1,30 +1,21 @@
 package mdsd.server.controller;
 
-import mdsd.rover.Rover;
 import mdsd.rover.RoverCommunication;
 import mdsd.server.model.Environment;
 import project.Point;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Class for handling the points for the missions.
+ */
 
 public class Mission implements Iterable {
 
-    private Point currentDestination;
     private List<Point> points;
     private Iterator missionIterator = new MissionIterator();
-
-
-    /**
-     * Empty constructor for the Mission, creates an empty arraylist for the points
-     */
-    public Mission() {
-        this.points = new ArrayList<>();
-    }
-
 
     /**
      * Constructor for the Mission, sets the list of points to the paramteters list of points
@@ -36,15 +27,6 @@ public class Mission implements Iterable {
     }
 
     /**
-     * Adds a new point to the points-list
-     *
-     * @param point the point to be added
-     */
-    public void addPoint(Point point) {
-        this.points.add(point);
-    }
-
-    /**
      * Getter for the points-list
      *
      * @return a list of points
@@ -53,33 +35,24 @@ public class Mission implements Iterable {
         return this.points;
     }
 
-    /**
-     * Getter for the current destination for the mission
-     *
-     * @return the missions current destination
-     */
-    public Point getCurrentDestination() {
-        return this.currentDestination;
-    }
 
     /**
      * Takes the points from a mission and sends them through path finding which returns new points
-     * for teh fastest way between the mission-points
+     * for the fastest way between the mission-points.
      */
-    public void updateStrategy(RoverCommunication rover, Environment env) { //TODO handle for when a rover has reached a certain amount of points.
+    void updateStrategy(RoverCommunication rover, Environment env) { //TODO handle for when a rover has reached a certain amount of points.
         PathFinder p = new PathFinder();
         this.points = p.getPathPoints(rover, this, env);
-    }
-
-
-    @Override
-    public Iterator iterator() {
-        return this.missionIterator;
     }
 
     /**
      * An iterator for the mission
      */
+    @Override
+    public Iterator iterator() {
+        return this.missionIterator;
+    }
+
     private class MissionIterator implements Iterator<Point> {
         private int currentIndex = 0;
 
@@ -92,7 +65,6 @@ public class Mission implements Iterable {
         @Override
         public Point next() {
             Point nextPoint = points.get(currentIndex);
-            currentDestination = nextPoint;
             currentIndex++;
             return nextPoint;
         }

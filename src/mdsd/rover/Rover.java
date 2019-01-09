@@ -11,14 +11,11 @@ import java.util.List;
  */
 public class Rover extends Robot {
 
-    //TODO RoverFactory
-
     private Point currentDestination;
-    private List<Point> gPSCoordinates;
     private Chassi roverChassi;
 
     /**
-     * Rover constructor, calls cuntructor of its superclass and adds a chassi.
+     * Rover constructor, calls constructor of its superclass and adds a chassi.
      *
      * @param startPosition the starting position for the rover
      * @param name          the name of the rover
@@ -30,7 +27,7 @@ public class Rover extends Robot {
     }
 
     /**
-     * Rover constructor, calls cuntructor of its superclass.
+     * Rover constructor, calls constructor of its superclass.
      *
      * @param startPosition the starting position for the rover
      * @param name          the name of the rover
@@ -41,14 +38,18 @@ public class Rover extends Robot {
     }
 
     /**
-     * Stops the rover by setting the its destination to the current position
+     * Stops the rover by setting its destination to the current position
      */
-    void stopRover() {
+
+    private void stopRover() {
         this.currentDestination = this.getPosition();
         this.setRoverDestination(this.currentDestination);
     }
 
-    void hitChassi() {
+    /**
+     * Dummy method for Chassi-feature.
+     */
+    private void hitChassi() {
         if (!roverChassi.sustainHit())
             this.stopRover();
     }
@@ -64,7 +65,7 @@ public class Rover extends Robot {
 
 
     /**
-     * Checks if the parameter x is in the same position as the currentDestinations x-parameter
+     * Checks if the parameter x is in the same surrounding area as the currentDestinations x-parameter
      *
      * @param x the parameter to be checked
      * @return True if x is in the range of the currentDestinations x-parameter, otherwise false
@@ -74,7 +75,7 @@ public class Rover extends Robot {
     }
 
     /**
-     * Checks if the parameter z is in the same position as the currentDestinations z-parameter
+     * Checks if the parameter z is in the same surrounding area as the currentDestinations z-parameter
      *
      * @param z the parameter to be checked
      * @return True if z is in the range of the currentDestinations z-parameter, otherwise false
@@ -109,7 +110,7 @@ public class Rover extends Robot {
      * Should verify if there are any physical faults with the Rover, broken sensors etc.
      */
     private void checkRoverFault() {
-        // TODO way to surveil the rover parts
-        // Poll att the parts???
+        // Dummy method for Rover faults.
+        // Since the Rovers are in a simulator, they can't physically break in any way.
     }
 }

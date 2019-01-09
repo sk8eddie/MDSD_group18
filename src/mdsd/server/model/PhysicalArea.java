@@ -208,7 +208,6 @@ public class PhysicalArea implements Area {
 
     /**
      * Getter for the area type
-     *
      * @return the type of the area
      */
     @Override
@@ -217,8 +216,7 @@ public class PhysicalArea implements Area {
     }
 
     /**
-     * Checks if the coordinate is in the area
-     *
+     * Checks if the coordinate is in the area.
      * @param coordinate Coordinate to check.
      * @return True if the coordinate is in the area, otherwise false.
      */
@@ -229,7 +227,6 @@ public class PhysicalArea implements Area {
 
     /**
      * Getter for the area name
-     *
      * @return the name of the area
      */
     @Override
@@ -239,7 +236,6 @@ public class PhysicalArea implements Area {
 
     /**
      * Getter for the list of walls
-     *
      * @return the List of the walls
      */
     @Override
@@ -247,11 +243,19 @@ public class PhysicalArea implements Area {
         return this.wallList;
     }
 
+    /**
+     * Getter for the list of EntryPoints.
+     * @return List of EntryPoints.
+     */
     @Override
     public HashMap<Point, Semaphore> getEntryList() {
         return entryPoint;
     }
 
+    /**
+     * Getter for the list of ExitPoints.
+     * @return List of ExitPoints.
+     */
     @Override
     public HashMap<Point, Semaphore> getExitList() {
         return exitPoint;

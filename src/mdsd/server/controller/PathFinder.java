@@ -1,6 +1,5 @@
 package mdsd.server.controller;
 
-
 import mdsd.rover.RoverCommunication;
 import mdsd.server.model.GridEnvironment;
 import mdsd.server.model.Environment;
@@ -12,18 +11,13 @@ import project.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PathFinder {
+/**
+ * Pathfinder class. Creates grid and finder and performs pathfinder to get the shortest path between two points.
+ */
 
-    /*
-     * Get the fastest path
-     *
-     * Read the XML and points send to PathFinder
-     * New list of points sent to MissionController
-     * Mission controller send to Rover
-     *
-     */
+class PathFinder {
+
     private GridEnvironment grid = new GridEnvironment(40, 40);
-    Environment env;
 
     /**
      * Method that performs the pathfinding. Creates a grid and a finder and performs the pathfinding.
@@ -33,7 +27,7 @@ public class PathFinder {
      * @return List of cells that is the shortest path.
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public List<GridCell> getFastestPath(Point start, Point end, Environment env) {
+    List<GridCell> getFastestPath(Point start, Point end, Environment env) {
 
         grid.createCells(env.wallList());
 
@@ -41,8 +35,7 @@ public class PathFinder {
         opt.allowDiagonal = true;
         AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
 
-        List<GridCell> lst = finder.findPath(convertPoints(start.getX()), convertPoints(start.getZ()), convertPoints(end.getX()), convertPoints(end.getZ()), grid.createNavGrid());
-        return lst;
+        return finder.findPath(convertPoints(start.getX()), convertPoints(start.getZ()), convertPoints(end.getX()), convertPoints(end.getZ()), grid.createNavGrid());
     }
 
     /**
@@ -50,9 +43,9 @@ public class PathFinder {
      * @param rover Rover to get the position of the rover.
      * @param mission The mission for that rover.
      * @param env Environment to get walls where rovers can't go.
-     * @return
+     * @return List of points that is the shortest path.
      */
-    public List<Point> getPathPoints(RoverCommunication rover, Mission mission, Environment env) {
+    List<Point> getPathPoints(RoverCommunication rover, Mission mission, Environment env) {
 
         List<GridCell> gridPoints = new ArrayList<>();
         List<Point> pathPoints = new ArrayList<>();

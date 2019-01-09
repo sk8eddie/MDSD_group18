@@ -109,11 +109,19 @@ public class Environment {
         return wallList;
     }
 
-    public HashMap<Point, Semaphore> getEntryMap() {
+    /**
+     * Getter for the list of EntryPoints.
+     * @return List of EntryPoints.
+     */
+    HashMap<Point, Semaphore> getEntryMap() {
         return entryMap;
     }
 
-    public HashMap<Point, Semaphore> getExitMap() {
+    /**
+     * Getter for the list of ExitPoints.
+     * @return List of ExitPoints.
+     */
+    HashMap<Point, Semaphore> getExitMap() {
         return exitMap;
     }
 }

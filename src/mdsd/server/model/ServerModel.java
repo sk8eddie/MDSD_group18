@@ -10,6 +10,11 @@ import java.util.Set;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
+/**
+ * Central server of the project. Handles the communication for the server.
+ * Contains necessary rover data, e.g. reward points and rover missions.
+ */
+
 public class ServerModel implements ServerInterface {
 
     private int rewardPoints; // Init by procedure controller
@@ -57,8 +62,8 @@ public class ServerModel implements ServerInterface {
     @Override
     public boolean isEntryPoint(Point destination) {
         Set<Point> set = entryPoints.keySet();
-        for (Point p : set){
-            if (p.getX() == destination.getX() && p.getZ() == destination.getZ()){
+        for (Point p : set) {
+            if (p.getX() == destination.getX() && p.getZ() == destination.getZ()) {
                 return true;
             }
         }
@@ -74,27 +79,34 @@ public class ServerModel implements ServerInterface {
     @Override
     public boolean isExitPoint(Point destination) {
         Set<Point> set = exitPoints.keySet();
-        for (Point p : set){
-            if (p.getX() == destination.getX() && p.getZ() == destination.getZ()){
+        for (Point p : set) {
+            if (p.getX() == destination.getX() && p.getZ() == destination.getZ()) {
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * Getter for Semaphore.
+     *
+     * @param destination Point to check for Semaphore.
+     * @param bool        true if checking for entry point, false if checking for exit point
+     * @return Semaphore if there is one at the destination, null otherwise.
+     */
     @Override
     public Semaphore getSemaphore(Point destination, boolean bool) {
-        if (bool){
+        if (bool) {
             Set<Point> set = entryPoints.keySet();
-            for (Point p : set){
-                if (p.getX() == destination.getX() && p.getZ() == destination.getZ()){
+            for (Point p : set) {
+                if (p.getX() == destination.getX() && p.getZ() == destination.getZ()) {
                     return entryPoints.get(p);
                 }
             }
         } else {
             Set<Point> set = exitPoints.keySet();
-            for (Point p : set){
-                if (p.getX() == destination.getX() && p.getZ() == destination.getZ()){
+            for (Point p : set) {
+                if (p.getX() == destination.getX() && p.getZ() == destination.getZ()) {
                     return exitPoints.get(p);
                 }
             }
@@ -111,8 +123,13 @@ public class ServerModel implements ServerInterface {
         }
     }
 
+    /**
+     * Method for what to do when all missions are complete.
+     *
+     * @param roverCommunication The rover.
+     */
     public void missionComplete(RoverCommunication roverCommunication) { // Check if all points reached - mission complete and then ask for a new mission from the controller
-
+        //TODO
     }
 
     /**

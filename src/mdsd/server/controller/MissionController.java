@@ -17,11 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Controls Mission creation through reading an XML-file, updating it's strategy and how they are performed.
+ */
 
 public class MissionController {
 
     private ServerModel model;
-    // private Environment environment;
 
     /**
      * Constructor for the MissionController
@@ -31,8 +33,6 @@ public class MissionController {
     public MissionController(ServerModel model) {
         this.model = model;
     }
-
-    //TODO Method for Mission complete
 
     /**
      * From a xml-file that is in "mdsdSimultar/missionData.xml" predefined missions are read and will
@@ -109,15 +109,6 @@ public class MissionController {
         Mission mission = model.getRoverMissions().get(roverCommunication);
         mission.updateStrategy(roverCommunication, env);
     }
-
-    // Checks if a rover is in the same room as objective returns true
-    // and at least one rover inside the building return true
-    // check boundaries
-    public boolean isConstraintFulfilled(RoverCommunication roverCommunication, Area area) {
-        return true;
-
-    }
-
 
     /**
      * Stops all rovers in the environment
