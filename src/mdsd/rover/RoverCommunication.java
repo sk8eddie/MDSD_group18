@@ -18,4 +18,9 @@ public interface RoverCommunication {
      */
     Point getPosition();
 
+    /**
+     * Stops the rover when the stop everything button is pressed
+     */
+    void stopRover();
+
 }

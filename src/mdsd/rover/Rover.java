@@ -44,7 +44,6 @@ public class Rover extends Robot {
      * Stops the rover by setting the its destination to the current position
      */
     void stopRover() {
-        System.out.println("STOP, THE ROVER IS BROKEN!");
         this.currentDestination = this.getPosition();
         this.setRoverDestination(this.currentDestination);
     }

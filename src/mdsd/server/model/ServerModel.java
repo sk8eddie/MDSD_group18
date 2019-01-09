@@ -107,7 +107,7 @@ public class ServerModel implements ServerInterface {
      */
     public void stopRovers() {
         for (RoverCommunication rc : roverMissions.keySet()) {
-            //TODO
+            rc.stopRover();
         }
     }
 
