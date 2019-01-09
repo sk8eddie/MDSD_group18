@@ -17,15 +17,6 @@ public class Mission implements Iterable {
     private List<Point> points;
     private Iterator missionIterator = new MissionIterator();
 
-
-    /**
-     * Empty constructor for the Mission, creates an empty arraylist for the points
-     */
-    public Mission() {
-        this.points = new ArrayList<>();
-    }
-
-
     /**
      * Constructor for the Mission, sets the list of points to the paramteters list of points
      *
@@ -33,15 +24,6 @@ public class Mission implements Iterable {
      */
     public Mission(List<Point> points) {
         this.points = points;
-    }
-
-    /**
-     * Adds a new point to the points-list
-     *
-     * @param point the point to be added
-     */
-    public void addPoint(Point point) {
-        this.points.add(point);
     }
 
     /**
@@ -56,7 +38,7 @@ public class Mission implements Iterable {
 
     /**
      * Takes the points from a mission and sends them through path finding which returns new points
-     * for teh fastest way between the mission-points
+     * for the fastest way between the mission-points.
      */
     void updateStrategy(RoverCommunication rover, Environment env) { //TODO handle for when a rover has reached a certain amount of points.
         PathFinder p = new PathFinder();
