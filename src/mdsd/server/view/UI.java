@@ -2,6 +2,7 @@ package mdsd.server.view;
 
 import mdsd.StartObserver;
 import mdsd.server.controller.MissionController;
+import mdsd.server.model.ServerModel;
 import simbad.gui.Simbad;
 import simbad.sim.Agent;
 import simbad.sim.CameraSensor;
@@ -21,10 +22,12 @@ public class UI {
     private File file;
     private MissionController missionController;
     private StartObserver startObserver;
+    private  ServerModel model;
 
-    public UI(MissionController mc, StartObserver startObserver){
+    public UI(MissionController mc, StartObserver startObserver, ServerModel model){
         this.missionController = mc;
         this.startObserver = startObserver;
+        this.model = model;
     }
 
     public void createFrame() {
@@ -113,8 +116,8 @@ public class UI {
         }
     }
 
-    public void setPoints(int points) {
-        pointsLabel.setText(String.valueOf(points));
+    public void setPoints() {
+        pointsLabel.setText(String.valueOf(model.getRewardPoints()));
     }
 
     public File getXmlFile(){

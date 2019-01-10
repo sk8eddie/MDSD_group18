@@ -123,16 +123,13 @@ public class Main implements StartObserver {
         servM = (ServerModel) sInter;
         missionController = new MissionController(servM);
 
-        ui = new UI(missionController, new Main());
+
+        ui = new UI(missionController, new Main(), servM);
 
         ui.createFrame();
     }
 
 
-    //TODO move this, shouldn't be in main
-    public UI getUi() {
-        return ui;
-    }
 
 
     @Override
@@ -142,7 +139,8 @@ public class Main implements StartObserver {
 
         //Calls the method to calculate the reward points every 20 seconds
         Timer timer = new Timer();
-        timer.schedule(new ProcedureController(rovComs, env, environment1, servM), 0, 20000);
+        timer.schedule(new ProcedureController(rovComs, env, environment1, servM, ui), 0, 20000);
 
+        // Lägga till UI som field i konstruktorn, kalla på sist i varje loop
     }
 }

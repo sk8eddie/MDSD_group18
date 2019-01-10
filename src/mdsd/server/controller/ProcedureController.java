@@ -4,6 +4,7 @@ import mdsd.rover.RoverCommunication;
 import mdsd.server.model.Area;
 import mdsd.server.model.Environment;
 import mdsd.server.model.ServerModel;
+import mdsd.server.view.UI;
 
 import java.util.*;
 
@@ -25,6 +26,7 @@ public class ProcedureController extends TimerTask {
     private Set<RoverCommunication> rovers;
     private Environment env;
     private Map<Area, Integer> envpnt = new HashMap<Area, Integer>();
+    private UI ui;
 
 
     /**
@@ -34,12 +36,14 @@ public class ProcedureController extends TimerTask {
      * @param env    the Environment
      * @param envpnt the areas of the environment as well as corresponding points of each of the areas
      * @param model  the ServerModel
+     * @param ui the GUI
      */
-    public ProcedureController(Set<RoverCommunication> rovers, Environment env, Map<Area, Integer> envpnt, ServerModel model) {
+    public ProcedureController(Set<RoverCommunication> rovers, Environment env, Map<Area, Integer> envpnt, ServerModel model, UI ui) {
         this.rovers = rovers;
         this.env = env;
         this.envpnt = envpnt;
         this.model = model;
+        this.ui = ui;
     }
 
 
@@ -72,7 +76,7 @@ public class ProcedureController extends TimerTask {
             }
         }
 
-
+        ui.setPoints();
     }
 
     /**

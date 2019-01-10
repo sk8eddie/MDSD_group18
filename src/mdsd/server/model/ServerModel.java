@@ -169,14 +169,20 @@ public class ServerModel implements ServerInterface {
     }
 
     /**
+     * Getter for reward points
+     * @return reward points
+     */
+    public int getRewardPoints() {
+        return rewardPoints;
+    }
+
+    /**
      * Adds new points to the already existing reward points
      *
      * @param newPts points to be added
      */
     public void addRewardPoints(int newPts) {
         this.rewardPoints += newPts;
-        Main main = new Main();
-        main.getUi().setPoints(this.rewardPoints);
     }
 
 }
