@@ -32,7 +32,7 @@ class PathFinder {
         grid.createCells(env.wallList());
 
         GridFinderOptions opt = new GridFinderOptions();
-        opt.allowDiagonal = true;
+        opt.allowDiagonal = false;
         AStarGridFinder<GridCell> finder = new AStarGridFinder(GridCell.class, opt);
 
         return finder.findPath(convertPoints(start.getX()), convertPoints(start.getZ()), convertPoints(end.getX()), convertPoints(end.getZ()), grid.createNavGrid());
@@ -60,6 +60,7 @@ class PathFinder {
         for (GridCell a : gridPoints) {
                 Point newPoint = new Point(unConvertPoints(a.getX()), unConvertPoints(a.getY()));
                 pathPoints.add(newPoint);
+            System.out.println(newPoint.getX() + ",  " + newPoint.getZ());
             }
         return pathPoints;
     }

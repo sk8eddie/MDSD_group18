@@ -6,11 +6,11 @@
     </Mission>
     <Mission order="1">
         <Point x="0.0" y="0.0"> </Point>
-        <Point x="0.0" y="6.0"> </Point>
+        <Point x="-6.0" y="0.0"> </Point>
     </Mission>
     <Mission order="2">
         <Point x="0.0" y="0.0"> </Point>
-        <Point x="-6.0" y="0.0"> </Point>
+        <Point x="0.0" y="6.0"> </Point>
     </Mission>
     <Mission order="3">
         <Point x="0.0" y="0.0"> </Point>

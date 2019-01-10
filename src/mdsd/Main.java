@@ -61,15 +61,19 @@ public class Main implements StartObserver {
         Area s2 = env.createArea(new Point(0, 6), "Surgery", e, c);
         Area s3 = env.createArea(new Point(-6, 0), "Surgery", e, c);
         Area s4 = env.createArea(new Point(0, -6), "Surgery", e, c);
+        Area l1 = env.createArea(new Point(3,0), "Wifi", e, c);
+        Area l2 = env.createArea(new Point(0,3), "Wifi", e, c);
+        Area l3 = env.createArea(new Point(-3,0), "Wifi", e, c);
+        Area l4 = env.createArea(new Point(0,-3), "Wifi", e, c);
 
 
         // Creates areas for the first environment of the assignments
-        /*
-		Area a = env.createArea(5f, 5f, new Point(-2.5, -2.5), "Demo", e, "Physical");
-		Area b = env.createArea(5f, 5f,new Point(2.5, -2.5), "Demo", e, "Physical");
-		Area cc = env.createArea(5f, 5f,new Point(-2.5f, 2.5f), "Demo", e, "Physical");
-		Area d = env.createArea(5f, 5f,new Point(2.5f, 2.5f), "Demo", e, "Physical");
-		*/
+        /*Area o1 = env.createArea(new Point(2.5,2.5),"Office", e, c);
+        Area o2 = env.createArea(new Point(2.5,-2.5),"Office", e, c);
+        Area o3 = env.createArea(new Point(-2.5,2.5),"Office", e, c);
+        Area o4 = env.createArea(new Point(-2.5,-2.5),"Office", e, c);*/
+
+
 
 
         // TODO add points to areas instead
@@ -84,6 +88,10 @@ public class Main implements StartObserver {
         environment1.put(s2, 20);
         environment1.put(s3, 20);
         environment1.put(s4, 20);
+        /*environment1.put(o1,2);
+        environment1.put(o2,2);
+        environment1.put(o3,2);
+        environment1.put(o4,2);*/
 
         //End init environment
 
@@ -91,8 +99,8 @@ public class Main implements StartObserver {
         Set<Robot> robots = new HashSet<>();
 
         Robot robot1 = new Rover(new Point(6, 0), "Rover 1");
-        Robot robot2 = new Rover(new Point(-6, 0), "Rover 2");
-        Robot robot3 = new Rover(new Point(0, 6), "Rover 3");
+        Robot robot2 = new Rover(new Point(0, 6), "Rover 2");
+        Robot robot3 = new Rover(new Point(-6, 0), "Rover 3");
         Robot robot4 = new Rover(new Point(0, -6), "Rover 4");
 
         robots.add(robot1);

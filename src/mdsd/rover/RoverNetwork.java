@@ -52,7 +52,7 @@ public class RoverNetwork implements RoverCommunication {
                     while (!rover.isAtDestination())
                         Thread.sleep(1);
 
-                    Thread.sleep(200);
+                    Thread.sleep(300);
                     System.out.println("Rover " + rover.getName() + " at position");
                     if (hasLock) {
                         if (server.isExitPoint(newDestination)) {
@@ -65,6 +65,7 @@ public class RoverNetwork implements RoverCommunication {
                         }
                     } else {
                         if (server.isEntryPoint(newDestination)) {
+                            Thread.sleep(2000);
                             server.getSemaphore(newDestination, true).acquire();
                             hasLock = true;
                         }

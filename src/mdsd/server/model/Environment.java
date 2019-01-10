@@ -89,8 +89,10 @@ public class Environment {
                 return null;
         }
         areaList.add(area);
-        entryMap.putAll(area.getEntryList());
-        exitMap.putAll(area.getExitList());
+        if (area.getClass().toString().equals("class mdsd.server.model.PhysicalArea")){
+            entryMap.putAll(area.getEntryList());
+            exitMap.putAll(area.getExitList());
+        }
         return area;
     }
 
@@ -102,8 +104,10 @@ public class Environment {
     public ArrayList<AbstractWall> wallList() {
         ArrayList<AbstractWall> wallList = new ArrayList<AbstractWall>();
         for (Area a : areaList) {
-            for (AbstractWall aw : a.getWallList()) {
-                wallList.add(aw);
+            if (a.getClass().toString().equals("class mdsd.server.model.PhysicalArea")) {
+                for (AbstractWall aw : a.getWallList()) {
+                    wallList.add(aw);
+                }
             }
         }
         return wallList;
