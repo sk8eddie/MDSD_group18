@@ -16,6 +16,7 @@ public class Mission implements Iterable {
 
     private List<Point> points;
     private Iterator missionIterator = new MissionIterator();
+    private boolean complete = false;
 
     /**
      * Constructor for the Mission, sets the list of points to the paramteters list of points
@@ -46,6 +47,14 @@ public class Mission implements Iterable {
     }
 
     /**
+     * Getter for complete-variable
+     * @return true if the mission is complete, otherwise false
+     */
+    public boolean isComplete() {
+        return complete;
+    }
+
+    /**
      * An iterator for the mission
      */
     @Override
@@ -58,6 +67,9 @@ public class Mission implements Iterable {
 
         @Override
         public boolean hasNext() {
+            if(currentIndex >= points.size()){
+                complete = true;
+            }
             return currentIndex < points.size();
             //return points.get(currentIndex) != null;
         }

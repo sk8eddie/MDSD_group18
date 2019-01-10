@@ -47,9 +47,13 @@ public class ProcedureController extends TimerTask {
      * Override from TimerTask
      * Loops through all rovers in the environment when the current procedure is sat
      * Calculates the reward points gained from each rover depending on which procedure should be used
+     * Stops the timer if all missions are completed
      */
     @Override
     public void run() {
+        if(model.allComplete()){
+            this.cancel();
+        }
         setCurrentProcedure();
         Iterator<RoverCommunication> iterator = rovers.iterator();
         RoverCommunication rover;

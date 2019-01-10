@@ -128,8 +128,21 @@ public class ServerModel implements ServerInterface {
      *
      * @param roverCommunication The rover.
      */
-    public void missionComplete(RoverCommunication roverCommunication) { // Check if all points reached - mission complete and then ask for a new mission from the controller
-        //TODO
+    public void missionComplete(RoverCommunication roverCommunication) {
+        roverCommunication.stopRover();
+    }
+
+    /**
+     * Checks if the mission for every rover is completed
+     * @return True if all missions are completed, otherwise false
+     */
+    public boolean allComplete() {
+        for (RoverCommunication r : roverMissions.keySet()) {
+            if (roverMissions.get(r).isComplete()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
