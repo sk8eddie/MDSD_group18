@@ -36,7 +36,7 @@ public class ProcedureController extends TimerTask {
      * @param env    the Environment
      * @param envpnt the areas of the environment as well as corresponding points of each of the areas
      * @param model  the ServerModel
-     * @param ui the GUI
+     * @param ui     the GUI
      */
     public ProcedureController(Set<RoverCommunication> rovers, Environment env, Map<Area, Integer> envpnt, ServerModel model, UI ui) {
         this.rovers = rovers;
@@ -51,32 +51,34 @@ public class ProcedureController extends TimerTask {
      * Override from TimerTask
      * Loops through all rovers in the environment when the current procedure is sat
      * Calculates the reward points gained from each rover depending on which procedure should be used
-     * Stops the timer if all missions are completed
+     * Stops the timer if all missions are completed or if the rovers are stopped
      */
     @Override
     public void run() {
-        if(model.allComplete()){
+        if (model.allComplete() || model.getRoversStopped()) {
             this.cancel();
-        }
-        setCurrentProcedure();
-        Iterator<RoverCommunication> iterator = rovers.iterator();
-        RoverCommunication rover;
+        } else {
+
+            setCurrentProcedure();
+            Iterator<RoverCommunication> iterator = rovers.iterator();
+            RoverCommunication rover;
 
 
-        while (iterator.hasNext()) {
-            switch (currentProcedure) {
-                case A:
-                    rover = iterator.next();
-                    procedure(rover, "Physical");
-                    break;
-                case B:
-                    rover = iterator.next();
-                    procedure(rover, "Logical");
-                    break;
+            while (iterator.hasNext()) {
+                switch (currentProcedure) {
+                    case A:
+                        rover = iterator.next();
+                        procedure(rover, "Physical");
+                        break;
+                    case B:
+                        rover = iterator.next();
+                        procedure(rover, "Logical");
+                        break;
+                }
             }
-        }
 
-        ui.setPoints();
+            ui.setPoints();
+        }
     }
 
     /**

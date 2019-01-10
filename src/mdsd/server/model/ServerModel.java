@@ -21,6 +21,7 @@ public class ServerModel implements ServerInterface {
     private HashMap<RoverCommunication, Mission> roverMissions; // Rover is the key and mission is the value
     private HashMap<Point, Semaphore> entryPoints;
     private HashMap<Point, Semaphore> exitPoints;
+    private boolean roversStopped = false;
 
 
     /**
@@ -121,6 +122,7 @@ public class ServerModel implements ServerInterface {
         for (RoverCommunication rc : roverMissions.keySet()) {
             rc.stopRover();
         }
+        roversStopped = true;
     }
 
     /**
@@ -138,7 +140,7 @@ public class ServerModel implements ServerInterface {
      */
     public boolean allComplete() {
         for (RoverCommunication r : roverMissions.keySet()) {
-            if (roverMissions.get(r).isComplete()) {
+            if (!roverMissions.get(r).isComplete()) {
                 return false;
             }
         }
@@ -183,6 +185,14 @@ public class ServerModel implements ServerInterface {
      */
     public void addRewardPoints(int newPts) {
         this.rewardPoints += newPts;
+    }
+
+    /**
+     * Gets the bool roversStopped.
+     * @return roversStopped.
+     */
+    public boolean getRoversStopped(){
+        return roversStopped;
     }
 
 }

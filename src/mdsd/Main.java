@@ -139,8 +139,6 @@ public class Main implements StartObserver {
 
         //Calls the method to calculate the reward points every 20 seconds
         Timer timer = new Timer();
-        timer.schedule(new ProcedureController(rovComs, env, environment1, servM, ui), 0, 20000);
-
-        // Lägga till UI som field i konstruktorn, kalla på sist i varje loop
+        timer.schedule(new ProcedureController(rovComs, env, environment1, servM, ui), 20000, 20000);
     }
 }

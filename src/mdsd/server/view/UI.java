@@ -28,6 +28,7 @@ public class UI {
         this.missionController = mc;
         this.startObserver = startObserver;
         this.model = model;
+        setPoints();
     }
 
     public void createFrame() {
